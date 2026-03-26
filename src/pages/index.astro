@@ -1,17 +1,577 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { readdir } from 'node:fs/promises';
+import path from 'node:path';
 
+const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
+const defaultTripDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+let galleryMedia = [];
+
+try {
+	const galleryDir = new URL('../../public/gallery/', import.meta.url);
+	const entries = await readdir(galleryDir, { withFileTypes: true });
+
+	galleryMedia = entries
+		.filter((entry) => entry.isFile())
+		.map((entry) => {
+			const extension = path.extname(entry.name).toLowerCase();
+			const isImage = imageExtensions.has(extension);
+			const isVideo = videoExtensions.has(extension);
+
+			if (!isImage && !isVideo) return null;
+
+			return {
+				name: entry.name,
+				src: `/gallery/${entry.name}`,
+				type: isVideo ? 'video' : 'image',
+				alt: path
+					.parse(entry.name)
+					.name
+					.replace(/[-_]+/g, ' ')
+					.replace(/\b\w/g, (char) => char.toUpperCase())
+			};
+		})
+		.filter(Boolean)
+		.sort((a, b) => a.name.localeCompare(b.name));
+} catch (error) {
+	console.error('Unable to load media from public/gallery:', error);
+}
+
+const trips = [
+	{
+		id: 1,
+		title: 'Big Game Drifting Tuna',
+		startTime: '08:00am',
+		image: 'public/tuna.jpg', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	},
+	{
+		id: 2,
+		title: 'Trolling Offshore',
+		startTime: '08:00am',
+		image: 'trolling.png', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	},
+	{
+		id: 3,
+		title: 'Trolling Inshore',
+		startTime: '08:00am',
+		image: 'inshore.jpg', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	},
+	{
+		id: 4,
+		title: 'Bottom Fishing',
+		startTime: '08:00am',
+		image: 'bottom.webp', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	},
+	{
+		id: 5,
+		title: 'Swordfish Night Fishing',
+		startTime: '08:00pm',
+		image: 'public/swordfish.jpg', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	},
+	{
+		id: 6,
+		title: 'Octopus and Squid Fishing',
+		startTime: '08:00am',
+		image: 'public/octopus.jpg', // Aggiungi percorso immagine
+		description: defaultTripDescription,
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+	}
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Big Catch Fishing Charters - Rome">
+	<!-- Hero Section -->
+	<section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
+		<!-- Background Video -->
+		<div class="absolute inset-0 z-0">
+			<video 
+				src="/video-hero.mp4" 
+				autoplay
+				muted
+				loop
+				playsinline
+				class="h-full w-full object-cover opacity-40"
+			/>
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80"></div>
+		</div>
+
+		<!-- Content -->
+		<div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+			<span class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300 backdrop-blur-sm sm:text-sm">
+				Unforgettable Fishing Trips
+			</span>
+			
+			<h1 class="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
+				Rome Fishing Charters
+			</h1>
+			
+			<p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+				Embark on an unforgettable fishing adventure in Rome. Our charter is designed to offer you more than just a simple boat trip; it is a true expedition into the heart of the Tyrrhenian Sea in search of the Mediterranean's most powerful predators: Bluefin Tuna, Mediterranean Spearfish and Swordfish, among others. Every excursion is engineered to maximize your chances of success and deliver a legendary fight. We utilize cutting-edge technology to ensure an unparalleled fishing experience.
+			</p>
+
+			<details class="group mt-4">
+				<summary class="flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-sky-400 transition-colors hover:text-sky-300">
+					<span>What's included</span>
+					<svg class="h-4 w-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+					</svg>
+				</summary>
+				<div class="mx-auto mt-6 max-w-2xl space-y-6 text-center">
+					<div class="inline-block rounded-xl border border-slate-800/50 bg-slate-900/40 p-6 text-left backdrop-blur-sm">
+						<p class="text-base font-semibold text-slate-200">All our excursions include:</p>
+						<ul class="mt-4 space-y-3 text-sm text-slate-300">
+							<li class="flex items-start gap-3">
+								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+								</svg>
+								<span>Premium Gear: High-end equipment selected from the finest Japanese, American, Australian, and Italian brands.</span>
+							</li>
+							<li class="flex items-start gap-3">
+								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+								</svg>
+								<span>Food & Drinks, Fuel, Bait.</span>
+							</li>
+							<li class="flex items-start gap-3">
+								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+								</svg>
+								<span>On Board, you will find everything you need for a professional fishing session.</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</details>
+
+			<a 
+				href="https://wa.me/39333000000"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-xl hover:shadow-green-500/40 sm:px-10 sm:py-4 sm:text-lg"
+			>
+				<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+					<path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882a.5.5 0 00.61.61l6.037-1.47A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.027-1.384l-.36-.214-3.733.909.934-3.63-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+				</svg>
+				Book Now
+			</a>
+		</div>
+	</section>
+
+	<!-- Book Your Trip Section -->
+	<section class="py-16 sm:py-20">
+		<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+			<h2 class="text-center text-3xl font-semibold text-slate-100 sm:text-4xl">
+				BOOK YOUR TRIP
+			</h2>
+
+			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{trips.map((trip) => (
+					<article class="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 transition-all hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10">
+						<button
+							type="button"
+							class="trip-card-trigger block w-full cursor-pointer text-left"
+							data-title={trip.title}
+							data-start-time={trip.startTime}
+							data-image={trip.image}
+							data-description={trip.description}
+							data-features={trip.features.join('|')}
+							aria-label={`Open details for ${trip.title}`}
+						>
+							<!-- Image Container -->
+							<div class="aspect-[4/3] overflow-hidden bg-slate-800/50">
+								{trip.image ? (
+									<img
+										src={trip.image}
+										alt={trip.title}
+										class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+									/>
+								) : (
+									<div class="flex h-full w-full items-center justify-center text-slate-600">
+										<svg class="h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+										</svg>
+									</div>
+								)}
+							</div>
+
+							<!-- Content -->
+							<div class="p-6">
+								<h3 class="text-xl font-semibold text-slate-100">
+									{trip.title}
+								</h3>
+								
+								<p class="mt-3 text-sm text-slate-400">
+									Start {trip.startTime}
+								</p>
+
+								<ul class="mt-4 space-y-2">
+									{trip.features.map((feature) => (
+										<li class="flex items-center gap-2 text-sm text-slate-300">
+											<svg class="h-4 w-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+												<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+											</svg>
+											{feature}
+										</li>
+									))}
+								</ul>
+							</div>
+						</button>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<div id="trip-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/90 p-4">
+		<button
+			type="button"
+			id="trip-modal-close"
+			class="absolute right-4 top-4 rounded-md border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800"
+			aria-label="Close trip details"
+		>
+			Close
+		</button>
+
+		<div class="w-full max-w-3xl overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
+			<img id="trip-modal-image" src="" alt="" class="aspect-[16/9] w-full object-cover" />
+			<div class="space-y-4 p-6">
+				<h3 id="trip-modal-title" class="text-2xl font-semibold text-slate-100"></h3>
+				<p id="trip-modal-start" class="text-sm text-slate-400"></p>
+				<ul id="trip-modal-features" class="space-y-2"></ul>
+				<p id="trip-modal-description" class="max-h-56 overflow-y-auto pr-1 text-sm leading-relaxed text-slate-300"></p>
+			</div>
+		</div>
+	</div>
+
+	<section id="about" class="bg-slate-900/40 py-14">
+		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<h2 class="text-2xl font-bold text-slate-100">Chi siamo</h2>
+			<p class="mt-4 max-w-3xl text-slate-400">
+				Sviluppiamo interfacce web orientate all'esperienza utente, con attenzione a performance e accessibilità.
+			</p>
+		</div>
+	</section>
+
+	<section id="gallery" class="py-14">
+		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<h2 class="text-2xl font-bold text-slate-100">Gallery</h2>
+
+			{
+				galleryMedia.length > 0 ? (
+					<div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40">
+						<button
+							id="gallery-prev"
+							type="button"
+							aria-label="Previous slide"
+							class="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700/80 bg-slate-900/70 p-2 text-slate-200 backdrop-blur transition hover:bg-slate-800"
+						>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M15 19l-7-7 7-7" />
+							</svg>
+						</button>
+
+						<div id="gallery-carousel-track" class="flex transition-transform duration-500 ease-out">
+							{galleryMedia.map((media, index) => (
+								<button
+									type="button"
+									class="gallery-slide group relative flex-shrink-0 cursor-pointer text-left"
+									data-index={index}
+									data-src={media.src}
+									data-type={media.type}
+									data-alt={media.alt}
+									aria-label={`Open ${media.type}: ${media.alt}`}
+								>
+									{media.type === 'video' ? (
+										<video
+											src={media.src}
+											class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+											muted
+											loop
+											autoplay
+											playsinline
+											preload="metadata"
+										/>
+									) : (
+										<img src={media.src} alt={media.alt} class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+									)}
+									<p class="border-t border-slate-800 px-4 py-3 text-sm text-slate-300">{media.alt}</p>
+									<span class="pointer-events-none absolute inset-0 bg-slate-950/0 transition group-hover:bg-slate-950/15"></span>
+								</button>
+							))}
+						</div>
+
+						<button
+							id="gallery-next"
+							type="button"
+							aria-label="Next slide"
+							class="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700/80 bg-slate-900/70 p-2 text-slate-200 backdrop-blur transition hover:bg-slate-800"
+						>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M9 5l7 7-7 7" />
+							</svg>
+						</button>
+					</div>
+				) : (
+					<p class="mt-6 text-slate-400">Nessun file trovato in public/gallery.</p>
+				)
+			}
+		</div>
+	</section>
+
+	<div id="gallery-lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/90 p-4">
+		<button
+			type="button"
+			id="gallery-lightbox-close"
+			class="absolute right-4 top-4 rounded-md border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800"
+			aria-label="Close lightbox"
+		>
+			Close
+		</button>
+
+		<button
+			type="button"
+			id="gallery-lightbox-prev"
+			class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
+			aria-label="Previous"
+		>
+			<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M15 19l-7-7 7-7" />
+			</svg>
+		</button>
+
+		<div class="w-full max-w-5xl">
+			<p id="gallery-lightbox-caption" class="mb-3 text-center text-sm text-slate-300"></p>
+			<div id="gallery-lightbox-content" class="overflow-hidden rounded-xl border border-slate-700 bg-black"></div>
+		</div>
+
+		<button
+			type="button"
+			id="gallery-lightbox-next"
+			class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
+			aria-label="Next"
+		>
+			<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+	</div>
+
+	<script>
+		const track = document.getElementById('gallery-carousel-track');
+		const prev = document.getElementById('gallery-prev');
+		const next = document.getElementById('gallery-next');
+		const slides = Array.from(document.querySelectorAll('.gallery-slide'));
+
+		const lightbox = document.getElementById('gallery-lightbox');
+		const lightboxContent = document.getElementById('gallery-lightbox-content');
+		const lightboxCaption = document.getElementById('gallery-lightbox-caption');
+		const closeButton = document.getElementById('gallery-lightbox-close');
+		const prevButton = document.getElementById('gallery-lightbox-prev');
+		const nextButton = document.getElementById('gallery-lightbox-next');
+
+		if (track && prev && next && slides.length > 0) {
+			let current = 0;
+			let visibleCount = 1;
+
+			const getVisibleCount = () => {
+				if (window.innerWidth >= 1024) return 3;
+				if (window.innerWidth >= 768) return 2;
+				return 1;
+			};
+
+			const setSlideWidths = () => {
+				visibleCount = getVisibleCount();
+				slides.forEach((slide) => {
+					slide.style.flex = `0 0 ${100 / visibleCount}%`;
+				});
+
+				const maxIndex = Math.max(0, slides.length - visibleCount);
+				if (current > maxIndex) current = maxIndex;
+			};
+
+			const update = () => {
+				track.style.transform = `translateX(-${current * (100 / visibleCount)}%)`;
+			};
+
+			prev.addEventListener('click', () => {
+				const maxIndex = Math.max(0, slides.length - visibleCount);
+				current = current <= 0 ? maxIndex : current - 1;
+				update();
+			});
+
+			next.addEventListener('click', () => {
+				const maxIndex = Math.max(0, slides.length - visibleCount);
+				current = current >= maxIndex ? 0 : current + 1;
+				update();
+			});
+
+			window.addEventListener('resize', () => {
+				setSlideWidths();
+				update();
+			});
+
+			setSlideWidths();
+			update();
+		}
+
+		if (slides.length && lightbox && lightboxContent && lightboxCaption && closeButton && prevButton && nextButton) {
+			let currentIndex = 0;
+
+			const renderMedia = () => {
+				const item = slides[currentIndex];
+				const src = item.dataset.src || '';
+				const type = item.dataset.type || 'image';
+				const alt = item.dataset.alt || '';
+
+				lightboxCaption.textContent = `${currentIndex + 1} / ${slides.length} • ${alt}`;
+				lightboxContent.innerHTML = '';
+
+				if (type === 'video') {
+					const video = document.createElement('video');
+					video.src = src;
+					video.controls = true;
+					video.autoplay = true;
+					video.playsInline = true;
+					video.className = 'max-h-[80vh] w-full object-contain';
+					lightboxContent.appendChild(video);
+				} else {
+					const img = document.createElement('img');
+					img.src = src;
+					img.alt = alt;
+					img.className = 'max-h-[80vh] w-full object-contain';
+					lightboxContent.appendChild(img);
+				}
+			};
+
+			const openLightbox = (index) => {
+				currentIndex = index;
+				renderMedia();
+				lightbox.classList.remove('hidden');
+				lightbox.classList.add('flex');
+				document.body.style.overflow = 'hidden';
+			};
+
+			const closeLightbox = () => {
+				lightbox.classList.add('hidden');
+				lightbox.classList.remove('flex');
+				lightboxContent.innerHTML = '';
+				document.body.style.overflow = '';
+			};
+
+			const prevMedia = () => {
+				currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+				renderMedia();
+			};
+
+			const nextMedia = () => {
+				currentIndex = (currentIndex + 1) % slides.length;
+				renderMedia();
+			};
+
+			slides.forEach((item, index) => {
+				item.addEventListener('click', () => openLightbox(index));
+			});
+
+			closeButton.addEventListener('click', closeLightbox);
+			prevButton.addEventListener('click', prevMedia);
+			nextButton.addEventListener('click', nextMedia);
+
+			lightbox.addEventListener('click', (event) => {
+				if (event.target === lightbox) closeLightbox();
+			});
+
+			document.addEventListener('keydown', (event) => {
+				if (lightbox.classList.contains('hidden')) return;
+				if (event.key === 'Escape') closeLightbox();
+				if (event.key === 'ArrowLeft') prevMedia();
+				if (event.key === 'ArrowRight') nextMedia();
+			});
+		}
+
+		const tripCards = Array.from(document.querySelectorAll('.trip-card-trigger'));
+		const tripModal = document.getElementById('trip-modal');
+		const tripModalClose = document.getElementById('trip-modal-close');
+		const tripModalImage = document.getElementById('trip-modal-image');
+		const tripModalTitle = document.getElementById('trip-modal-title');
+		const tripModalStart = document.getElementById('trip-modal-start');
+		const tripModalFeatures = document.getElementById('trip-modal-features');
+		const tripModalDescription = document.getElementById('trip-modal-description');
+
+		if (
+			tripCards.length &&
+			tripModal &&
+			tripModalClose &&
+			tripModalImage &&
+			tripModalTitle &&
+			tripModalStart &&
+			tripModalFeatures &&
+			tripModalDescription
+		) {
+			const openTripModal = (card) => {
+				const title = card.dataset.title || '';
+				const startTime = card.dataset.startTime || '';
+				const image = card.dataset.image || '';
+				const description = card.dataset.description || '';
+				const features = (card.dataset.features || '').split('|').filter(Boolean);
+
+				tripModalImage.src = image;
+				tripModalImage.alt = title;
+				tripModalTitle.textContent = title;
+				tripModalStart.textContent = `Start ${startTime}`;
+				tripModalDescription.textContent = description;
+
+				tripModalFeatures.innerHTML = '';
+				features.forEach((feature) => {
+					const item = document.createElement('li');
+					item.className = 'flex items-center gap-2 text-sm text-slate-300';
+					item.innerHTML = `
+						<svg class="h-4 w-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+						</svg>
+						<span>${feature}</span>
+					`;
+					tripModalFeatures.appendChild(item);
+				});
+
+				tripModal.classList.remove('hidden');
+				tripModal.classList.add('flex');
+				document.body.style.overflow = 'hidden';
+			};
+
+			const closeTripModal = () => {
+				tripModal.classList.add('hidden');
+				tripModal.classList.remove('flex');
+				document.body.style.overflow = '';
+			};
+
+			tripCards.forEach((card) => {
+				card.addEventListener('click', () => openTripModal(card));
+			});
+
+			tripModalClose.addEventListener('click', closeTripModal);
+			tripModal.addEventListener('click', (event) => {
+				if (event.target === tripModal) closeTripModal();
+			});
+
+			document.addEventListener('keydown', (event) => {
+				if (!tripModal.classList.contains('hidden') && event.key === 'Escape') {
+					closeTripModal();
+				}
+			});
+		}
+	</script>
+
+</Layout>

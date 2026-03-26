@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readdir } from 'node:fs/promises';
+import path from 'node:path';
+
+const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
+
+let galleryMedia = [];
+
+try {
+	const galleryDir = new URL('../../public/gallery/', import.meta.url);
+	const entries = await readdir(galleryDir, { withFileTypes: true });
+
+	galleryMedia = entries
+		.filter((entry) => entry.isFile())
+		.map((entry) => {
+			const extension = path.extname(entry.name).toLowerCase();
+			const isImage = imageExtensions.has(extension);
+			const isVideo = videoExtensions.has(extension);
+
+			if (!isImage && !isVideo) return null;
+
+			return {
+				name: entry.name,
+				src: `/gallery/${entry.name}`,
+				type: isVideo ? 'video' : 'image',
+				alt: path
+					.parse(entry.name)
+					.name
+					.replace(/[-_]+/g, ' ')
+					.replace(/\b\w/g, (char) => char.toUpperCase())
+			};
+		})
+		.filter(Boolean)
+		.sort((a, b) => a.name.localeCompare(b.name));
+} catch (error) {
+	console.error('Unable to load media from public/gallery:', error);
+}
+---
+
+<Layout title="Gallery - Big Catch Fishing Charters">
+	<section class="py-14 sm:py-20">
+		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<h1 class="text-3xl font-bold text-slate-100 sm:text-4xl">Gallery</h1>
+			<p class="mt-3 text-slate-400">Foto e video delle nostre uscite.</p>
+
+			{
+				galleryMedia.length > 0 ? (
+					<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						{galleryMedia.map((media, index) => (
+							<button
+								type="button"
+								class="gallery-item group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 text-left"
+								data-index={index}
+								data-src={media.src}
+								data-type={media.type}
+								data-alt={media.alt}
+								aria-label={`Open ${media.type}: ${media.alt}`}
+							>
+								{media.type === 'video' ? (
+									<video
+										src={media.src}
+										class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										muted
+										playsinline
+										preload="metadata"
+									/>
+								) : (
+									<img
+										src={media.src}
+										alt={media.alt}
+										loading="lazy"
+										class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+									/>
+								)}
+								<span class="pointer-events-none absolute inset-0 bg-slate-950/0 transition group-hover:bg-slate-950/20"></span>
+							</button>
+						))}
+					</div>
+				) : (
+					<p class="mt-6 text-slate-400">Nessun file trovato in public/gallery.</p>
+				)
+			}
+		</div>
+	</section>
+
+	<div id="gallery-lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/90 p-4">
+		<button
+			type="button"
+			id="gallery-lightbox-close"
+			class="absolute right-4 top-4 rounded-md border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800"
+			aria-label="Close lightbox"
+		>
+			Close
+		</button>
+
+		<button
+			type="button"
+			id="gallery-lightbox-prev"
+			class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
+			aria-label="Previous"
+		>
+			<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M15 19l-7-7 7-7" />
+			</svg>
+		</button>
+
+		<div class="w-full max-w-5xl">
+			<p id="gallery-lightbox-caption" class="mb-3 text-center text-sm text-slate-300"></p>
+			<div id="gallery-lightbox-content" class="overflow-hidden rounded-xl border border-slate-700 bg-black"></div>
+		</div>
+
+		<button
+			type="button"
+			id="gallery-lightbox-next"
+			class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
+			aria-label="Next"
+		>
+			<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+	</div>
+
+	<script>
+		const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+		const lightbox = document.getElementById('gallery-lightbox');
+		const lightboxContent = document.getElementById('gallery-lightbox-content');
+		const lightboxCaption = document.getElementById('gallery-lightbox-caption');
+		const closeButton = document.getElementById('gallery-lightbox-close');
+		const prevButton = document.getElementById('gallery-lightbox-prev');
+		const nextButton = document.getElementById('gallery-lightbox-next');
+
+		if (galleryItems.length && lightbox && lightboxContent && lightboxCaption && closeButton && prevButton && nextButton) {
+			let currentIndex = 0;
+
+			const renderMedia = () => {
+				const item = galleryItems[currentIndex];
+				const src = item.dataset.src || '';
+				const type = item.dataset.type || 'image';
+				const alt = item.dataset.alt || '';
+
+				lightboxCaption.textContent = `${currentIndex + 1} / ${galleryItems.length} • ${alt}`;
+				lightboxContent.innerHTML = '';
+
+				if (type === 'video') {
+					const video = document.createElement('video');
+					video.src = src;
+					video.controls = true;
+					video.autoplay = true;
+					video.playsInline = true;
+					video.className = 'max-h-[80vh] w-full object-contain';
+					lightboxContent.appendChild(video);
+				} else {
+					const img = document.createElement('img');
+					img.src = src;
+					img.alt = alt;
+					img.className = 'max-h-[80vh] w-full object-contain';
+					lightboxContent.appendChild(img);
+				}
+			};
+
+			const openLightbox = (index) => {
+				currentIndex = index;
+				renderMedia();
+				lightbox.classList.remove('hidden');
+				lightbox.classList.add('flex');
+				document.body.style.overflow = 'hidden';
+			};
+
+			const closeLightbox = () => {
+				lightbox.classList.add('hidden');
+				lightbox.classList.remove('flex');
+				lightboxContent.innerHTML = '';
+				document.body.style.overflow = '';
+			};
+
+			const prevMedia = () => {
+				currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+				renderMedia();
+			};
+
+			const nextMedia = () => {
+				currentIndex = (currentIndex + 1) % galleryItems.length;
+				renderMedia();
+			};
+
+			galleryItems.forEach((item, index) => {
+				item.addEventListener('click', () => openLightbox(index));
+			});
+
+			closeButton.addEventListener('click', closeLightbox);
+			prevButton.addEventListener('click', prevMedia);
+			nextButton.addEventListener('click', nextMedia);
+
+			lightbox.addEventListener('click', (event) => {
+				if (event.target === lightbox) closeLightbox();
+			});
+
+			document.addEventListener('keydown', (event) => {
+				if (lightbox.classList.contains('hidden')) return;
+				if (event.key === 'Escape') closeLightbox();
+				if (event.key === 'ArrowLeft') prevMedia();
+				if (event.key === 'ArrowRight') nextMedia();
+			});
+		}
+	</script>
+</Layout>
