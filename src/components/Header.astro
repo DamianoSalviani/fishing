@@ -1,38 +1,65 @@
 ---
 const menuItems = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Gallery', href: '#gallery' },
-	{ label: 'Contatti', href: '#contact' },
+	{ key: 'home', label: 'Home', href: '/#' },
+	{ key: 'trips', label: 'Trips', href: '/#trips' },
+	{ key: 'vessel', label: 'Vessel', href: '/#vessel' },
+	{ key: 'faq', label: 'FAQ', href: '/#faq' },
+	{ key: 'gallery', label: 'Gallery', href: '/#gallery' },
+	{ key: 'contact', label: 'Contact', href: '/#contact' },
 ];
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
 	<input id="mobile-menu" type="checkbox" class="peer sr-only md:hidden" aria-label="Apri menu" />
 
-	<div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+	<div class="mx-auto flex w-full max-w-6xl items-center px-4 py-3 sm:px-6 lg:px-8">
 		<a href="/" class="flex items-center gap-3">
 			<img src="/logo.png" alt="Big Catch Logo" class="h-10 w-10 sm:h-12 sm:w-12" />
 			<span class="text-base font-bold tracking-tight text-slate-100 sm:text-lg">Big Catch Fishing Charters</span>
 		</a>
 
-		<label
-			for="mobile-menu"
-			class="inline-flex cursor-pointer items-center rounded-md border border-slate-700 p-2 text-slate-200 transition hover:bg-slate-800 md:hidden"
-		>
-			<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-				<path d="M4 6h16M4 12h16M4 18h16" />
-			</svg>
-		</label>
-
-		<nav class="hidden items-center gap-6 md:flex" aria-label="Navigazione principale">
+		<nav class="hidden items-center gap-6 md:flex md:flex-grow md:justify-center lg:gap-8" aria-label="Navigazione principale">
 			{
 				menuItems.map((item) => (
-					<a href={item.href} class="text-sm font-medium text-slate-300 transition hover:text-sky-400">
+					<a href={item.href} data-nav-key={item.key} class="text-sm font-medium text-slate-300 transition hover:text-sky-400">
 						{item.label}
 					</a>
 				))
 			}
 		</nav>
+
+		<!-- Language Switcher + Menu Button (Right side) -->
+		<div class="flex items-center gap-3 ml-auto">
+			<div class="inline-flex items-center rounded-full border border-slate-700 bg-slate-900/40 p-1 backdrop-blur-sm" id="lang-switcher" role="tablist">
+				<button 
+					type="button" 
+					data-lang="en" 
+					role="tab"
+					aria-selected="true"
+					class="lang-btn rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200 ease-out en-active bg-sky-500/90 text-white shadow-lg shadow-sky-500/20 hover:bg-sky-400" 
+				>
+					EN
+				</button>
+				<button 
+					type="button" 
+					data-lang="it" 
+					role="tab"
+					aria-selected="false"
+					class="lang-btn rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200 ease-out text-slate-300 hover:text-slate-100" 
+				>
+					IT
+				</button>
+			</div>
+
+			<label
+				for="mobile-menu"
+				class="inline-flex cursor-pointer items-center rounded-md border border-slate-700 p-2 text-slate-200 transition hover:bg-slate-800 md:hidden"
+			>
+				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path d="M4 6h16M4 12h16M4 18h16" />
+				</svg>
+			</label>
+		</div>
 	</div>
 
 	<nav
@@ -43,7 +70,7 @@ const menuItems = [
 			{
 				menuItems.map((item) => (
 					<li>
-						<a href={item.href} class="mobile-nav-link block rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-sky-400">
+						<a href={item.href} data-nav-key={item.key} class="mobile-nav-link block rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-sky-400">
 							{item.label}
 						</a>
 					</li>

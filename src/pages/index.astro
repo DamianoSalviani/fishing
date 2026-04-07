@@ -6,7 +6,27 @@ import path from 'node:path';
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
 const defaultTripDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
-
+const driftingTuna = `Get ready to experience the most iconic fight of our seas. Tuna Drifting is more than just fishing; it is a primal duel between man and nature. Whether you are a seasoned pro or embarking on your first Big Game adventure, our team will assist you in managing the fight in stand-up style, ensuring maximum safety for you and total respect for the prey, in full compliance with current regulations. We will fish at anchor or drifting with the current, chumming with sardines and oily fish (the tuna's favorite food). We aim to draw the tuna directly under ur boat into a "rain" of sardines, where they will find our live and dead baits waiting. That’s where the battle begins!`;
+const trollingOffshore = `Offshore Trolling represents the pinnacle of dynamic pursuit in Big Game fishing. This is not passive fishing; it is an active strategy based on the meticulous study of currents, bathymetry, and the migratory routes of large pelagic species. Anglers love trolling because it perfectly combines strategy, patience, and the adrenaline of sudden, explosive strikes.
+The technique involves trolling Konas, teasers, and rigged minnows behind a moving vessel. We head far offshore, where encounters with Bluefin Tuna, Swordfish, Albacore, Mediterranean Spearfish, and Mahi-Mahi demand surgical precision and world-class equipment.
+Our approach focuses on an obsessive attention to detail: from the precise arrangement of the lure pattern in the wake to the millimetric calibration of the drag systems. On board, you will utilize cutting-edge fishing systems and the latest generation of marine electronics to pinpoint the predators' feeding zones.
+This experience is dedicated to those who seek more than just a day of fun—it is for those who demand technical excellence and a profound knowledge of the open sea.`;
+const trollingInshore = `Coastal Trolling is a discipline that demands extreme precision, deep knowledge of the seabed, and an impeccable reading of sonar markings. This technique is played out on the thin line between the coast and the open sea, where predators congregate to hunt. Our charters are designed for those looking to target species such as Little Tunny, Mahi-Mahi (Dorado), Bluefish, European Sea Bass, and Leerfish.
+Our approach is strictly technical. We utilize both artificial lures and live bait (caught during the session), managed with controlled sinking systems using sinker weights (piombo guardiano) to position the bait exactly within the strike zone. Every detail—from the choice of fluorocarbon leaders to the knot-precise trolling speed—is aimed at deceiving the most wary predators.
+On board, our crew provides their expertise to optimize the fishing action, constantly monitoring the fish finder and bottom contours to intercept the most promising marks.`;
+const bolentino = `Bottom Fishing (Bolentino) represents the discipline where nautical technology meets the angler's intuition. Our charters focus on the meticulous search for shoals, wrecks, and drop-offs, identifying the ideal habitats for the most prized predators and bottom-feeders. We cater to those seeking a targeted session for species such as Common Seabream, Gilthead Bream, Black Seabream, Red Scorpionfish, and Couch's Seabream.
+We utilize high-definition sonar to precisely interpret the bottom contours and identify the most promising marks. Every drop is calculated to the smallest detail, employing technical fluorocarbon leaders and fresh natural baits. We typically fish with 4-hook rigs to maximize efficiency.
+Whether drifting or at anchor, we manage the boat's position with extreme precision to keep your gear exactly over the "hot spot."
+From coastal to deep-sea bottom fishing, our crew will guide you in reading the subtlest rod tip signals and managing the retrieve, ensuring a high-level technical experience.`;
+const octoupus = `
+Octopus fishing is a discipline that rewards patience, tactile sensitivity, and a deep understanding of the underwater terrain. Our approach focuses on a methodical search along seagrass meadows (Posidonia), rocky areas, and mixed seabeds, where this cephalopod establishes its den.
+We employ high-visibility octopus jigs (polpare), combined with optimized traditional baits designed to trigger the mollusk's predatory and territorial instincts. Every movement of the line is engineered to simulate natural prey, requiring the angler to develop a specific reactivity to sense the "hold" and master the crucial moment of lifting the catch off the bottom.
+This activity is ideal for those wishing to learn the secrets of an ancient technique supported by modern nautical technology. It is the perfect experience for anyone seeking a day of pure fun and authentic Mediterranean culture.`;
+const swordfishNight = `Night fishing for Swordfish is the most extreme and exclusive experience our charter offers. A 10-hour expedition into the heart of the Tyrrhenian Sea, dedicated to those who wish to experience the ocean in its wildest and most mysterious form. The journey begins at sunset.
+Our strategy is divided into two crucial phases that demand maximum expertise:
+Squid Catching: The session starts with light drifting or targeted jigging to catch fresh squid (totani).
+The Hunt: Once the cephalopods are rigged, we deploy our lines into the darkness. We use light-signaling systems (strobe lights and glow sticks) to create a visual trail that guides the Swordfish toward the strike.
+Fighting a Swordfish under the stars, surrounded by total darkness, is an unforgettable experience. Every vibration of the rod in the nocturnal silence is a unique thrill. On board, the crew will manage every phase—from instrumental navigation to positioning the baits at specific depths—to give you the chance to face the true "Gladiator of the Sea."`;
 let galleryMedia = [];
 
 try {
@@ -45,7 +65,7 @@ const trips = [
 		title: 'Big Game Drifting Tuna',
 		startTime: '08:00am',
 		image: 'public/tuna.jpg', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: driftingTuna,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	},
 	{
@@ -53,7 +73,7 @@ const trips = [
 		title: 'Trolling Offshore',
 		startTime: '08:00am',
 		image: 'trolling.png', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: trollingOffshore,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	},
 	{
@@ -61,7 +81,7 @@ const trips = [
 		title: 'Trolling Inshore',
 		startTime: '08:00am',
 		image: 'inshore.jpg', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: trollingInshore,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	},
 	{
@@ -69,7 +89,7 @@ const trips = [
 		title: 'Bottom Fishing',
 		startTime: '08:00am',
 		image: 'bottom.webp', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: bolentino,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	},
 	{
@@ -77,7 +97,7 @@ const trips = [
 		title: 'Swordfish Night Fishing',
 		startTime: '08:00pm',
 		image: 'public/swordfish.jpg', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: swordfishNight,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	},
 	{
@@ -85,7 +105,7 @@ const trips = [
 		title: 'Octopus and Squid Fishing',
 		startTime: '08:00am',
 		image: 'public/octopus.jpg', // Aggiungi percorso immagine
-		description: defaultTripDescription,
+		description: octoupus,
 		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
 	}
 ];
@@ -109,46 +129,46 @@ const trips = [
 
 		<!-- Content -->
 		<div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-			<span class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300 backdrop-blur-sm sm:text-sm">
-				Unforgettable Fishing Trips
-			</span>
-			
-			<h1 class="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
+			<h1 id="hero-title" class="text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
 				Rome Fishing Charters
 			</h1>
+
+			<p id="hero-subtitle" class="mt-3 text-sm text-slate-300 sm:text-base">
+				More than 10 years fishing the coast's of Rome
+			</p>
 			
-			<p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+			<p id="hero-intro" class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
 				Embark on an unforgettable fishing adventure in Rome. Our charter is designed to offer you more than just a simple boat trip; it is a true expedition into the heart of the Tyrrhenian Sea in search of the Mediterranean's most powerful predators: Bluefin Tuna, Mediterranean Spearfish and Swordfish, among others. Every excursion is engineered to maximize your chances of success and deliver a legendary fight. We utilize cutting-edge technology to ensure an unparalleled fishing experience.
 			</p>
 
 			<details class="group mt-4">
 				<summary class="flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-sky-400 transition-colors hover:text-sky-300">
-					<span>What's included</span>
+					<span id="included-title">What's included</span>
 					<svg class="h-4 w-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 					</svg>
 				</summary>
 				<div class="mx-auto mt-6 max-w-2xl space-y-6 text-center">
 					<div class="inline-block rounded-xl border border-slate-800/50 bg-slate-900/40 p-6 text-left backdrop-blur-sm">
-						<p class="text-base font-semibold text-slate-200">All our excursions include:</p>
+						<p id="included-subtitle" class="text-base font-semibold text-slate-200">All our excursions include:</p>
 						<ul class="mt-4 space-y-3 text-sm text-slate-300">
 							<li class="flex items-start gap-3">
 								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
 									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 								</svg>
-								<span>Premium Gear: High-end equipment selected from the finest Japanese, American, Australian, and Italian brands.</span>
+								<span id="included-item-1">Premium Gear: High-end equipment selected from the finest Japanese, American, Australian, and Italian brands.</span>
 							</li>
 							<li class="flex items-start gap-3">
 								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
 									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 								</svg>
-								<span>Food & Drinks, Fuel, Bait.</span>
+								<span id="included-item-2">Food & Drinks, Fuel, Bait.</span>
 							</li>
 							<li class="flex items-start gap-3">
 								<svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
 									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 								</svg>
-								<span>On Board, you will find everything you need for a professional fishing session.</span>
+								<span id="included-item-3">On Board, you will find everything you need for a professional fishing session.</span>
 							</li>
 						</ul>
 					</div>
@@ -156,24 +176,25 @@ const trips = [
 			</details>
 
 			<a 
-				href="https://wa.me/39333000000"
+				id="hero-book-link"
+				href="https://wa.me/39333000000?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%20and%20availability%3F%20Thanks!"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="mt-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-xl hover:shadow-green-500/40 sm:px-10 sm:py-4 sm:text-lg"
+				class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-xl hover:shadow-green-500/40 sm:px-10 sm:py-4 sm:text-lg"
 			>
 				<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
 					<path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882a.5.5 0 00.61.61l6.037-1.47A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.027-1.384l-.36-.214-3.733.909.934-3.63-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
 				</svg>
-				Book Now
+				<span id="hero-book-text">Book Now</span>
 			</a>
 		</div>
 	</section>
 
 	<!-- Book Your Trip Section -->
-	<section class="py-16 sm:py-20">
+	<section id="trips" class="py-16 sm:py-20">
 		<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-			<h2 class="text-center text-3xl font-semibold text-slate-100 sm:text-4xl">
+			<h2 id="trips-title" class="text-center text-3xl font-semibold text-slate-100 sm:text-4xl">
 				BOOK YOUR TRIP
 			</h2>
 
@@ -183,6 +204,7 @@ const trips = [
 						<button
 							type="button"
 							class="trip-card-trigger block w-full cursor-pointer text-left"
+							data-trip-id={trip.id}
 							data-title={trip.title}
 							data-start-time={trip.startTime}
 							data-image={trip.image}
@@ -209,12 +231,12 @@ const trips = [
 
 							<!-- Content -->
 							<div class="p-6">
-								<h3 class="text-xl font-semibold text-slate-100">
+								<h3 class="trip-card-title text-xl font-semibold text-slate-100">
 									{trip.title}
 								</h3>
 								
 								<p class="mt-3 text-sm text-slate-400">
-									Start {trip.startTime}
+									<span class="trip-start-label">Start</span> <span class="trip-start-time">{trip.startTime}</span>
 								</p>
 
 								<ul class="mt-4 space-y-2">
@@ -223,7 +245,7 @@ const trips = [
 											<svg class="h-4 w-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
 												<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 											</svg>
-											{feature}
+											<span class="trip-feature-text">{feature}</span>
 										</li>
 									))}
 								</ul>
@@ -252,16 +274,181 @@ const trips = [
 				<p id="trip-modal-start" class="text-sm text-slate-400"></p>
 				<ul id="trip-modal-features" class="space-y-2"></ul>
 				<p id="trip-modal-description" class="max-h-56 overflow-y-auto pr-1 text-sm leading-relaxed text-slate-300"></p>
+				<a
+					id="trip-modal-book"
+					href="https://wa.me/39333000000"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-green-500"
+				>
+					Book Now
+				</a>
 			</div>
 		</div>
 	</div>
 
-	<section id="about" class="bg-slate-900/40 py-14">
+	<!-- Vessel & Arsenal Section -->
+	<section id="vessel" class="bg-slate-900/40 py-16 sm:py-24">
 		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-			<h2 class="text-2xl font-bold text-slate-100">Chi siamo</h2>
-			<p class="mt-4 max-w-3xl text-slate-400">
-				Sviluppiamo interfacce web orientate all'esperienza utente, con attenzione a performance e accessibilità.
-			</p>
+
+			<div class="mb-12 text-center">
+				<span id="vessel-badge" class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300">
+					Equipment
+				</span>
+				<h2 id="vessel-title" class="mt-4 text-3xl font-bold text-slate-100 sm:text-4xl">Built for Battle</h2>
+				<p id="vessel-intro" class="mx-auto mt-4 max-w-2xl text-slate-400">
+					Every detail on board has been chosen with one goal in mind: giving you the best possible chance against the sea's greatest predators.
+				</p>
+			</div>
+
+			<div class="grid gap-8 lg:grid-cols-2">
+				<!-- The Vessel -->
+				<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+					<div class="mb-6 flex items-center gap-3">
+						<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+							<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71m12.73 0-.71-.71M6.34 6.34l-.71-.71M21 16.5A8.5 8.5 0 1 1 12 3" />
+							</svg>
+						</div>
+						<h3 id="vessel-card-title" class="text-xl font-semibold text-slate-100">The Vessel</h3>
+					</div>
+					<p id="vessel-card-text" class="text-sm leading-relaxed text-slate-400">
+						The heart of our operations is a <span class="text-slate-200 font-medium">30-foot vessel</span> that perfectly balances stability, spacious deck movement, and safety. Designed to handle diverse sea conditions, she is the ideal platform for those seeking a solid and high-performance fishing machine.
+					</p>
+					<ul class="mt-6 space-y-3">
+						<li class="flex items-start gap-3 text-sm text-slate-300">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+							</svg>
+							<span id="vessel-item-1">Motore principale <span class="font-medium text-slate-200">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.</span>
+						</li>
+						<li class="flex items-start gap-3 text-sm text-slate-300">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+							</svg>
+							<span id="vessel-item-2">Motore ausiliario <span class="font-medium text-slate-200">Mercury</span> per la massima sicurezza in mare.</span>
+						</li>
+						<li class="flex items-start gap-3 text-sm text-slate-300">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+							</svg>
+							<span id="vessel-item-3"><span class="font-medium text-slate-200">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.</span>
+						</li>
+						<li class="flex items-start gap-3 text-sm text-slate-300">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+							</svg>
+							<span id="vessel-item-4">Ampie <span class="font-medium text-slate-200">vasche del vivo</span>, <span class="font-medium text-slate-200">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.</span>
+						</li>
+					</ul>
+				</div>
+
+				<!-- The Arsenal -->
+				<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+					<div class="mb-6 flex items-center gap-3">
+						<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+							<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+							</svg>
+						</div>
+						<h3 id="arsenal-card-title" class="text-xl font-semibold text-slate-100">Our Arsenal</h3>
+					</div>
+					<p id="arsenal-card-intro" class="text-sm leading-relaxed text-slate-400">
+						Only the world's finest. Our philosophy is simple: to target great predators, you need the best components available.
+					</p>
+					<ul class="mt-6 space-y-4">
+						<li class="text-sm text-slate-300">
+							<p id="arsenal-item-title-1" class="font-medium text-slate-200">Reels & Rods</p>
+							<p id="arsenal-item-text-1" class="mt-1 text-slate-400">
+								<span class="text-sky-400">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-400">Seeker</span> and <span class="text-sky-400">Fin-Nor</span> rods for total control during the most grueling battles.
+							</p>
+						</li>
+						<li class="text-sm text-slate-300">
+							<p id="arsenal-item-title-2" class="font-medium text-slate-200">Lines</p>
+							<p id="arsenal-item-text-2" class="mt-1 text-slate-400">
+								Exclusively <span class="text-sky-400">Sunline</span> and <span class="text-sky-400">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.
+							</p>
+						</li>
+						<li class="text-sm text-slate-300">
+							<p id="arsenal-item-title-3" class="font-medium text-slate-200">Terminal Tackle</p>
+							<p id="arsenal-item-text-3" class="mt-1 text-slate-400">
+								High-quality <span class="text-sky-400">Decoy</span> hardware — because a single hook or swivel often makes the difference.
+							</p>
+						</li>
+						<li class="text-sm text-slate-300">
+							<p id="arsenal-item-title-4" class="font-medium text-slate-200">Lures</p>
+							<p id="arsenal-item-text-4" class="mt-1 text-slate-400">
+								The very best of American and Japanese production: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> among others.
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Section -->
+	<section id="faq" class="py-16 sm:py-24">
+		<div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
+
+			<div class="mb-12 text-center">
+				<span id="faq-badge" class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300">
+					FAQ
+				</span>
+				<h2 id="faq-title" class="mt-4 text-3xl font-bold text-slate-100 sm:text-4xl">Everything You Need to Know</h2>
+				<p id="faq-intro" class="mx-auto mt-4 max-w-xl text-slate-400">Got questions before casting off? We've got answers.</p>
+			</div>
+
+			<div class="space-y-3">
+				{[
+					{
+						q: "Is Rome a good location for fishing?",
+						a: "The Roman coastline, particularly the stretch of sea facing the Tiber river mouth, is one of the premier \"hotspots\" for sportfishing in Italy. The unique seabed structure and the merging of fresh water with the salty currents of the Tyrrhenian Sea create a nutrient-rich ecosystem. The migratory routes of apex predators, such as Bluefin Tuna and Mediterranean Spearfish, make Rome a strategic base for Big Game, offshore trolling, and coastal fishing."
+					},
+					{
+						q: "Which species can I catch in Rome?",
+						a: "Bluefin Tuna, Little Tunny, Mediterranean Spearfish, Albacore, Swordfish, Mahi-Mahi (Dorado), Leerfish, Bluefish, Octopus, Cuttlefish, Gilthead Bream, and various bottom-dwelling species."
+					},
+					{
+						q: "Can I bring my own gear?",
+						a: "We provide premium equipment from the world's leading brands (Japanese, American, and Italian). However, if you have a \"lucky\" rod of your own, you are more than welcome to bring it along."
+					},
+					{
+						q: "What if I have never fished before?",
+						a: "Our trips are open to everyone. We will assist you step-by-step, teaching you the fundamentals of fighting a fish and handling the catch."
+					},
+					{
+						q: "What happens in case of bad weather?",
+						a: "Safety is our top priority. If sea or weather conditions do not allow for a safe trip, the booking will be rescheduled to the first available date. You may cancel your reservation up to 3 days in advance."
+					},
+					{
+						q: "Can I bring a non-fishing companion?",
+						a: "Absolutely! The boat is spacious and perfect for those who simply want to enjoy a day of sun and sea."
+					},
+					{
+						q: "What happens if we catch a fish? Can I take it home?",
+						a: "We strictly adhere to current maritime regulations. For Bluefin Tuna, we frequently practice Catch & Release, while for other species, it is often possible to keep the catch."
+					},
+					{
+						q: "Is a catch guaranteed?",
+						a: "The sea is not an aquarium, but our expertise and advanced onboard electronics maximize your chances of success. The thrill of the hunt is an integral part of the adventure."
+					},
+					{
+						q: "Are children allowed?",
+						a: "Of course! They are the future of fishing and are always welcome on board."
+					},
+				].map((item, index) => (
+					<details class="group rounded-xl border border-slate-800 bg-slate-900/60" data-faq-index={index}>
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-slate-200 transition hover:text-sky-300">
+							<span>{item.q}</span>
+							<svg class="h-4 w-4 flex-shrink-0 text-sky-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm leading-relaxed text-slate-400">{item.a}</p>
+					</details>
+				))}
+			</div>
 		</div>
 	</section>
 
@@ -370,6 +557,368 @@ const trips = [
 	</div>
 
 	<script>
+		const i18n = {
+			en: {
+				heroBadge: 'Unforgettable Fishing Trips',
+				heroTitle: 'Rome Fishing Charter Trips',
+				heroSubtitle: "More than 10 years fishing the coast's of Rome",
+				heroIntro: "Embark on an unforgettable fishing adventure in Rome. Our charter is designed to offer you more than just a simple boat trip; it is a true expedition into the heart of the Tyrrhenian Sea in search of the Mediterranean's most powerful predators: Bluefin Tuna, Mediterranean Spearfish and Swordfish, among others. Every excursion is engineered to maximize your chances of success and deliver a legendary fight. We utilize cutting-edge technology to ensure an unparalleled fishing experience.",
+				includedTitle: "What's included",
+				includedSubtitle: 'All our excursions include:',
+				includedItems: [
+					'Premium Gear: High-end equipment selected from the finest Japanese, American, Australian, and Italian brands.',
+					'Food & Drinks, Fuel, Bait.',
+					'On Board, you will find everything you need for a professional fishing session.'
+				],
+				heroBook: 'Book Now',
+				tripsTitle: 'BOOK YOUR TRIP',
+				navLinks: {
+					home: 'Home',
+					trips: 'Trips',
+					vessel: 'Vessel',
+					faq: 'FAQ',
+					gallery: 'Gallery',
+					contact: 'Contact'
+				},
+				footer: {
+					description: 'Modern solutions for digital experiences in fishing and tourism.',
+					linksTitle: 'Useful Links',
+					contactTitle: 'Contact',
+					emailLabel: 'Email',
+					phoneLabel: 'Phone',
+					addressLabel: 'Address',
+					addressValue: 'Via del Porto 10, Naples',
+					copyright: '© ' + new Date().getFullYear() + ' Big Catch Fishing Charters. All rights reserved.'
+				},
+				startLabel: 'Start',
+				close: 'Close',
+				vesselBadge: 'Equipment',
+				vesselTitle: 'Built for Battle',
+				vesselIntro: "Every detail on board has been chosen with one goal in mind: giving you the best possible chance against the sea's greatest predators.",
+				vesselCardTitle: 'The Vessel',
+				vesselCardText: "The heart of our operations is a 30-foot vessel, a boat that perfectly balances stability, spacious deck movement, and safety. Designed to handle diverse sea conditions, she is the ideal platform for those seeking a solid and high-performance fishing machine.",
+				vesselItems: [
+					`<span class="font-medium text-slate-200">200 HP Suzuki (2020)</span> main engine — speed and reliability to reach the grounds fast.`,
+					`<span class="font-medium text-slate-200">Mercury auxiliary engine</span> for maximum safety at sea.`,
+					`<span class="font-medium text-slate-200">Garmin electronics suite</span> with Autopilot for pinpoint navigation and mark identification.`,
+					`Large <span class="font-medium text-slate-200">livewells</span>, <span class="font-medium text-slate-200">300-liter fuel tank</span>, professional rod holders and outriggers for a wide trolling spread.`
+				],
+				arsenalCardTitle: 'Our Arsenal',
+				arsenalCardIntro: "Only the world's finest. Our philosophy is simple: to target great predators, you need the best components available.",
+				arsenalItems: [
+					[
+						'Reels & Rods',
+						`<span class="text-sky-400">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-400">Seeker</span> and <span class="text-sky-400">Fin-Nor</span> rods for total control during the most grueling battles.`
+					],
+					[
+						'Lines',
+						`Exclusively <span class="text-sky-400">Sunline</span> and <span class="text-sky-400">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.`
+					],
+					[
+						'Terminal Tackle',
+						`High-quality <span class="text-sky-400">Decoy</span> hardware — because a single hook or swivel often makes the difference.`
+					],
+					[
+						'Lures',
+						`The very best of American and Japanese production: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> among others.`
+					]
+				],
+				faqTitle: 'Everything You Need to Know',
+				faqIntro: "Got questions before casting off? We've got answers.",
+				faq: [
+					['Is Rome a good location for fishing?', 'The Roman coastline, particularly the stretch of sea facing the Tiber river mouth, is one of the premier "hotspots" for sportfishing in Italy. The unique seabed structure and the merging of fresh water with the salty currents of the Tyrrhenian Sea create a nutrient-rich ecosystem. The migratory routes of apex predators, such as Bluefin Tuna and Mediterranean Spearfish, make Rome a strategic base for Big Game, offshore trolling, and coastal fishing.'],
+					['Which species can I catch in Rome?', 'Bluefin Tuna, Little Tunny, Mediterranean Spearfish, Albacore, Swordfish, Mahi-Mahi (Dorado), Leerfish, Bluefish, Octopus, Cuttlefish, Gilthead Bream, and various bottom-dwelling species.'],
+					['Can I bring my own gear?', 'We provide premium equipment from the world\'s leading brands (Japanese, American, and Italian). However, if you have a "lucky" rod of your own, you are more than welcome to bring it along.'],
+					['What if I have never fished before?', 'Our trips are open to everyone. We will assist you step-by-step, teaching you the fundamentals of fighting a fish and handling the catch.'],
+					['What happens in case of bad weather?', 'Safety is our top priority. If sea or weather conditions do not allow for a safe trip, the booking will be rescheduled to the first available date. You may cancel your reservation up to 3 days in advance.'],
+					['Can I bring a non-fishing companion?', 'Absolutely! The boat is spacious and perfect for those who simply want to enjoy a day of sun and sea.'],
+					['What happens if we catch a fish? Can I take it home?', 'We strictly adhere to current maritime regulations. For Bluefin Tuna, we frequently practice Catch & Release, while for other species, it is often possible to keep the catch.'],
+					['Is a catch guaranteed?', 'The sea is not an aquarium, but our expertise and advanced onboard electronics maximize your chances of success. The thrill of the hunt is an integral part of the adventure.'],
+					['Are children allowed?', 'Of course! They are the future of fishing and are always welcome on board.']
+				]
+			},
+			it: {
+				heroBadge: 'Escursioni di pesca indimenticabili',
+				heroTitle: 'Rome Fishing Charter Trips',
+				heroSubtitle: 'Più di 10 anni di pesca sulle coste di Roma',
+				heroIntro: "Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari.",
+				includedTitle: 'Cosa include',
+				includedSubtitle: 'In tutte le nostre escursioni sono inclusi:',
+				includedItems: [
+					'Attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane.',
+					'Snack, pranzo, bevande e carburante.',
+					'A bordo troverai tutto il necessario per pescare.'
+				],
+				heroBook: 'Prenota ora',
+				tripsTitle: 'PRENOTA LA TUA USCITA',
+				navLinks: {
+					home: 'Home',
+					trips: 'Uscite',
+					vessel: 'Imbarcazione',
+					faq: 'FAQ',
+					gallery: 'Gallery',
+					contact: 'Contatti'
+				},
+				footer: {
+					description: 'Soluzioni moderne per esperienze digitali nel mondo della pesca e del turismo.',
+					linksTitle: 'Link utili',
+					contactTitle: 'Contatti',
+					emailLabel: 'Email',
+					phoneLabel: 'Telefono',
+					addressLabel: 'Indirizzo',
+					addressValue: 'Via del Porto 10, Napoli',
+					copyright: '© ' + new Date().getFullYear() + ' Fishing Project. Tutti i diritti riservati.'
+				},
+				startLabel: 'Partenza',
+				close: 'Chiudi',
+				vesselBadge: 'Attrezzatura',
+				vesselTitle: 'Progettata per combattere',
+				vesselIntro: 'Ogni dettaglio a bordo è stato scelto per darti il massimo contro i grandi predatori del mare.',
+				vesselCardTitle: "L'imbarcazione",
+				vesselCardText: "Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante.",
+				vesselItems: [
+					`Motore principale <span class="font-medium text-slate-200">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.`,
+					`Motore ausiliario <span class="font-medium text-slate-200">Mercury</span> per la massima sicurezza in mare.`,
+					`<span class="font-medium text-slate-200">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.`,
+					`Ampie <span class="font-medium text-slate-200">vasche del vivo</span>, <span class="font-medium text-slate-200">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.`
+				],
+				arsenalCardTitle: 'Il nostro arsenale',
+				arsenalCardIntro: `Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo. Utilizziamo mulinelli Alutecnos, lo standard d'oro per la pesca al tonno, abbinati alla reattività delle canne Seeker e Fin-Nor. Questa combinazione garantisce il controllo totale durante i combattimenti più impegnativi. Utilizziamo esclusivamente monofili e trecciati Sunline e Momoi Diamond's, scelti per l'incredibile resistenza all'abrasione. Ogni montatura è completata da minuteria Decoy di alta qualità, perché sappiamo che spesso è un singolo amo o una girella a fare la differenza tra una cattura da record e una delusione. Il nostro arsenale di artificiali comprende il meglio della produzione americana e giapponese di marchi iconici come: Nomad Design, Pulsator, Fathom Offshore, Mustad, Sunline.`,
+				arsenalItems: [
+					[
+						'Mulinelli & Canne',
+						`Mulinelli <span class="text-sky-400">Alutecnos</span> — lo standard d'oro per la pesca al tonno — abbinati alle canne <span class="text-sky-400">Seeker</span> e <span class="text-sky-400">Fin-Nor</span> per il massimo controllo nei combattimenti più duri.`
+					],
+					[
+						'Lenze',
+						`Esclusivamente monofili e trecciati <span class="text-sky-400">Sunline</span> e <span class="text-sky-400">Momoi Diamond</span>, scelti per l'eccezionale resistenza all'abrasione.`
+					],
+					[
+						'Terminali',
+						`Minuteria <span class="text-sky-400">Decoy</span> di alta qualità — perché spesso un singolo amo o una girella fanno la differenza.`
+					],
+					[
+						'Artificiali',
+						`Il meglio della produzione americana e giapponese: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> e altri.`
+					]
+				],
+				faqTitle: 'Tutto quello che devi sapere',
+				faqIntro: 'Hai domande prima di salpare? Ecco le risposte.',
+				faq: [
+					['Roma è un posto adatto alla pesca?', 'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei punti caldi della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'incontro tra le correnti d’acqua dolce e quelle salate del Tirreno creano un ecosistema ricco di vita.'],
+					['Quali pesci posso pescare a Roma?', 'Tonno Rosso, Tonno Alletterato, Aguglia Imperiale, Tonno Alalunga, Pesce Spada, Lampuga, Leccia Amia, Pesce Serra, Polpi, Seppie, Orata e pesce di fondo.'],
+					['Posso portare la mia attrezzatura?', 'Mettiamo a disposizione attrezzatura premium dei migliori brand mondiali. Se però hai una tua canna fortunata, sei libero di portarla.'],
+					['Cosa succede se non ho mai pescato prima?', 'Le nostre uscite sono aperte a tutti. Ti assisteremo passo dopo passo, insegnandoti le basi del combattimento e della gestione della preda.'],
+					['Cosa succede in caso di maltempo?', 'La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l\'uscita, la prenotazione verrà spostata alla prima data utile. È possibile cancellare fino a 3 giorni prima.'],
+					['Posso portare un accompagnatore che non pesca?', 'Certamente. La barca è spaziosa e perfetta anche per chi vuole solo godersi una giornata di sole e mare.'],
+					['Cosa succede se prendiamo un pesce? Posso portarlo a casa?', 'Seguiamo rigorosamente le normative vigenti. Per il Tonno Rosso pratichiamo spesso il Catch & Release, mentre per altre specie è possibile tenere il pescato.'],
+					['La cattura è garantita?', 'Il mare non è un acquario, ma la nostra esperienza e la strumentazione di bordo massimizzano le probabilità di successo.'],
+					['I bambini sono accettati?', 'Certo che sì, sono il futuro della pesca!']
+				]
+			}
+		};
+
+		const tripI18n = {
+		1: {
+			en: {
+				title: 'Big Game Drifting Bluefin Tuna',
+				description: `Get ready to experience the most iconic fight of our seas. Tuna Drifting is more than just fishing; it is a primal duel between man and nature.
+Whether you are a seasoned pro or embarking on your first Big Game adventure, our team will assist you in managing the fight in stand-up style, ensuring maximum safety for you and total respect for the prey, in full compliance with current regulations.
+We will fish at anchor or drifting with the current, chumming with sardines and oily fish (the tuna's favorite food). We aim to draw the tuna directly under our boat into a "rain" of sardines, where they will find our live and dead baits waiting. That's where the battle begins!`,
+				features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child Friendly']
+			},
+			it: {
+				title: 'Big Game Drifting Tonno Rosso',
+				description: `Preparati a vivere il combattimento più iconico dei nostri mari. Il drifting al tonno non è solo pesca, è un duello primordiale tra uomo e natura.
+Che tu sia un esperto o alla tua prima esperienza di Big Game, il nostro team ti assisterà nella gestione del combattimento in stand-up, garantendo la massima sicurezza per te e il massimo rispetto per la preda secondo le normative vigenti.
+Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo preferito dei tonni). Attireremo i tonni sotto la nostra barca, dove all'interno di una pioggia di sarde, ci saranno innescate esche vive e morte. Lì inizia il combattimento!`,
+				features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Adatto ai bambini']
+			}
+		},
+		2: {
+			en: { title: 'Offshore Trolling', description: `Offshore Trolling represents the pinnacle of dynamic pursuit in Big Game fishing. This is not passive fishing; it is an active strategy based on the meticulous study of currents, bathymetry, and the migratory routes of large pelagic species. Anglers love trolling because it perfectly combines strategy, patience, and the adrenaline of sudden, explosive strikes.
+The technique involves trolling Konas, teasers, and rigged minnows behind a moving vessel. We head far offshore, where encounters with Bluefin Tuna, Swordfish, Albacore, Mediterranean Spearfish, and Mahi-Mahi demand surgical precision and world-class equipment.
+Our approach focuses on an obsessive attention to detail: from the precise arrangement of the lure pattern in the wake to the millimetric calibration of the drag systems. On board, you will utilize cutting-edge fishing systems and the latest generation of marine electronics to pinpoint the predators' feeding zones.
+This experience is dedicated to those who seek more than just a day of fun—it is for those who demand technical excellence and a profound knowledge of the open sea.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
+			it: { title: "Traina d'Altura", description: `La traina d'altura rappresenta la massima espressione della ricerca dinamica nel Big Game. Non è una pesca d'attesa, ma una strategia attiva basata sullo studio delle correnti, delle batimetriche e delle rotte migratorie dei grandi pelagici. I pescatori amano la traina perchè combina strategia, pazienza e l'emozione di attacchi improvvisi. Consiste nel trascinare kona, teaser, minnow innescate dietro un'imbarcazione in movimento. Ci spingiamo al largo, dove l'incontro con Tonni rossi, Pesci Spada, Alalunghe, Aguglie Imperiali e Lampughe richiede precisione e attrezzature di altissimo livello.
+La nostra attività si concentra sulla cura maniacale dei dettagli: dalla disposizione del pattern di esche in scia alla taratura millimetrica delle frizioni. A bordo, utilizzerete sistemi di pesca d'avanguardia e strumentazione elettronica di ultima generazione per l'individuazione delle zone di alimentazione dei predatori.
+Un'esperienza dedicata a chi cerca nel charter non solo il divertimento, ma l'eccellenza tecnica e la profonda conoscenza del mare aperto.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
+		},
+		3: {
+			en: { title: 'Coastal Trolling', description: `Coastal Trolling is a discipline that demands extreme precision, deep knowledge of the seabed, and an impeccable reading of sonar markings. This technique is played out on the thin line between the coast and the open sea, where predators congregate to hunt. Our charters are designed for those looking to target species such as Little Tunny, Mahi-Mahi (Dorado), Bluefish, European Sea Bass, and Leerfish.
+Our approach is strictly technical. We utilize both artificial lures and live bait (caught during the session), managed with controlled sinking systems using sinker weights (piombo guardiano) to position the bait exactly within the strike zone. Every detail—from the choice of fluorocarbon leaders to the knot-precise trolling speed—is aimed at deceiving the most wary predators.
+On board, our crew provides their expertise to optimize the fishing action, constantly monitoring the fish finder and bottom contours to intercept the most promising marks.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child Friendly'] },
+			it: { title: 'Traina Costiera', description: `La traina costiera è una disciplina che richiede estrema precisione, una profonda conoscenza dei fondali e una lettura impeccabile delle marcature sull'eco. Questa tecnica si gioca sulla sottile linea tra la costa e il mare aperto, dove i predatori si concentrano per cacciare. La nostra attività si rivolge a chi desidera insidiare specie come Tonno Alletterato, Dorado, Pesci Serra, Spigole e Leccia.
+Il nostro approccio è rigorosamente tecnico: utilizziamo sia esche artificiali che esca viva (reperiti durante l'uscita), gestita con sistemi di affondamento controllato tramite piombo guardiano per posizionare l'insidia esattamente nella strike-zone. Ogni dettaglio, dalla scelta del terminale in fluorocarbon alla velocità di traina nodi-precisa, è finalizzato a ingannare i predatori più diffidenti.
+A bordo, l'equipaggio mette a disposizione la propria esperienza per ottimizzare l'azione di pesca, monitorando costantemente l'ecoscandaglio e la conformazione del fondo per intercettare le marcature più interessanti.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Adatto ai bambini'] }
+		},
+		4: {
+			en: { title: 'Bottom Fishing', description: `Bottom Fishing (Bolentino) represents the discipline where nautical technology meets the angler's intuition. Our charters focus on the meticulous search for shoals, wrecks, and drop-offs, identifying the ideal habitats for the most prized predators and bottom-feeders. We cater to those seeking a targeted session for species such as Common Seabream, Gilthead Bream, Black Seabream, Red Scorpionfish, and Couch's Seabream.
+We utilize high-definition sonar to precisely interpret the bottom contours and identify the most promising marks. Every drop is calculated to the smallest detail, employing technical fluorocarbon leaders and fresh natural baits. We typically fish with 4-hook rigs to maximize efficiency.
+Whether drifting or at anchor, we manage the boat's position with extreme precision to keep your gear exactly over the "hot spot."
+From coastal to deep-sea bottom fishing, our crew will guide you in reading the subtlest rod tip signals and managing the retrieve, ensuring a high-level technical experience.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
+			it: { title: 'Bolentino', description: `Il Bolentino rappresenta la disciplina dove la tecnologia nautica incontra la sensibilità del pescatore. La nostra attività si sviluppa sulla ricerca meticolosa di secche, relitti e cadute di fondale, individuando gli habitat ideali dove stazionano i predatori e i grufolatori più pregiati. Ci rivolgiamo a chi cerca una pesca mirata a specie come Pagelli, Orate, Tanute, Scorfani e Paraghi.
+Utilizziamo ecoscandagli ad alta definizione per interpretare con precisione la conformazione del fondo e individuare le marcature più promettenti.
+Ogni calata è studiata nei minimi dettagli, con l'impiego di terminali in fluorocarbon tecnico e l'uso di esche naturali fresche. Utilizzeremo lenze formate da 4 ami.
+Gestiamo lo scarroccio dell'imbarcazione o l'ancoraggio con estrema precisione, per mantenere le nostre insidie esattamente sopra lo spot.
+Che si tratti di bolentino costiero o di profondità, l'equipaggio ti guiderà nella lettura dei segnali della canna e nella gestione del recupero, assicurando un'esperienza tecnica di alto livello.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
+		},
+		5: {
+			en: { title: 'Swordfish Night Expedition', description: `Night fishing for Swordfish is the most extreme and exclusive experience our charter offers. A 10-hour expedition into the heart of the Tyrrhenian Sea, dedicated to those who wish to experience the ocean in its wildest and most mysterious form. The journey begins at sunset.
+Our strategy is divided into two crucial phases that demand maximum expertise:
+Squid Catching: The session starts with light drifting or targeted jigging to catch fresh squid (totani).
+The Hunt: Once the cephalopods are rigged, we deploy our lines into the darkness. We use light-signaling systems (strobe lights and glow sticks) to create a visual trail that guides the Swordfish toward the strike.
+Fighting a Swordfish under the stars, surrounded by total darkness, is an unforgettable experience. Every vibration of the rod in the nocturnal silence is a unique thrill. On board, the crew will manage every phase—from instrumental navigation to positioning the baits at specific depths—to give you the chance to face the true "Gladiator of the Sea."`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
+			it: { title: 'Spedizione Notturna al Pesce Spada', description: `La pesca notturna al Pesce Spada è l'esperienza più estrema ed esclusiva che il nostro charter possa offrire. Una spedizione di 10 ore nel cuore del Tirreno, dedicata a chi vuole vivere il mare nella sua veste più selvaggia e misteriosa. Il viaggio inizia al tramonto.
+La nostra strategia è divisa in due fasi cruciali che richiedono massima competenza:
+La sessione inizia con il light drifting o il jigging mirato alla cattura dei totani.
+Una volta innescati i cefalopodi, caliamo le nostre lenze nell'oscurità. Utilizziamo sistemi di segnalazione luminosa per creare una scia visiva che guidi il Pesce Spada verso lo strike.
+Combattere un Pesce Spada sotto le stelle, circondati dal buio totale, è un'esperienza indimenticabile. Ogni vibrazione della canna nel silenzio notturno è un brivido unico. A bordo, l'equipaggio gestirà ogni fase — dalla navigazione strumentale al posizionamento delle esche sulle diverse batimetriche — per offrirti l'opportunità di confrontarti con il vero "Gladiatore del Mare".`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
+		},
+		6: {
+			en: { title: 'Octopus Fishing', description: `Octopus fishing is a discipline that rewards patience, tactile sensitivity, and a deep understanding of the underwater terrain. Our approach focuses on a methodical search along seagrass meadows (Posidonia), rocky areas, and mixed seabeds, where this cephalopod establishes its den.
+We employ high-visibility octopus jigs (polpare), combined with optimized traditional baits designed to trigger the mollusk's predatory and territorial instincts. Every movement of the line is engineered to simulate natural prey, requiring the angler to develop a specific reactivity to sense the "hold" and master the crucial moment of lifting the catch off the bottom.
+This activity is ideal for those wishing to learn the secrets of an ancient technique supported by modern nautical technology. It is the perfect experience for anyone seeking a day of pure fun and authentic Mediterranean culture.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child Friendly'] },
+			it: { title: 'Pesca a Polpi', description: `La pesca al polpo è una disciplina che premia la pazienza, la sensibilità tattile e una conoscenza del territorio sommerso. il nostro approccio si focalizza su una ricerca metodica lungo le praterie di posidonia, le zone rocciose e i fondali misti, dove questo cefalopode stabilisce la sua tana.
+Impieghiamo polpare ed ad alta visibilità, combinate con inneschi tradizionali ottimizzati per stimolare l'istinto predatorio e territoriale del mollusco.
+Ogni movimento della lenza è studiato per simulare una preda naturale, richiedendo al pescatore una reattività specifica per avvertire la "trattenuta" e gestire il momento del distacco dal fondo.
+Questa attività è ideale per chi desidera apprendere i segreti di una tecnica antica supportata dalle moderne tecnologie nautiche. Un'esperienza perfetta per chi cerca una giornata di puro divertimento.`, features: ['Food & Drinks', 'Canne e mulinelli', 'Max 4 persone', 'Adatto ai bambini'] }
+		}
+	};
+
+	let currentLang = localStorage.getItem('lang') || (navigator.language?.toLowerCase().startsWith('it') ? 'it' : 'en');
+		if (!['it', 'en'].includes(currentLang)) currentLang = 'en';
+
+		const setText = (id, value) => {
+			const el = document.getElementById(id);
+			if (el) el.textContent = value;
+		};
+
+		const setHtml = (id, value) => {
+			const el = document.getElementById(id);
+			if (el) el.innerHTML = value;
+		};
+
+		const applyLang = (lang) => {
+			const t = i18n[lang];
+			document.documentElement.lang = lang;
+			localStorage.setItem('lang', lang);
+
+			setText('hero-badge', t.heroBadge);
+			setText('hero-title', t.heroTitle);
+			setText('hero-subtitle', t.heroSubtitle);
+			setText('hero-intro', t.heroIntro);
+			setText('included-title', t.includedTitle);
+			setText('included-subtitle', t.includedSubtitle);
+			setText('included-item-1', t.includedItems[0]);
+			setText('included-item-2', t.includedItems[1]);
+			setText('included-item-3', t.includedItems[2]);
+			setText('hero-book-text', t.heroBook);
+			setText('trips-title', t.tripsTitle);
+			document.querySelectorAll('[data-nav-key]').forEach((el) => {
+				const key = el.getAttribute('data-nav-key');
+				if (key && t.navLinks?.[key]) el.textContent = t.navLinks[key];
+			});
+			document.querySelectorAll('[data-footer-link-key]').forEach((el) => {
+				const key = el.getAttribute('data-footer-link-key');
+				if (key && t.navLinks?.[key]) el.textContent = t.navLinks[key];
+			});
+			setText('footer-description', t.footer.description);
+			setText('footer-links-title', t.footer.linksTitle);
+			setText('footer-contact-title', t.footer.contactTitle);
+			setText('footer-email-label', t.footer.emailLabel);
+			setText('footer-phone-label', t.footer.phoneLabel);
+			setText('footer-address-label', t.footer.addressLabel);
+			setText('footer-address-value', t.footer.addressValue);
+			setText('footer-copyright', t.footer.copyright);
+			setText('vessel-badge', t.vesselBadge);
+			setText('vessel-title', t.vesselTitle);
+			setText('vessel-intro', t.vesselIntro);
+			setText('vessel-card-title', t.vesselCardTitle);
+			setText('vessel-card-text', t.vesselCardText);
+			setHtml('vessel-item-1', t.vesselItems[0]);
+			setHtml('vessel-item-2', t.vesselItems[1]);
+			setHtml('vessel-item-3', t.vesselItems[2]);
+			setHtml('vessel-item-4', t.vesselItems[3]);
+			setText('arsenal-card-title', t.arsenalCardTitle);
+			setText('arsenal-card-intro', t.arsenalCardIntro);
+			setText('arsenal-item-title-1', t.arsenalItems[0][0]);
+			setHtml('arsenal-item-text-1', t.arsenalItems[0][1]);
+			setText('arsenal-item-title-2', t.arsenalItems[1][0]);
+			setHtml('arsenal-item-text-2', t.arsenalItems[1][1]);
+			setText('arsenal-item-title-3', t.arsenalItems[2][0]);
+			setHtml('arsenal-item-text-3', t.arsenalItems[2][1]);
+			setText('arsenal-item-title-4', t.arsenalItems[3][0]);
+			setHtml('arsenal-item-text-4', t.arsenalItems[3][1]);
+			setText('faq-title', t.faqTitle);
+			setText('faq-intro', t.faqIntro);
+
+			const heroBookLink = document.getElementById('hero-book-link');
+			if (heroBookLink) {
+				heroBookLink.href = 'https://wa.me/39333000000?text=' + encodeURIComponent("Hi! I'm interested in booking a fishing trip with your charter. Could you please send me more info about your packages and availability? Thanks!");
+			}
+
+			document.querySelectorAll('.trip-card-trigger').forEach((card) => {
+				const id = Number(card.getAttribute('data-trip-id'));
+				const trip = tripI18n[id]?.[lang];
+				if (!trip) return;
+
+				card.dataset.title = trip.title;
+				card.dataset.description = trip.description;
+				card.dataset.features = trip.features.join('|');
+				card.setAttribute('aria-label', (lang === 'it' ? 'Apri dettagli per ' : 'Open details for ') + trip.title);
+
+				const titleEl = card.querySelector('.trip-card-title');
+				if (titleEl) titleEl.textContent = trip.title;
+
+				const startLabel = card.querySelector('.trip-start-label');
+				if (startLabel) startLabel.textContent = t.startLabel;
+
+				const featureEls = card.querySelectorAll('.trip-feature-text');
+				featureEls.forEach((el, index) => {
+					if (trip.features[index]) el.textContent = trip.features[index];
+				});
+			});
+
+			document.querySelectorAll('[data-faq-index]').forEach((detail) => {
+				const idx = Number(detail.getAttribute('data-faq-index'));
+				const q = detail.querySelector('summary span');
+				const a = detail.querySelector('p');
+				if (t.faq[idx]) {
+					if (q) q.textContent = t.faq[idx][0];
+					if (a) a.textContent = t.faq[idx][1];
+				}
+			});
+
+			const closeTrip = document.getElementById('trip-modal-close');
+			if (closeTrip) closeTrip.textContent = t.close;
+			const tripBook = document.getElementById('trip-modal-book');
+			if (tripBook) tripBook.textContent = t.heroBook;
+
+			document.querySelectorAll('.lang-btn').forEach((btn) => {
+				const isActive = btn.getAttribute('data-lang') === lang;
+				btn.setAttribute('aria-selected', isActive.toString());
+				
+				if (isActive) {
+					btn.classList.add('en-active');
+					btn.classList.remove('text-slate-300', 'hover:text-slate-100');
+					btn.classList.add('bg-sky-500/90', 'text-white', 'shadow-lg', 'shadow-sky-500/20');
+				} else {
+					btn.classList.remove('en-active');
+					btn.classList.add('text-slate-300', 'hover:text-slate-100');
+					btn.classList.remove('bg-sky-500/90', 'text-white', 'shadow-lg', 'shadow-sky-500/20');
+				}
+			});
+
+			currentLang = lang;
+		};
+
+		document.querySelectorAll('.lang-btn').forEach((btn) => {
+			btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang') || 'en'));
+		});
+
+		applyLang(currentLang);
+
 		const track = document.getElementById('gallery-carousel-track');
 		const prev = document.getElementById('gallery-prev');
 		const next = document.getElementById('gallery-next');
@@ -509,6 +1058,7 @@ const trips = [
 		const tripModalStart = document.getElementById('trip-modal-start');
 		const tripModalFeatures = document.getElementById('trip-modal-features');
 		const tripModalDescription = document.getElementById('trip-modal-description');
+		const tripModalBook = document.getElementById('trip-modal-book');
 
 		if (
 			tripCards.length &&
@@ -518,7 +1068,8 @@ const trips = [
 			tripModalTitle &&
 			tripModalStart &&
 			tripModalFeatures &&
-			tripModalDescription
+			tripModalDescription &&
+			tripModalBook
 		) {
 			const openTripModal = (card) => {
 				const title = card.dataset.title || '';
@@ -530,8 +1081,9 @@ const trips = [
 				tripModalImage.src = image;
 				tripModalImage.alt = title;
 				tripModalTitle.textContent = title;
-				tripModalStart.textContent = `Start ${startTime}`;
+				tripModalStart.textContent = `${i18n[currentLang].startLabel} ${startTime}`;
 				tripModalDescription.textContent = description;
+				tripModalBook.href = `https://wa.me/39333000000?text=${encodeURIComponent(`Hi! I want to book ${title}`)}`;
 
 				tripModalFeatures.innerHTML = '';
 				features.forEach((feature) => {
