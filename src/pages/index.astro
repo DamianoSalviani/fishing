@@ -303,14 +303,14 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 		</button>
 
 		<div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
-			<img id="trip-modal-image" src="" alt="" class="aspect-[4/3] w-full flex-shrink-0 object-cover sm:aspect-[16/9]" />
-			<div class="flex-1 min-h-0">
+			<img id="trip-modal-image" src="" alt="" class="hidden w-full flex-shrink-0 object-cover sm:block sm:aspect-[16/9]" />
+			<div class="min-h-0 flex-1 overflow-y-auto">
 				<div class="space-y-3 p-4 sm:space-y-4 sm:p-6">
 					<h3 id="trip-modal-title" class="text-xl font-semibold text-slate-900 sm:text-2xl"></h3>
 					<p id="trip-modal-start" class="text-sm text-slate-500"></p>
 					<div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
 					<div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
-					<p id="trip-modal-description" class="max-h-32 overflow-y-auto pr-1 text-sm leading-relaxed text-slate-700 sm:max-h-48"></p>
+					<p id="trip-modal-description" class="text-sm leading-relaxed text-slate-700"></p>
 				</div>
 			</div>
 			<div class="flex-shrink-0 border-t border-slate-100 p-4 sm:p-6">
