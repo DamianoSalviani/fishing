@@ -64,51 +64,67 @@ const trips = [
 		id: 1,
 		title: 'Big Game Drifting Tuna',
 		startTime: '08:00am',
-		image: 'public/tuna.jpg', // Aggiungi percorso immagine
+		image: 'public/tuna.jpg',
 		description: driftingTuna,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '8h — €750/gruppo|4h — €450/gruppo'
 	},
 	{
 		id: 2,
 		title: 'Trolling Offshore',
 		startTime: '08:00am',
-		image: 'trolling.png', // Aggiungi percorso immagine
+		image: 'trolling.png',
 		description: trollingOffshore,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '8h — €900/gruppo'
 	},
 	{
 		id: 3,
 		title: 'Trolling Inshore',
 		startTime: '08:00am',
-		image: 'inshore.jpg', // Aggiungi percorso immagine
+		image: 'inshore.jpg',
 		description: trollingInshore,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '8h — €750/gruppo'
 	},
 	{
 		id: 4,
 		title: 'Bottom Fishing',
 		startTime: '08:00am',
-		image: 'bottom.webp', // Aggiungi percorso immagine
+		image: 'bottom.webp',
 		description: bolentino,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '8h — €650/gruppo|4h — €450/gruppo'
 	},
 	{
 		id: 5,
 		title: 'Swordfish Night Fishing',
 		startTime: '08:00pm',
-		image: 'public/swordfish.jpg', // Aggiungi percorso immagine
+		image: 'public/swordfish.jpg',
 		description: swordfishNight,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '€1.500/gruppo'
 	},
 	{
 		id: 6,
 		title: 'Octopus and Squid Fishing',
 		startTime: '08:00am',
-		image: 'public/octopus.jpg', // Aggiungi percorso immagine
+		image: 'public/octopus.jpg',
 		description: octoupus,
-		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person']
+		features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
+		pricing: '8h — €600/gruppo'
 	}
 ];
+
+const cardSchemes = [
+	{
+		bar: 'background:linear-gradient(to right,#22d3ee,#0ea5e9,#3b82f6)',
+		cardBg: 'background:#ffffff',
+		titleGrad: "font-family:'Montserrat',sans-serif;color:#0f172a",
+	},
+];
+
+const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % cardSchemes.length] }));
 ---
 
 <Layout title="Big Catch Fishing Charters - Rome">
@@ -149,7 +165,7 @@ const trips = [
 					</svg>
 				</summary>
 				<div class="mx-auto mt-6 max-w-2xl space-y-6 text-center">
-					<div class="inline-block rounded-xl border border-slate-800/50 bg-slate-900/40 p-6 text-left backdrop-blur-sm">
+					<div class="inline-block rounded-xl border border-cyan-500/30 bg-cyan-950/50 p-6 text-left backdrop-blur-sm">
 						<p id="included-subtitle" class="text-base font-semibold text-slate-200">All our excursions include:</p>
 						<ul class="mt-4 space-y-3 text-sm text-slate-300">
 							<li class="flex items-start gap-3">
@@ -192,15 +208,21 @@ const trips = [
 	</section>
 
 	<!-- Book Your Trip Section -->
-	<section id="trips" class="py-16 sm:py-20">
+	<section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
 		<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-			<h2 id="trips-title" class="text-center text-3xl font-semibold text-slate-100 sm:text-4xl">
-				BOOK YOUR TRIP
-			</h2>
+			<div class="mb-12 text-center">
+				<span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">
+					<svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+					<span id="trips-title">BOOK YOUR TRIP</span>
+				</span>
+				<h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
+					Choose Your <span style="background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Adventure</span>
+				</h2>
+			</div>
 
 			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-				{trips.map((trip) => (
-					<article class="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 transition-all hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10">
+				{tripsWithSchemes.map((trip) => (
+					<article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-500/10" style={trip.s.cardBg}>
 						<button
 							type="button"
 							class="trip-card-trigger block w-full cursor-pointer text-left"
@@ -210,10 +232,11 @@ const trips = [
 							data-image={trip.image}
 							data-description={trip.description}
 							data-features={trip.features.join('|')}
+							data-pricing={trip.pricing}
 							aria-label={`Open details for ${trip.title}`}
 						>
 							<!-- Image Container -->
-							<div class="aspect-[4/3] overflow-hidden bg-slate-800/50">
+							<div class="aspect-[4/3] overflow-hidden bg-slate-100">
 								{trip.image ? (
 									<img
 										src={trip.image}
@@ -229,20 +252,32 @@ const trips = [
 								)}
 							</div>
 
+							<div class="h-2 w-full" style={trip.s.bar}></div>
 							<!-- Content -->
 							<div class="p-6">
-								<h3 class="trip-card-title text-xl font-semibold text-slate-100">
+								<h3 class="trip-card-title text-xl font-black" style={trip.s.titleGrad}>
 									{trip.title}
 								</h3>
+
+								<div class="trip-card-pricing mt-2 flex flex-wrap gap-1.5">
+									{trip.pricing.split('|').map((p) => (
+										<span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-200">
+											<svg class="h-3.5 w-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+												<path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+											</svg>
+											{p}
+										</span>
+									))}
+								</div>
 								
-								<p class="mt-3 text-sm text-slate-400">
+								<p class="mt-3 text-sm text-slate-500">
 									<span class="trip-start-label">Start</span> <span class="trip-start-time">{trip.startTime}</span>
 								</p>
 
 								<ul class="mt-4 space-y-2">
 									{trip.features.map((feature) => (
-										<li class="flex items-center gap-2 text-sm text-slate-300">
-											<svg class="h-4 w-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+										<li class="flex items-center gap-2 text-sm text-slate-600">
+											<svg class="h-4 w-4 flex-shrink-0 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
 												<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 											</svg>
 											<span class="trip-feature-text">{feature}</span>
@@ -261,19 +296,20 @@ const trips = [
 		<button
 			type="button"
 			id="trip-modal-close"
-			class="absolute right-4 top-4 rounded-md border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800"
+			class="absolute right-4 top-4 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
 			aria-label="Close trip details"
 		>
 			Close
 		</button>
 
-		<div class="w-full max-w-3xl overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
+		<div class="w-full max-w-3xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
 			<img id="trip-modal-image" src="" alt="" class="aspect-[16/9] w-full object-cover" />
 			<div class="space-y-4 p-6">
-				<h3 id="trip-modal-title" class="text-2xl font-semibold text-slate-100"></h3>
-				<p id="trip-modal-start" class="text-sm text-slate-400"></p>
-				<ul id="trip-modal-features" class="space-y-2"></ul>
-				<p id="trip-modal-description" class="max-h-56 overflow-y-auto pr-1 text-sm leading-relaxed text-slate-300"></p>
+				<h3 id="trip-modal-title" class="text-2xl font-semibold text-slate-900"></h3>
+				<p id="trip-modal-start" class="text-sm text-slate-500"></p>
+				<div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
+				<div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
+				<p id="trip-modal-description" class="max-h-56 overflow-y-auto pr-1 text-sm leading-relaxed text-slate-700"></p>
 				<a
 					id="trip-modal-book"
 					href="https://wa.me/393793554548"
@@ -288,97 +324,97 @@ const trips = [
 	</div>
 
 	<!-- Vessel & Arsenal Section -->
-	<section id="vessel" class="bg-slate-900/40 py-16 sm:py-24">
+	<section id="vessel" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
 		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 
 			<div class="mb-12 text-center">
-				<span id="vessel-badge" class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300">
+				<span id="vessel-badge" class="inline-flex items-center rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">
 					Equipment
 				</span>
-				<h2 id="vessel-title" class="mt-4 text-3xl font-bold text-slate-100 sm:text-4xl">Built for Battle</h2>
-				<p id="vessel-intro" class="mx-auto mt-4 max-w-2xl text-slate-400">
+				<h2 id="vessel-title" class="mt-4 text-3xl font-black sm:text-4xl" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Built for Battle</h2>
+				<p id="vessel-intro" class="mx-auto mt-4 max-w-2xl text-slate-600">
 					Every detail on board has been chosen with one goal in mind: giving you the best possible chance against the sea's greatest predators.
 				</p>
 			</div>
 
 			<div class="grid gap-8 lg:grid-cols-2">
 				<!-- The Vessel -->
-				<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+				<div class="rounded-2xl border border-cyan-100 bg-white p-8 shadow-md">
 					<div class="mb-6 flex items-center gap-3">
-						<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+						<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-sky-600 text-white shadow-md shadow-cyan-400/40">
 							<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71m12.73 0-.71-.71M6.34 6.34l-.71-.71M21 16.5A8.5 8.5 0 1 1 12 3" />
 							</svg>
 						</div>
-						<h3 id="vessel-card-title" class="text-xl font-semibold text-slate-100">The Vessel</h3>
+						<h3 id="vessel-card-title" class="text-xl font-black text-slate-900" style="font-family:'Montserrat',sans-serif">The Vessel</h3>
 					</div>
-					<p id="vessel-card-text" class="text-sm leading-relaxed text-slate-400">
-						The heart of our operations is a <span class="text-slate-200 font-medium">30-foot vessel</span> that perfectly balances stability, spacious deck movement, and safety. Designed to handle diverse sea conditions, she is the ideal platform for those seeking a solid and high-performance fishing machine.
+					<p id="vessel-card-text" class="text-sm leading-relaxed text-slate-600">
+						The heart of our operations is a <span class="text-slate-900 font-medium">30-foot vessel</span> that perfectly balances stability, spacious deck movement, and safety. Designed to handle diverse sea conditions, she is the ideal platform for those seeking a solid and high-performance fishing machine.
 					</p>
 					<ul class="mt-6 space-y-3">
-						<li class="flex items-start gap-3 text-sm text-slate-300">
-							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+						<li class="flex items-start gap-3 text-sm text-slate-700">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
-							<span id="vessel-item-1">Motore principale <span class="font-medium text-slate-200">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.</span>
+							<span id="vessel-item-1">Motore principale <span class="font-medium text-slate-900">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.</span>
 						</li>
-						<li class="flex items-start gap-3 text-sm text-slate-300">
-							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+						<li class="flex items-start gap-3 text-sm text-slate-700">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
-							<span id="vessel-item-2">Motore ausiliario <span class="font-medium text-slate-200">Mercury</span> per la massima sicurezza in mare.</span>
+							<span id="vessel-item-2">Motore ausiliario <span class="font-medium text-slate-900">Mercury</span> per la massima sicurezza in mare.</span>
 						</li>
-						<li class="flex items-start gap-3 text-sm text-slate-300">
-							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+						<li class="flex items-start gap-3 text-sm text-slate-700">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
-							<span id="vessel-item-3"><span class="font-medium text-slate-200">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.</span>
+							<span id="vessel-item-3"><span class="font-medium text-slate-900">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.</span>
 						</li>
-						<li class="flex items-start gap-3 text-sm text-slate-300">
-							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+						<li class="flex items-start gap-3 text-sm text-slate-700">
+							<svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
-							<span id="vessel-item-4">Ampie <span class="font-medium text-slate-200">vasche del vivo</span>, <span class="font-medium text-slate-200">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.</span>
+							<span id="vessel-item-4">Ampie <span class="font-medium text-slate-900">vasche del vivo</span>, <span class="font-medium text-slate-900">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.</span>
 						</li>
 					</ul>
 				</div>
 
 				<!-- The Arsenal -->
-				<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+				<div class="rounded-2xl border border-orange-100 bg-white p-8 shadow-md">
 					<div class="mb-6 flex items-center gap-3">
-						<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+						<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 text-white shadow-md shadow-orange-400/40">
 							<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
 							</svg>
 						</div>
-						<h3 id="arsenal-card-title" class="text-xl font-semibold text-slate-100">Our Arsenal</h3>
+						<h3 id="arsenal-card-title" class="text-xl font-black text-slate-900" style="font-family:'Montserrat',sans-serif">Our Arsenal</h3>
 					</div>
-					<p id="arsenal-card-intro" class="text-sm leading-relaxed text-slate-400">
+					<p id="arsenal-card-intro" class="text-sm leading-relaxed text-slate-600">
 						Only the world's finest. Our philosophy is simple: to target great predators, you need the best components available.
 					</p>
 					<ul class="mt-6 space-y-4">
-						<li class="text-sm text-slate-300">
-							<p id="arsenal-item-title-1" class="font-medium text-slate-200">Reels & Rods</p>
-							<p id="arsenal-item-text-1" class="mt-1 text-slate-400">
-								<span class="text-sky-400">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-400">Seeker</span> and <span class="text-sky-400">Fin-Nor</span> rods for total control during the most grueling battles.
+						<li class="text-sm text-slate-700">
+							<p id="arsenal-item-title-1" class="font-medium text-slate-900">Reels & Rods</p>
+							<p id="arsenal-item-text-1" class="mt-1 text-slate-600">
+								<span class="text-sky-600">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-600">Seeker</span> and <span class="text-sky-600">Fin-Nor</span> rods for total control during the most grueling battles.
 							</p>
 						</li>
-						<li class="text-sm text-slate-300">
-							<p id="arsenal-item-title-2" class="font-medium text-slate-200">Lines</p>
-							<p id="arsenal-item-text-2" class="mt-1 text-slate-400">
-								Exclusively <span class="text-sky-400">Sunline</span> and <span class="text-sky-400">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.
+						<li class="text-sm text-slate-700">
+							<p id="arsenal-item-title-2" class="font-medium text-slate-900">Lines</p>
+							<p id="arsenal-item-text-2" class="mt-1 text-slate-600">
+								Exclusively <span class="text-sky-600">Sunline</span> and <span class="text-sky-600">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.
 							</p>
 						</li>
-						<li class="text-sm text-slate-300">
-							<p id="arsenal-item-title-3" class="font-medium text-slate-200">Terminal Tackle</p>
-							<p id="arsenal-item-text-3" class="mt-1 text-slate-400">
-								High-quality <span class="text-sky-400">Decoy</span> hardware — because a single hook or swivel often makes the difference.
+						<li class="text-sm text-slate-700">
+							<p id="arsenal-item-title-3" class="font-medium text-slate-900">Terminal Tackle</p>
+							<p id="arsenal-item-text-3" class="mt-1 text-slate-600">
+								High-quality <span class="text-sky-600">Decoy</span> hardware — because a single hook or swivel often makes the difference.
 							</p>
 						</li>
-						<li class="text-sm text-slate-300">
-							<p id="arsenal-item-title-4" class="font-medium text-slate-200">Lures</p>
-							<p id="arsenal-item-text-4" class="mt-1 text-slate-400">
-								The very best of American and Japanese production: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> among others.
+						<li class="text-sm text-slate-700">
+							<p id="arsenal-item-title-4" class="font-medium text-slate-900">Lures</p>
+							<p id="arsenal-item-text-4" class="mt-1 text-slate-600">
+								The very best of American and Japanese production: <span class="text-sky-600">Nomad Design</span>, <span class="text-sky-600">Pulsator</span>, <span class="text-sky-600">Fathom</span>, <span class="text-sky-600">Mustad</span>, <span class="text-sky-600">Sunline</span> among others.
 							</p>
 						</li>
 					</ul>
@@ -392,11 +428,11 @@ const trips = [
 		<div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
 
 			<div class="mb-12 text-center">
-				<span id="faq-badge" class="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-950/40 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-sky-300">
+				<span id="faq-badge" class="inline-flex items-center rounded-full bg-gradient-to-r from-orange-400 to-amber-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-orange-400/30">
 					FAQ
 				</span>
-				<h2 id="faq-title" class="mt-4 text-3xl font-bold text-slate-100 sm:text-4xl">Everything You Need to Know</h2>
-				<p id="faq-intro" class="mx-auto mt-4 max-w-xl text-slate-400">Got questions before casting off? We've got answers.</p>
+				<h2 id="faq-title" class="mt-4 text-3xl font-black sm:text-4xl" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#ea580c,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Everything You Need to Know</h2>
+				<p id="faq-intro" class="mx-auto mt-4 max-w-xl text-slate-600">Got questions before casting off? We've got answers.</p>
 			</div>
 
 			<div class="space-y-3">
@@ -438,36 +474,44 @@ const trips = [
 						a: "Of course! They are the future of fishing and are always welcome on board."
 					},
 				].map((item, index) => (
-					<details class="group rounded-xl border border-slate-800 bg-slate-900/60" data-faq-index={index}>
-						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-slate-200 transition hover:text-sky-300">
+					<details class="group rounded-xl border border-slate-200 bg-white shadow-sm transition-all open:border-l-4 open:border-l-orange-400 open:shadow-md" data-faq-index={index}>
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-slate-800 transition hover:text-sky-600">
 							<span>{item.q}</span>
-							<svg class="h-4 w-4 flex-shrink-0 text-sky-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="h-4 w-4 flex-shrink-0 text-orange-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 							</svg>
 						</summary>
-						<p class="px-6 pb-5 text-sm leading-relaxed text-slate-400">{item.a}</p>
+						<p class="px-6 pb-5 text-sm leading-relaxed text-slate-600">{item.a}</p>
 					</details>
 				))}
 			</div>
 		</div>
 	</section>
 
-	<section id="gallery" class="py-14">
+	<section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
 		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-			<h2 class="text-2xl font-bold text-slate-100">Gallery</h2>
+
+			<div class="mb-10 text-center">
+				<span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">
+					<svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+					</svg>
+					Gallery
+				</span>
+				<h2 id="gallery-title" class="mt-4 text-3xl font-black sm:text-4xl" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Momenti dal Mare</h2>
+				<p id="gallery-subtitle" class="mx-auto mt-3 max-w-xl text-base text-slate-500">Ogni uscita è una storia. Sfoglia i momenti catturati a bordo.</p>
+			</div>
 
 			{
 				galleryMedia.length > 0 ? (
-					<div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40">
+					<div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<button
 							id="gallery-prev"
 							type="button"
 							aria-label="Previous slide"
-							class="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700/80 bg-slate-900/70 p-2 text-slate-200 backdrop-blur transition hover:bg-slate-800"
+							class="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-200 bg-white/90 p-2 text-slate-600 shadow-sm backdrop-blur transition hover:bg-slate-100"
 						>
-							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M15 19l-7-7 7-7" />
-							</svg>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7" /></svg>
 						</button>
 
 						<div id="gallery-carousel-track" class="flex transition-transform duration-500 ease-out">
@@ -485,17 +529,13 @@ const trips = [
 										<video
 											src={media.src}
 											class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-											muted
-											loop
-											autoplay
-											playsinline
-											preload="metadata"
+											muted loop autoplay playsinline preload="metadata"
 										/>
 									) : (
 										<img src={media.src} alt={media.alt} class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
 									)}
-									<p class="border-t border-slate-800 px-4 py-3 text-sm text-slate-300">{media.alt}</p>
-									<span class="pointer-events-none absolute inset-0 bg-slate-950/0 transition group-hover:bg-slate-950/15"></span>
+									<p class="border-t border-slate-100 px-4 py-3 text-sm text-slate-500">{media.alt}</p>
+									<span class="pointer-events-none absolute inset-0 bg-cyan-500/0 transition group-hover:bg-cyan-500/5"></span>
 								</button>
 							))}
 						</div>
@@ -504,15 +544,13 @@ const trips = [
 							id="gallery-next"
 							type="button"
 							aria-label="Next slide"
-							class="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700/80 bg-slate-900/70 p-2 text-slate-200 backdrop-blur transition hover:bg-slate-800"
+							class="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-200 bg-white/90 p-2 text-slate-600 shadow-sm backdrop-blur transition hover:bg-slate-100"
 						>
-							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M9 5l7 7-7 7" />
-							</svg>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" /></svg>
 						</button>
 					</div>
 				) : (
-					<p class="mt-6 text-slate-400">Nessun file trovato in public/gallery.</p>
+					<p class="mt-6 text-center text-slate-500">Nessun file trovato in public/gallery.</p>
 				)
 			}
 		</div>
@@ -598,33 +636,35 @@ const trips = [
 				vesselCardTitle: 'The Vessel',
 				vesselCardText: "The heart of our operations is a 30-foot vessel, a boat that perfectly balances stability, spacious deck movement, and safety. Designed to handle diverse sea conditions, she is the ideal platform for those seeking a solid and high-performance fishing machine.",
 				vesselItems: [
-					`<span class="font-medium text-slate-200">200 HP Suzuki (2020)</span> main engine — speed and reliability to reach the grounds fast.`,
-					`<span class="font-medium text-slate-200">Mercury auxiliary engine</span> for maximum safety at sea.`,
-					`<span class="font-medium text-slate-200">Garmin electronics suite</span> with Autopilot for pinpoint navigation and mark identification.`,
-					`Large <span class="font-medium text-slate-200">livewells</span>, <span class="font-medium text-slate-200">300-liter fuel tank</span>, professional rod holders and outriggers for a wide trolling spread.`
+					`<span class="font-medium text-slate-900">200 HP Suzuki (2020)</span> main engine — speed and reliability to reach the grounds fast.`,
+					`<span class="font-medium text-slate-900">Mercury auxiliary engine</span> for maximum safety at sea.`,
+					`<span class="font-medium text-slate-900">Garmin electronics suite</span> with Autopilot for pinpoint navigation and mark identification.`,
+					`Large <span class="font-medium text-slate-900">livewells</span>, <span class="font-medium text-slate-900">300-liter fuel tank</span>, professional rod holders and outriggers for a wide trolling spread.`
 				],
 				arsenalCardTitle: 'Our Arsenal',
 				arsenalCardIntro: "Only the world's finest. Our philosophy is simple: to target great predators, you need the best components available.",
 				arsenalItems: [
 					[
 						'Reels & Rods',
-						`<span class="text-sky-400">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-400">Seeker</span> and <span class="text-sky-400">Fin-Nor</span> rods for total control during the most grueling battles.`
+						`<span class="text-sky-600">Alutecnos</span> reels — the gold standard for tuna fishing — paired with <span class="text-sky-600">Seeker</span> and <span class="text-sky-600">Fin-Nor</span> rods for total control during the most grueling battles.`
 					],
 					[
 						'Lines',
-						`Exclusively <span class="text-sky-400">Sunline</span> and <span class="text-sky-400">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.`
+						`Exclusively <span class="text-sky-600">Sunline</span> and <span class="text-sky-600">Momoi Diamond</span> monofilaments and braids, chosen for incredible abrasion resistance.`
 					],
 					[
 						'Terminal Tackle',
-						`High-quality <span class="text-sky-400">Decoy</span> hardware — because a single hook or swivel often makes the difference.`
+						`High-quality <span class="text-sky-600">Decoy</span> hardware — because a single hook or swivel often makes the difference.`
 					],
 					[
 						'Lures',
-						`The very best of American and Japanese production: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> among others.`
+						`The very best of American and Japanese production: <span class="text-sky-600">Nomad Design</span>, <span class="text-sky-600">Pulsator</span>, <span class="text-sky-600">Fathom</span>, <span class="text-sky-600">Mustad</span>, <span class="text-sky-600">Sunline</span> among others.`
 					]
 				],
 				faqTitle: 'Everything You Need to Know',
 				faqIntro: "Got questions before casting off? We've got answers.",
+				galleryTitle: 'Moments at Sea',
+				gallerySubtitle: 'Every trip is a story. Browse the moments captured on board.',
 				faq: [
 					['Is Rome a good location for fishing?', 'The Roman coastline, particularly the stretch of sea facing the Tiber river mouth, is one of the premier "hotspots" for sportfishing in Italy. The unique seabed structure and the merging of fresh water with the salty currents of the Tyrrhenian Sea create a nutrient-rich ecosystem. The migratory routes of apex predators, such as Bluefin Tuna and Mediterranean Spearfish, make Rome a strategic base for Big Game, offshore trolling, and coastal fishing.'],
 					['Which species can I catch in Rome?', 'Bluefin Tuna, Little Tunny, Mediterranean Spearfish, Albacore, Swordfish, Mahi-Mahi (Dorado), Leerfish, Bluefish, Octopus, Cuttlefish, Gilthead Bream, and various bottom-dwelling species.'],
@@ -677,33 +717,35 @@ const trips = [
 				vesselCardTitle: "L'imbarcazione",
 				vesselCardText: "Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante.",
 				vesselItems: [
-					`Motore principale <span class="font-medium text-slate-200">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.`,
-					`Motore ausiliario <span class="font-medium text-slate-200">Mercury</span> per la massima sicurezza in mare.`,
-					`<span class="font-medium text-slate-200">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.`,
-					`Ampie <span class="font-medium text-slate-200">vasche del vivo</span>, <span class="font-medium text-slate-200">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.`
+					`Motore principale <span class="font-medium text-slate-900">Suzuki 200 CV (2020)</span> — velocità e affidabilità per raggiungere rapidamente gli spot di pesca.`,
+					`Motore ausiliario <span class="font-medium text-slate-900">Mercury</span> per la massima sicurezza in mare.`,
+					`<span class="font-medium text-slate-900">Suite elettronica Garmin</span> con autopilota per navigazione di precisione e identificazione delle marcature.`,
+					`Ampie <span class="font-medium text-slate-900">vasche del vivo</span>, <span class="font-medium text-slate-900">serbatoio da 300 litri</span>, portacanne professionali e divergenti per una traina ad ampio raggio.`
 				],
 				arsenalCardTitle: 'Il nostro arsenale',
 				arsenalCardIntro: `Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo. Utilizziamo mulinelli Alutecnos, lo standard d'oro per la pesca al tonno, abbinati alla reattività delle canne Seeker e Fin-Nor. Questa combinazione garantisce il controllo totale durante i combattimenti più impegnativi. Utilizziamo esclusivamente monofili e trecciati Sunline e Momoi Diamond's, scelti per l'incredibile resistenza all'abrasione. Ogni montatura è completata da minuteria Decoy di alta qualità, perché sappiamo che spesso è un singolo amo o una girella a fare la differenza tra una cattura da record e una delusione. Il nostro arsenale di artificiali comprende il meglio della produzione americana e giapponese di marchi iconici come: Nomad Design, Pulsator, Fathom Offshore, Mustad, Sunline.`,
 				arsenalItems: [
 					[
 						'Mulinelli & Canne',
-						`Mulinelli <span class="text-sky-400">Alutecnos</span> — lo standard d'oro per la pesca al tonno — abbinati alle canne <span class="text-sky-400">Seeker</span> e <span class="text-sky-400">Fin-Nor</span> per il massimo controllo nei combattimenti più duri.`
+						`Mulinelli <span class="text-sky-600">Alutecnos</span> — lo standard d'oro per la pesca al tonno — abbinati alle canne <span class="text-sky-600">Seeker</span> e <span class="text-sky-600">Fin-Nor</span> per il massimo controllo nei combattimenti più duri.`
 					],
 					[
 						'Lenze',
-						`Esclusivamente monofili e trecciati <span class="text-sky-400">Sunline</span> e <span class="text-sky-400">Momoi Diamond</span>, scelti per l'eccezionale resistenza all'abrasione.`
+						`Esclusivamente monofili e trecciati <span class="text-sky-600">Sunline</span> e <span class="text-sky-600">Momoi Diamond</span>, scelti per l'eccezionale resistenza all'abrasione.`
 					],
 					[
 						'Terminali',
-						`Minuteria <span class="text-sky-400">Decoy</span> di alta qualità — perché spesso un singolo amo o una girella fanno la differenza.`
+						`Minuteria <span class="text-sky-600">Decoy</span> di alta qualità — perché spesso un singolo amo o una girella fanno la differenza.`
 					],
 					[
 						'Artificiali',
-						`Il meglio della produzione americana e giapponese: <span class="text-sky-400">Nomad Design</span>, <span class="text-sky-400">Pulsator</span>, <span class="text-sky-400">Fathom</span>, <span class="text-sky-400">Mustad</span>, <span class="text-sky-400">Sunline</span> e altri.`
+						`Il meglio della produzione americana e giapponese: <span class="text-sky-600">Nomad Design</span>, <span class="text-sky-600">Pulsator</span>, <span class="text-sky-600">Fathom</span>, <span class="text-sky-600">Mustad</span>, <span class="text-sky-600">Sunline</span> e altri.`
 					]
 				],
 				faqTitle: 'Tutto quello che devi sapere',
 				faqIntro: 'Hai domande prima di salpare? Ecco le risposte.',
+				galleryTitle: 'Momenti dal Mare',
+				gallerySubtitle: 'Ogni uscita è una storia. Sfoglia i momenti catturati a bordo.',
 				faq: [
 					['Roma è un posto adatto alla pesca?', 'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei punti caldi della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'incontro tra le correnti d’acqua dolce e quelle salate del Tirreno creano un ecosistema ricco di vita.'],
 					['Quali pesci posso pescare a Roma?', 'Tonno Rosso, Tonno Alletterato, Aguglia Imperiale, Tonno Alalunga, Pesce Spada, Lampuga, Leccia Amia, Pesce Serra, Polpi, Seppie, Orata e pesce di fondo.'],
@@ -722,6 +764,7 @@ const trips = [
 		1: {
 			en: {
 				title: 'Big Game Drifting Bluefin Tuna',
+				pricing: '8h — €750/group|4h — €450/group',
 				description: `Get ready to experience the most iconic fight of our seas. Tuna Drifting is more than just fishing; it is a primal duel between man and nature.
 Whether you are a seasoned pro or embarking on your first Big Game adventure, our team will assist you in managing the fight in stand-up style, ensuring maximum safety for you and total respect for the prey, in full compliance with current regulations.
 We will fish at anchor or drifting with the current, chumming with sardines and oily fish (the tuna's favorite food). We aim to draw the tuna directly under our boat into a "rain" of sardines, where they will find our live and dead baits waiting. That's where the battle begins!`,
@@ -729,6 +772,7 @@ We will fish at anchor or drifting with the current, chumming with sardines and 
 			},
 			it: {
 				title: 'Big Game Drifting Tonno Rosso',
+				pricing: '8h — €750/gruppo|4h — €450/gruppo',
 				description: `Preparati a vivere il combattimento più iconico dei nostri mari. Il drifting al tonno non è solo pesca, è un duello primordiale tra uomo e natura.
 Che tu sia un esperto o alla tua prima esperienza di Big Game, il nostro team ti assisterà nella gestione del combattimento in stand-up, garantendo la massima sicurezza per te e il massimo rispetto per la preda secondo le normative vigenti.
 Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo preferito dei tonni). Attireremo i tonni sotto la nostra barca, dove all'interno di una pioggia di sarde, ci saranno innescate esche vive e morte. Lì inizia il combattimento!`,
@@ -736,50 +780,50 @@ Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo pre
 			}
 		},
 		2: {
-			en: { title: 'Offshore Trolling', description: `Offshore Trolling represents the pinnacle of dynamic pursuit in Big Game fishing. This is not passive fishing; it is an active strategy based on the meticulous study of currents, bathymetry, and the migratory routes of large pelagic species. Anglers love trolling because it perfectly combines strategy, patience, and the adrenaline of sudden, explosive strikes.
+			en: { title: 'Offshore Trolling', pricing: '8h — €900/group', description: `Offshore Trolling represents the pinnacle of dynamic pursuit in Big Game fishing. This is not passive fishing; it is an active strategy based on the meticulous study of currents, bathymetry, and the migratory routes of large pelagic species. Anglers love trolling because it perfectly combines strategy, patience, and the adrenaline of sudden, explosive strikes.
 The technique involves trolling Konas, teasers, and rigged minnows behind a moving vessel. We head far offshore, where encounters with Bluefin Tuna, Swordfish, Albacore, Mediterranean Spearfish, and Mahi-Mahi demand surgical precision and world-class equipment.
 Our approach focuses on an obsessive attention to detail: from the precise arrangement of the lure pattern in the wake to the millimetric calibration of the drag systems. On board, you will utilize cutting-edge fishing systems and the latest generation of marine electronics to pinpoint the predators' feeding zones.
 This experience is dedicated to those who seek more than just a day of fun—it is for those who demand technical excellence and a profound knowledge of the open sea.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
-			it: { title: "Traina d'Altura", description: `La traina d'altura rappresenta la massima espressione della ricerca dinamica nel Big Game. Non è una pesca d'attesa, ma una strategia attiva basata sullo studio delle correnti, delle batimetriche e delle rotte migratorie dei grandi pelagici. I pescatori amano la traina perchè combina strategia, pazienza e l'emozione di attacchi improvvisi. Consiste nel trascinare kona, teaser, minnow innescate dietro un'imbarcazione in movimento. Ci spingiamo al largo, dove l'incontro con Tonni rossi, Pesci Spada, Alalunghe, Aguglie Imperiali e Lampughe richiede precisione e attrezzature di altissimo livello.
+			it: { title: "Traina d'Altura", pricing: '8h — €900/gruppo', description: `La traina d'altura rappresenta la massima espressione della ricerca dinamica nel Big Game. Non è una pesca d'attesa, ma una strategia attiva basata sullo studio delle correnti, delle batimetriche e delle rotte migratorie dei grandi pelagici. I pescatori amano la traina perchè combina strategia, pazienza e l'emozione di attacchi improvvisi. Consiste nel trascinare kona, teaser, minnow innescate dietro un'imbarcazione in movimento. Ci spingiamo al largo, dove l'incontro con Tonni rossi, Pesci Spada, Alalunghe, Aguglie Imperiali e Lampughe richiede precisione e attrezzature di altissimo livello.
 La nostra attività si concentra sulla cura maniacale dei dettagli: dalla disposizione del pattern di esche in scia alla taratura millimetrica delle frizioni. A bordo, utilizzerete sistemi di pesca d'avanguardia e strumentazione elettronica di ultima generazione per l'individuazione delle zone di alimentazione dei predatori.
 Un'esperienza dedicata a chi cerca nel charter non solo il divertimento, ma l'eccellenza tecnica e la profonda conoscenza del mare aperto.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
 		},
 		3: {
-			en: { title: 'Coastal Trolling', description: `Coastal Trolling is a discipline that demands extreme precision, deep knowledge of the seabed, and an impeccable reading of sonar markings. This technique is played out on the thin line between the coast and the open sea, where predators congregate to hunt. Our charters are designed for those looking to target species such as Little Tunny, Mahi-Mahi (Dorado), Bluefish, European Sea Bass, and Leerfish.
+			en: { title: 'Coastal Trolling', pricing: '8h — €750/group', description: `Coastal Trolling is a discipline that demands extreme precision, deep knowledge of the seabed, and an impeccable reading of sonar markings. This technique is played out on the thin line between the coast and the open sea, where predators congregate to hunt. Our charters are designed for those looking to target species such as Little Tunny, Mahi-Mahi (Dorado), Bluefish, European Sea Bass, and Leerfish.
 Our approach is strictly technical. We utilize both artificial lures and live bait (caught during the session), managed with controlled sinking systems using sinker weights (piombo guardiano) to position the bait exactly within the strike zone. Every detail—from the choice of fluorocarbon leaders to the knot-precise trolling speed—is aimed at deceiving the most wary predators.
 On board, our crew provides their expertise to optimize the fishing action, constantly monitoring the fish finder and bottom contours to intercept the most promising marks.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child Friendly'] },
-			it: { title: 'Traina Costiera', description: `La traina costiera è una disciplina che richiede estrema precisione, una profonda conoscenza dei fondali e una lettura impeccabile delle marcature sull'eco. Questa tecnica si gioca sulla sottile linea tra la costa e il mare aperto, dove i predatori si concentrano per cacciare. La nostra attività si rivolge a chi desidera insidiare specie come Tonno Alletterato, Dorado, Pesci Serra, Spigole e Leccia.
+			it: { title: 'Traina Costiera', pricing: '8h — €750/gruppo', description: `La traina costiera è una disciplina che richiede estrema precisione, una profonda conoscenza dei fondali e una lettura impeccabile delle marcature sull'eco. Questa tecnica si gioca sulla sottile linea tra la costa e il mare aperto, dove i predatori si concentrano per cacciare. La nostra attività si rivolge a chi desidera insidiare specie come Tonno Alletterato, Dorado, Pesci Serra, Spigole e Leccia.
 Il nostro approccio è rigorosamente tecnico: utilizziamo sia esche artificiali che esca viva (reperiti durante l'uscita), gestita con sistemi di affondamento controllato tramite piombo guardiano per posizionare l'insidia esattamente nella strike-zone. Ogni dettaglio, dalla scelta del terminale in fluorocarbon alla velocità di traina nodi-precisa, è finalizzato a ingannare i predatori più diffidenti.
 A bordo, l'equipaggio mette a disposizione la propria esperienza per ottimizzare l'azione di pesca, monitorando costantemente l'ecoscandaglio e la conformazione del fondo per intercettare le marcature più interessanti.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Adatto ai bambini'] }
 		},
 		4: {
-			en: { title: 'Bottom Fishing', description: `Bottom Fishing (Bolentino) represents the discipline where nautical technology meets the angler's intuition. Our charters focus on the meticulous search for shoals, wrecks, and drop-offs, identifying the ideal habitats for the most prized predators and bottom-feeders. We cater to those seeking a targeted session for species such as Common Seabream, Gilthead Bream, Black Seabream, Red Scorpionfish, and Couch's Seabream.
+			en: { title: 'Bottom Fishing', pricing: '8h — €650/group|4h — €450/group', description: `Bottom Fishing (Bolentino) represents the discipline where nautical technology meets the angler's intuition. Our charters focus on the meticulous search for shoals, wrecks, and drop-offs, identifying the ideal habitats for the most prized predators and bottom-feeders. We cater to those seeking a targeted session for species such as Common Seabream, Gilthead Bream, Black Seabream, Red Scorpionfish, and Couch's Seabream.
 We utilize high-definition sonar to precisely interpret the bottom contours and identify the most promising marks. Every drop is calculated to the smallest detail, employing technical fluorocarbon leaders and fresh natural baits. We typically fish with 4-hook rigs to maximize efficiency.
 Whether drifting or at anchor, we manage the boat's position with extreme precision to keep your gear exactly over the "hot spot."
 From coastal to deep-sea bottom fishing, our crew will guide you in reading the subtlest rod tip signals and managing the retrieve, ensuring a high-level technical experience.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
-			it: { title: 'Bolentino', description: `Il Bolentino rappresenta la disciplina dove la tecnologia nautica incontra la sensibilità del pescatore. La nostra attività si sviluppa sulla ricerca meticolosa di secche, relitti e cadute di fondale, individuando gli habitat ideali dove stazionano i predatori e i grufolatori più pregiati. Ci rivolgiamo a chi cerca una pesca mirata a specie come Pagelli, Orate, Tanute, Scorfani e Paraghi.
+			it: { title: 'Bolentino', pricing: '8h — €650/gruppo|4h — €450/gruppo', description: `Il Bolentino rappresenta la disciplina dove la tecnologia nautica incontra la sensibilità del pescatore. La nostra attività si sviluppa sulla ricerca meticolosa di secche, relitti e cadute di fondale, individuando gli habitat ideali dove stazionano i predatori e i grufolatori più pregiati. Ci rivolgiamo a chi cerca una pesca mirata a specie come Pagelli, Orate, Tanute, Scorfani e Paraghi.
 Utilizziamo ecoscandagli ad alta definizione per interpretare con precisione la conformazione del fondo e individuare le marcature più promettenti.
 Ogni calata è studiata nei minimi dettagli, con l'impiego di terminali in fluorocarbon tecnico e l'uso di esche naturali fresche. Utilizzeremo lenze formate da 4 ami.
 Gestiamo lo scarroccio dell'imbarcazione o l'ancoraggio con estrema precisione, per mantenere le nostre insidie esattamente sopra lo spot.
 Che si tratti di bolentino costiero o di profondità, l'equipaggio ti guiderà nella lettura dei segnali della canna e nella gestione del recupero, assicurando un'esperienza tecnica di alto livello.`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
 		},
 		5: {
-			en: { title: 'Swordfish Night Expedition', description: `Night fishing for Swordfish is the most extreme and exclusive experience our charter offers. A 10-hour expedition into the heart of the Tyrrhenian Sea, dedicated to those who wish to experience the ocean in its wildest and most mysterious form. The journey begins at sunset.
+			en: { title: 'Swordfish Night Expedition', pricing: '€1.500/group', description: `Night fishing for Swordfish is the most extreme and exclusive experience our charter offers. A 10-hour expedition into the heart of the Tyrrhenian Sea, dedicated to those who wish to experience the ocean in its wildest and most mysterious form. The journey begins at sunset.
 Our strategy is divided into two crucial phases that demand maximum expertise:
 Squid Catching: The session starts with light drifting or targeted jigging to catch fresh squid (totani).
 The Hunt: Once the cephalopods are rigged, we deploy our lines into the darkness. We use light-signaling systems (strobe lights and glow sticks) to create a visual trail that guides the Swordfish toward the strike.
 Fighting a Swordfish under the stars, surrounded by total darkness, is an unforgettable experience. Every vibration of the rod in the nocturnal silence is a unique thrill. On board, the crew will manage every phase—from instrumental navigation to positioning the baits at specific depths—to give you the chance to face the true "Gladiator of the Sea."`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Tuition for beginners'] },
-			it: { title: 'Spedizione Notturna al Pesce Spada', description: `La pesca notturna al Pesce Spada è l'esperienza più estrema ed esclusiva che il nostro charter possa offrire. Una spedizione di 10 ore nel cuore del Tirreno, dedicata a chi vuole vivere il mare nella sua veste più selvaggia e misteriosa. Il viaggio inizia al tramonto.
+			it: { title: 'Spedizione Notturna al Pesce Spada', pricing: '€1.500/gruppo', description: `La pesca notturna al Pesce Spada è l'esperienza più estrema ed esclusiva che il nostro charter possa offrire. Una spedizione di 10 ore nel cuore del Tirreno, dedicata a chi vuole vivere il mare nella sua veste più selvaggia e misteriosa. Il viaggio inizia al tramonto.
 La nostra strategia è divisa in due fasi cruciali che richiedono massima competenza:
 La sessione inizia con il light drifting o il jigging mirato alla cattura dei totani.
 Una volta innescati i cefalopodi, caliamo le nostre lenze nell'oscurità. Utilizziamo sistemi di segnalazione luminosa per creare una scia visiva che guidi il Pesce Spada verso lo strike.
 Combattere un Pesce Spada sotto le stelle, circondati dal buio totale, è un'esperienza indimenticabile. Ogni vibrazione della canna nel silenzio notturno è un brivido unico. A bordo, l'equipaggio gestirà ogni fase — dalla navigazione strumentale al posizionamento delle esche sulle diverse batimetriche — per offrirti l'opportunità di confrontarti con il vero "Gladiatore del Mare".`, features: ['Cibo e bevande', 'Canne e mulinelli', 'Max 4 persone', 'Lezione per principianti'] }
 		},
 		6: {
-			en: { title: 'Octopus Fishing', description: `Octopus fishing is a discipline that rewards patience, tactile sensitivity, and a deep understanding of the underwater terrain. Our approach focuses on a methodical search along seagrass meadows (Posidonia), rocky areas, and mixed seabeds, where this cephalopod establishes its den.
+			en: { title: 'Octopus Fishing', pricing: '8h — €600/group', description: `Octopus fishing is a discipline that rewards patience, tactile sensitivity, and a deep understanding of the underwater terrain. Our approach focuses on a methodical search along seagrass meadows (Posidonia), rocky areas, and mixed seabeds, where this cephalopod establishes its den.
 We employ high-visibility octopus jigs (polpare), combined with optimized traditional baits designed to trigger the mollusk's predatory and territorial instincts. Every movement of the line is engineered to simulate natural prey, requiring the angler to develop a specific reactivity to sense the "hold" and master the crucial moment of lifting the catch off the bottom.
 This activity is ideal for those wishing to learn the secrets of an ancient technique supported by modern nautical technology. It is the perfect experience for anyone seeking a day of pure fun and authentic Mediterranean culture.`, features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child Friendly'] },
-			it: { title: 'Pesca a Polpi', description: `La pesca al polpo è una disciplina che premia la pazienza, la sensibilità tattile e una conoscenza del territorio sommerso. il nostro approccio si focalizza su una ricerca metodica lungo le praterie di posidonia, le zone rocciose e i fondali misti, dove questo cefalopode stabilisce la sua tana.
+			it: { title: 'Pesca a Polpi', pricing: '8h — €600/gruppo', description: `La pesca al polpo è una disciplina che premia la pazienza, la sensibilità tattile e una conoscenza del territorio sommerso. il nostro approccio si focalizza su una ricerca metodica lungo le praterie di posidonia, le zone rocciose e i fondali misti, dove questo cefalopode stabilisce la sua tana.
 Impieghiamo polpare ed ad alta visibilità, combinate con inneschi tradizionali ottimizzati per stimolare l'istinto predatorio e territoriale del mollusco.
 Ogni movimento della lenza è studiato per simulare una preda naturale, richiedendo al pescatore una reattività specifica per avvertire la "trattenuta" e gestire il momento del distacco dal fondo.
 Questa attività è ideale per chi desidera apprendere i segreti di una tecnica antica supportata dalle moderne tecnologie nautiche. Un'esperienza perfetta per chi cerca una giornata di puro divertimento.`, features: ['Food & Drinks', 'Canne e mulinelli', 'Max 4 persone', 'Adatto ai bambini'] }
@@ -852,6 +896,8 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 			setHtml('arsenal-item-text-4', t.arsenalItems[3][1]);
 			setText('faq-title', t.faqTitle);
 			setText('faq-intro', t.faqIntro);
+			setText('gallery-title', t.galleryTitle);
+			setText('gallery-subtitle', t.gallerySubtitle);
 
 			const heroBookLink = document.getElementById('hero-book-link');
 			if (heroBookLink) {
@@ -866,10 +912,19 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 				card.dataset.title = trip.title;
 				card.dataset.description = trip.description;
 				card.dataset.features = trip.features.join('|');
+				if (trip.pricing) card.dataset.pricing = trip.pricing;
 				card.setAttribute('aria-label', (lang === 'it' ? 'Apri dettagli per ' : 'Open details for ') + trip.title);
 
 				const titleEl = card.querySelector('.trip-card-title');
 				if (titleEl) titleEl.textContent = trip.title;
+
+				const pricingEl = card.querySelector('.trip-card-pricing');
+				if (pricingEl && trip.pricing) {
+					const svgIcon = `<svg class="h-3.5 w-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>`;
+					pricingEl.innerHTML = trip.pricing.split('|').map((p) =>
+						`<span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-200">${svgIcon}${p}</span>`
+					).join('');
+				}
 
 				const startLabel = card.querySelector('.trip-start-label');
 				if (startLabel) startLabel.textContent = t.startLabel;
@@ -898,15 +953,12 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 			document.querySelectorAll('.lang-btn').forEach((btn) => {
 				const isActive = btn.getAttribute('data-lang') === lang;
 				btn.setAttribute('aria-selected', isActive.toString());
-				
 				if (isActive) {
-					btn.classList.add('en-active');
-					btn.classList.remove('text-slate-300', 'hover:text-slate-100');
-					btn.classList.add('bg-sky-500/90', 'text-white', 'shadow-lg', 'shadow-sky-500/20');
+					btn.classList.add('en-active', 'bg-gradient-to-r', 'from-cyan-500', 'to-sky-600', 'text-white', 'shadow-md');
+					btn.classList.remove('text-cyan-700', 'hover:text-cyan-900');
 				} else {
-					btn.classList.remove('en-active');
-					btn.classList.add('text-slate-300', 'hover:text-slate-100');
-					btn.classList.remove('bg-sky-500/90', 'text-white', 'shadow-lg', 'shadow-sky-500/20');
+					btn.classList.remove('en-active', 'bg-gradient-to-r', 'from-cyan-500', 'to-sky-600', 'text-white', 'shadow-md', 'shadow-cyan-400/30', 'hover:from-cyan-400', 'hover:to-sky-500', 'bg-sky-500/90', 'shadow-lg', 'shadow-sky-500/20');
+					btn.classList.add('text-cyan-700', 'hover:text-cyan-900');
 				}
 			});
 
@@ -946,7 +998,6 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 				slides.forEach((slide) => {
 					slide.style.flex = `0 0 ${100 / visibleCount}%`;
 				});
-
 				const maxIndex = Math.max(0, slides.length - visibleCount);
 				if (current > maxIndex) current = maxIndex;
 			};
@@ -1059,6 +1110,7 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 		const tripModalFeatures = document.getElementById('trip-modal-features');
 		const tripModalDescription = document.getElementById('trip-modal-description');
 		const tripModalBook = document.getElementById('trip-modal-book');
+		const tripModalPricing = document.getElementById('trip-modal-pricing');
 
 		if (
 			tripCards.length &&
@@ -1077,6 +1129,7 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 				const image = card.dataset.image || '';
 				const description = card.dataset.description || '';
 				const features = (card.dataset.features || '').split('|').filter(Boolean);
+				const pricing = card.dataset.pricing || '';
 
 				tripModalImage.src = image;
 				tripModalImage.alt = title;
@@ -1084,18 +1137,25 @@ Questa attività è ideale per chi desidera apprendere i segreti di una tecnica 
 				tripModalStart.textContent = `${i18n[currentLang].startLabel} ${startTime}`;
 				tripModalDescription.textContent = description;
 				tripModalBook.href = `https://wa.me/393793554548?text=${encodeURIComponent(`Hi! I want to book ${title}`)}`;
-
+				if (tripModalPricing) {
+					const svgIcon = `<svg class="h-4 w-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>`;
+					tripModalPricing.className = 'flex flex-wrap gap-2';
+					tripModalPricing.innerHTML = pricing.split('|').map((p) =>
+						`<span class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200">${svgIcon}${p}</span>`
+					).join('');
+				}
 				tripModalFeatures.innerHTML = '';
 				features.forEach((feature) => {
-					const item = document.createElement('li');
-					item.className = 'flex items-center gap-2 text-sm text-slate-300';
-					item.innerHTML = `
-						<svg class="h-4 w-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
-							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+					const chip = document.createElement('span');
+					chip.className = 'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold';
+					chip.style.cssText = 'background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd';
+					chip.innerHTML = `
+						<svg class="h-3 w-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color:#0369a1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
 						</svg>
-						<span>${feature}</span>
+						${feature}
 					`;
-					tripModalFeatures.appendChild(item);
+					tripModalFeatures.appendChild(chip);
 				});
 
 				tripModal.classList.remove('hidden');
