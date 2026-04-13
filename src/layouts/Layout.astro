@@ -14,13 +14,17 @@ const { title } = Astro.props;
 <html lang="it">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="color-scheme" content="light" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 		<title>{title}</title>
 	</head>
-	<body class="flex min-h-screen flex-col bg-slate-950 text-slate-100">
+	<body class="flex min-h-screen flex-col bg-white text-slate-900">
 		<Header />
 		<main class="flex-1">
 			<slot />
@@ -31,10 +35,32 @@ const { title } = Astro.props;
 
 <style is:global>
 	:root {
-		--color-primary: #0ea5e9;
-		--color-secondary: #06b6d4;
+		--color-primary: #0891b2;
+		--color-secondary: #0ea5e9;
 		--color-accent: #f97316;
-		--color-background: #020617;
-		--color-foreground: #e2e8f0;
+		--color-background: #f0f9ff;
+		--color-foreground: #0f172a;
+	}
+	body {
+		font-family: 'Inter', system-ui, sans-serif;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Montserrat', system-ui, sans-serif;
+	}
+	.gradient-text {
+		background: linear-gradient(135deg, #0891b2, #0369a1);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	.section-badge {
+		display: inline-flex;
+		align-items: center;
+		border-radius: 9999px;
+		padding: 0.375rem 1rem;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 	}
 </style>
