@@ -127,7 +127,70 @@ const cardSchemes = [
 const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % cardSchemes.length] }));
 ---
 
-<Layout title="Big Catch Fishing Charters - Rome">
+<Layout title="Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters | Pesca Tonno, Traina, Drifting">
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "LocalBusiness",
+					"@id": "https://www.bigcatchfishingcharters.com/#business",
+					"name": "Big Catch Fishing Charters",
+					"description": "Charter pesca Roma e Fiumicino. Uscite di pesca al tonno rosso, pesce spada, drifting, traina offshore e inshore, bolentino nel Mar Tirreno.",
+					"url": "https://www.bigcatchfishingcharters.com",
+					"telephone": "+39-3793554548",
+					"email": "bigcatchfishingcharters@gmail.com",
+					"address": {
+						"@type": "PostalAddress",
+						"streetAddress": "Viale Traiano 88",
+						"addressLocality": "Fiumicino",
+						"addressRegion": "RM",
+						"postalCode": "00054",
+						"addressCountry": "IT"
+					},
+					"geo": {
+						"@type": "GeoCoordinates",
+						"latitude": 41.7666,
+						"longitude": 12.2333
+					},
+					"priceRange": "€€€",
+					"openingHoursSpecification": {
+						"@type": "OpeningHoursSpecification",
+						"dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+						"opens": "06:00",
+						"closes": "22:00"
+					},
+					"sameAs": [],
+					"image": "/og-image.jpg",
+					"areaServed": [
+						{ "@type": "City", "name": "Roma" },
+						{ "@type": "City", "name": "Fiumicino" },
+						{ "@type": "Place", "name": "Mar Tirreno" }
+					],
+					"hasOfferCatalog": {
+						"@type": "OfferCatalog",
+						"name": "Uscite di Pesca",
+						"itemListElement": [
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Drifting Tonno - Big Game Fishing Roma", "description": "Pesca al tonno rosso in drifting nel Mar Tirreno, partenza da Fiumicino" }, "price": "750", "priceCurrency": "EUR" },
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traina Offshore Roma", "description": "Traina d'altura per tonno, pesce spada, lampuga" }, "price": "900", "priceCurrency": "EUR" },
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traina Costiera Inshore Roma", "description": "Traina costiera per tonnetti, lampughe, spigole, lecce" }, "price": "750", "priceCurrency": "EUR" },
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bolentino Roma", "description": "Bolentino di profondità per dentici, orate, pagelli" }, "price": "650", "priceCurrency": "EUR" },
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pesca Pesce Spada Notturna Roma", "description": "Pesca notturna al pesce spada nel Mar Tirreno" }, "price": "1500", "priceCurrency": "EUR" },
+							{ "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pesca Polpo e Calamari Roma", "description": "Uscita di pesca al polpo e calamari" }, "price": "600", "priceCurrency": "EUR" }
+						]
+					}
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://www.bigcatchfishingcharters.com/#website",
+					"url": "https://www.bigcatchfishingcharters.com",
+					"name": "Big Catch Fishing Charters",
+					"description": "Charter pesca Roma e Fiumicino - Pesca sportiva nel Mar Tirreno",
+					"inLanguage": ["it-IT", "en-GB"]
+				}
+			]
+		})} />
+	</Fragment>
 	<!-- Hero Section -->
 	<section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
 		<!-- Background Video -->
@@ -628,7 +691,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 					emailLabel: 'Email',
 					phoneLabel: 'Phone',
 					addressLabel: 'Address',
-					addressValue: 'Viale Traino 88',
+					addressValue: 'Viale Traiano 88',
 					copyright: '© ' + new Date().getFullYear() + ' Big Catch Fishing Charters. All rights reserved.'
 				},
 				startLabel: 'Start',
@@ -709,7 +772,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 					emailLabel: 'Email',
 					phoneLabel: 'Telefono',
 					addressLabel: 'Indirizzo',
-					addressValue: 'Viale Traino 88',
+					addressValue: 'Viale Traiano 88',
 					copyright: '© ' + new Date().getFullYear() + ' Fishing Project. Tutti i diritti riservati.'
 				},
 				startLabel: 'Partenza',
