@@ -15,7 +15,10 @@ const menuItems = [
 	<div class="mx-auto flex w-full max-w-6xl items-center px-4 py-3 sm:px-6 lg:px-8">
 		<a href="/" class="flex items-center gap-3">
 			<img src="/logo.png" alt="Big Catch Logo" class="h-10 w-10 sm:h-12 sm:w-12" />
-			<span class="text-base font-black tracking-tight sm:text-lg" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Big Catch</span>
+			<span class="flex flex-col leading-none">
+				<span class="text-sm font-black tracking-[0.18em] sm:text-base" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">BIG CATCH</span>
+				<span class="mt-1 text-[9px] font-bold tracking-[0.28em] text-slate-600 sm:text-[10px]">FISHING CHARTER</span>
+			</span>
 		</a>
 
 		<nav class="hidden items-center gap-6 md:flex md:flex-grow md:justify-center lg:gap-8" aria-label="Navigazione principale">
@@ -28,15 +31,14 @@ const menuItems = [
 			}
 		</nav>
 
-		<!-- Language Switcher + Menu Button (Right side) -->
-		<div class="flex items-center gap-3 ml-auto">
+		<div class="ml-auto flex items-center gap-3">
 			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="tablist">
 				<button 
 					type="button" 
 					data-lang="en" 
 					role="tab"
 					aria-selected="true"
-					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out en-active bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-sky-700"
+					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:text-white"
 				>
 					EN
 				</button>
@@ -81,31 +83,8 @@ const menuItems = [
 </header>
 
 <script>
-	const mobileMenuCheckbox = document.getElementById('mobile-menu') as HTMLInputElement | null;
+	const mobileMenuCheckbox = document.getElementById('mobile-menu');
 	const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-	const langButtons = document.querySelectorAll<HTMLButtonElement>('.lang-btn');
-
-	function applyLanguageSelection(lang: string) {
-		const selectedLang = lang === 'it' ? 'it' : 'en';
-
-		langButtons.forEach((button) => {
-			const isSelected = button.dataset.lang === selectedLang;
-			button.setAttribute('aria-selected', String(isSelected));
-			button.classList.toggle('bg-gradient-to-r', isSelected);
-			button.classList.toggle('from-cyan-500', isSelected);
-			button.classList.toggle('to-sky-600', isSelected);
-			button.classList.toggle('text-white', isSelected);
-			button.classList.toggle('shadow-md', isSelected);
-			button.classList.toggle('shadow-cyan-400/30', isSelected);
-			button.classList.toggle('text-cyan-700', !isSelected);
-			button.classList.toggle('hover:text-cyan-900', !isSelected);
-			button.classList.toggle('en-active', selectedLang === 'en');
-		});
-
-		window.localStorage.setItem('lang', selectedLang);
-		document.dispatchEvent(new CustomEvent('lang-change', { detail: selectedLang }));
-	}
-
 	if (mobileMenuCheckbox && mobileNavLinks.length > 0) {
 		mobileNavLinks.forEach((link) => {
 			link.addEventListener('click', () => {
@@ -114,13 +93,33 @@ const menuItems = [
 		});
 	}
 
+	const langButtons = document.querySelectorAll('.lang-btn');
+	const setLangButtonState = (lang) => {
+		langButtons.forEach((button) => {
+			const selected = button.dataset.lang === lang;
+			button.setAttribute('aria-selected', String(selected));
+			button.classList.toggle('bg-gradient-to-r', selected);
+			button.classList.toggle('from-cyan-500', selected);
+			button.classList.toggle('to-sky-600', selected);
+			button.classList.toggle('text-white', selected);
+			button.classList.toggle('shadow-md', selected);
+			button.classList.toggle('shadow-cyan-400/30', selected);
+			button.classList.toggle('text-cyan-700', !selected);
+			button.classList.toggle('hover:text-cyan-900', !selected);
+			button.classList.toggle('hover:text-white', selected);
+		});
+	};
+
+	const initialLang = localStorage.getItem('lang') || 'en';
+	setLangButtonState(initialLang);
+
 	langButtons.forEach((button) => {
 		button.addEventListener('click', () => {
-			const nextLang = button.dataset.lang === 'it' ? 'it' : 'en';
-			applyLanguageSelection(nextLang);
+			const nextLang = button.dataset.lang;
+			if (!nextLang) return;
+			localStorage.setItem('lang', nextLang);
+			setLangButtonState(nextLang);
+			document.dispatchEvent(new CustomEvent('lang-change', { detail: nextLang }));
 		});
 	});
-
-	const storedLang = window.localStorage.getItem('lang') || 'en';
-	applyLanguageSelection(storedLang);
 </script>
