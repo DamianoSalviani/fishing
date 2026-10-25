@@ -18,6 +18,7 @@ try {
       const extension = path.extname(entry.name).toLowerCase();
       const isImage = imageExtensions.has(extension);
       const isVideo = videoExtensions.has(extension);
+
       if (!isImage && !isVideo) return null;
 
       return {
@@ -109,40 +110,51 @@ const cardSchemes = [
 const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % cardSchemes.length] }));
 ---
 
-<Layout title="Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters | Pesca Tonno, Traina, Drifting">
-  <section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
+<Layout title="Big Catch Fishing Charters | Charter pesca Roma e Fiumicino">
+  <section id="home" class="relative flex min-h-[620px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[720px]">
     <div class="absolute inset-0 z-0">
       <video src="/video-hero.mp4" autoplay muted loop playsinline class="h-full w-full object-cover opacity-40"></video>
-      <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/45 to-slate-950/80"></div>
     </div>
 
-    <div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-      <h1 id="hero-title" class="text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">Rome Fishing Charters</h1>
-      <p id="hero-subtitle" class="mt-3 text-sm text-slate-300 sm:text-base">More than 10 years fishing the coast's of Rome</p>
-      <p id="hero-intro" class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing.</p>
+    <div class="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+      <span class="inline-flex items-center rounded-full border border-cyan-300/30 bg-cyan-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-cyan-100 shadow-lg shadow-cyan-500/10">
+        Big Catch Fishing Charters
+      </span>
+      <h1 id="hero-title" class="mt-6 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-7xl">Big Catch Fishing Charters</h1>
+      <p id="hero-subtitle" class="mt-4 text-sm uppercase tracking-[0.25em] text-cyan-100/90 sm:text-base">Charter pesca Roma e Fiumicino</p>
+      <p id="hero-intro" class="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-slate-200 sm:text-lg">
+        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile.
+        Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari.
+        In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane; snack, pranzo e bevande; carburante; esche accuratamente selezionate; a bordo troverai tutto il necessario per pescare.
+        <br />
+        <span class="mt-3 block text-cyan-100">ENG: Embark on an unforgettable fishing adventure in Rome. Our charter is designed to offer you more than just a simple boat trip; it is a true expedition into the heart of the Tyrrhenian Sea in search of the Mediterranean’s most powerful predators: Bluefin Tuna, Mediterranean Spearfish and Swordfish, among others. Every excursion is engineered to maximize your chances of success and deliver a legendary fight. We utilize cutting-edge technology to ensure an unparalleled fishing experience. All our excursions include: premium gear, food & drinks, fuel, bait and everything needed for a professional session.</span>
+      </p>
 
-      <a
-        id="hero-book-link"
-        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%3F"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
-      >
-        <span id="hero-book-text">Book Now</span>
-      </a>
+      <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          id="hero-book-link"
+          href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%3F"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
+        >
+          <span id="hero-book-text">Prenota ora</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
-        <span id="trips-title" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">BOOK YOUR TRIP</span>
-        <h2 id="trips-heading" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span></h2>
+        <span id="trips-title" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">PRENOTA LA TUA USCITA</span>
+        <h2 id="trips-heading" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Scegli la tua <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Avventura</span></h2>
       </div>
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tripsWithSchemes.map((trip) => (
-          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-500/10">
+          <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-500/10">
             <button
               type="button"
               class="trip-card-trigger block w-full cursor-pointer text-left"
@@ -153,7 +165,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
               data-description={trip.description}
               data-features={trip.features.join('|')}
               data-pricing={trip.pricing}
-              aria-label={`Open details for ${trip.title}`}
+              aria-label={`Apri dettagli per ${trip.title}`}
             >
               <div class="aspect-[4/3] overflow-hidden bg-slate-100">
                 <img src={trip.image} alt={trip.title} class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
@@ -171,7 +183,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
                 </div>
 
                 <p class="mt-3 text-sm text-slate-500">
-                  <span class="trip-start-label">Start</span>
+                  <span class="trip-start-label">Partenza</span>
                   <span class="trip-start-time">{trip.startTime}</span>
                 </p>
 
@@ -190,35 +202,36 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
     </div>
   </section>
 
-  <div id="trip-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/90 p-3 sm:p-4">
-    <button
-      type="button"
-      id="trip-modal-close"
-      class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
-      aria-label="Close trip details"
-    >
-      Close
-    </button>
+  <section id="faq" class="bg-slate-50 py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-orange-500/20">FAQ</span>
+        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
+      </div>
 
-    <div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
-      <div class="min-h-0 flex-1 overflow-y-auto">
-        <div class="space-y-3 p-4 sm:space-y-4 sm:p-6">
-          <h3 id="trip-modal-title" class="text-xl font-semibold text-slate-900 sm:text-2xl"></h3>
-          <p id="trip-modal-start" class="text-sm text-slate-500"></p>
-          <div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
-          <div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
-          <p id="trip-modal-description" class="text-sm leading-relaxed text-slate-700"></p>
+      <div id="faq-list" class="space-y-4">
+        <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 class="faq-question text-lg font-bold text-slate-900">Che cosa include l'uscita?</h3>
+          <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">Attrezzatura premium, snack, pranzo e bevande, carburante, esche e tutto il necessario per una sessione professionale.</p>
+        </div>
+        <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 class="faq-question text-lg font-bold text-slate-900">Dove partiamo?</h3>
+          <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">Partiamo da Roma e Fiumicino, con uscite dedicate al Mar Tirreno e alle zone di pesca più productive.</p>
+        </div>
+        <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 class="faq-question text-lg font-bold text-slate-900">Quanti partecipanti possono essere a bordo?</h3>
+          <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">Le nostre uscite sono pensate per gruppi fino a 4 persone, per garantire spazio, comfort e massima attenzione.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
-    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">Gallery</span>
-        <h2 id="gallery-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Moments at Sea</h2>
-        <p id="gallery-subtitle" class="mx-auto mt-3 max-w-xl text-base text-slate-500">Every trip is a story. Browse the moments captured on board.</p>
+        <h2 id="gallery-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Momenti in mare</h2>
+        <p id="gallery-subtitle" class="mx-auto mt-3 max-w-2xl text-base text-slate-500">Ogni uscita è una storia. Sfoglia i momenti catturati a bordo.</p>
       </div>
 
       {galleryMedia.length > 0 ? (
@@ -237,30 +250,64 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
           </div>
         </div>
       ) : (
-        <p class="mt-6 text-center text-slate-500">No files found in public/gallery.</p>
+        <p class="mt-6 text-center text-slate-500">Nessun file trovato in public/gallery.</p>
       )}
     </div>
   </section>
 
+  <div id="trip-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/90 p-3 sm:p-4">
+    <button
+      type="button"
+      id="trip-modal-close"
+      class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
+      aria-label="Chiudi dettagli uscita"
+    >
+      Chiudi
+    </button>
+
+    <div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      <div class="min-h-0 flex-1 overflow-y-auto">
+        <div class="space-y-3 p-4 sm:space-y-4 sm:p-6">
+          <h3 id="trip-modal-title" class="text-xl font-semibold text-slate-900 sm:text-2xl"></h3>
+          <p id="trip-modal-start" class="text-sm text-slate-500"></p>
+          <div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
+          <div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
+          <p id="trip-modal-description" class="text-sm leading-relaxed text-slate-700"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const translations = {
       en: {
-        heroTitle: 'Rome Fishing Charters',
-        heroSubtitle: 'More than 10 years fishing the coast\'s of Rome',
-        heroIntro: 'Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing.',
-        heroBook: 'Book Now',
+        heroTitle: 'Big Catch Fishing Charters',
+        heroSubtitle: 'Rome and Fiumicino Fishing Charter',
+        heroIntro: 'Embark on an unforgettable fishing adventure in Rome. Our charter is designed to offer you more than just a simple boat trip; it is a true expedition into the heart of the Tyrrhenian Sea in search of the Mediterranean’s most powerful predators: Bluefin Tuna, Mediterranean Spearfish and Swordfish, among others. Every excursion is engineered to maximize your chances of success and deliver a legendary fight. We utilize cutting-edge technology to ensure an unparalleled fishing experience. All our excursions include: premium gear, food & drinks, fuel, bait and everything needed for a professional session.',
+        heroBook: 'Book now',
         tripsTitle: 'BOOK YOUR TRIP',
-        tripsHeading: ['Choose Your ', 'Adventure'],
+        tripsHeading: ['Choose your ', 'Adventure'],
         galleryTitle: 'Moments at Sea',
         gallerySubtitle: 'Every trip is a story. Browse the moments captured on board.',
         startLabel: 'Start',
         closeLabel: 'Close',
+        faqTitle: 'Frequently asked questions',
+        faqQuestions: [
+          'What is included in the trip?',
+          'Where do we depart from?',
+          'How many people can join?' 
+        ],
+        faqAnswers: [
+          'Premium equipment, snacks, lunch and drinks, fuel, bait and everything needed for a professional session.',
+          'We depart from Rome and Fiumicino, with trips dedicated to the most productive areas of the Tyrrhenian Sea.',
+          'Our trips are designed for groups of up to 4 people, to guarantee comfort, space and attention.'
+        ],
         openTripLabel: 'Open details for '
       },
       it: {
-        heroTitle: 'Charter di Pesca a Roma',
-        heroSubtitle: 'Più di 10 anni di pesca sulle coste di Roma',
-        heroIntro: 'Preparati a vivere un\'avventura di pesca indimenticabile a Roma. Le nostre uscite combinano pesca d\'altura, traina costiera, bolentino e esperienze da sogno nel Tirreno.',
+        heroTitle: 'Big Catch Fishing Charters',
+        heroSubtitle: 'Charter pesca Roma e Fiumicino',
+        heroIntro: 'Parti per un\'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. Utilizziamo tecnologie all\'avanguardia per garantire un\'esperienza di pesca senza pari. In tutte le nostre escursioni sono inclusi: attrezzatura premium, snack, pranzo e bevande, carburante, esche accuratamente selezionate e tutto il necessario per pescare.',
         heroBook: 'Prenota ora',
         tripsTitle: 'PRENOTA LA TUA USCITA',
         tripsHeading: ['Scegli la tua ', 'Avventura'],
@@ -268,6 +315,17 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
         gallerySubtitle: 'Ogni uscita è una storia. Sfoglia i momenti catturati a bordo.',
         startLabel: 'Partenza',
         closeLabel: 'Chiudi',
+        faqTitle: 'Domande frequenti',
+        faqQuestions: [
+          'Che cosa include l\'uscita?',
+          'Dove partiamo?',
+          'Quanti partecipanti possono essere a bordo?' 
+        ],
+        faqAnswers: [
+          'Attrezzatura premium, snack, pranzo e bevande, carburante, esche e tutto il necessario per una sessione professionale.',
+          'Partiamo da Roma e Fiumicino, con uscite dedicate alle zone di pesca più produttive del Tirreno.',
+          'Le nostre uscite sono pensate per gruppi fino a 4 persone, per garantire spazio, comfort e massima attenzione.'
+        ],
         openTripLabel: 'Apri dettagli per '
       }
     };
@@ -334,36 +392,49 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
             .join('');
         }
 
-        const featuresEl = card.querySelectorAll('.trip-feature-text');
-        featuresEl.forEach((item, index) => {
+        const featureEls = card.querySelectorAll('.trip-feature-text');
+        featureEls.forEach((item, index) => {
           item.textContent = trip.features[index] ?? trip.features[0] ?? '';
         });
 
-        const startLabelEl = card.querySelector('.trip-start-label');
-        if (startLabelEl) startLabelEl.textContent = translations[lang].startLabel;
+        const startLabel = card.querySelector('.trip-start-label');
+        if (startLabel) startLabel.textContent = translations[lang].startLabel;
+      });
+    }
+
+    function updateFaq(lang) {
+      const faqTitle = document.getElementById('faq-title');
+      if (faqTitle) faqTitle.textContent = translations[lang].faqTitle;
+
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      const faqAnswers = document.querySelectorAll('.faq-answer');
+      translations[lang].faqQuestions.forEach((question, index) => {
+        if (faqQuestions[index]) faqQuestions[index].textContent = question;
+      });
+      translations[lang].faqAnswers.forEach((answer, index) => {
+        if (faqAnswers[index]) faqAnswers[index].textContent = answer;
       });
     }
 
     function applyLanguage(lang = 'en') {
       const t = translations[lang] || translations.en;
-      const elementById = (id) => document.getElementById(id);
 
-      const heroTitle = elementById('hero-title');
+      const heroTitle = document.getElementById('hero-title');
       if (heroTitle) heroTitle.textContent = t.heroTitle;
 
-      const heroSubtitle = elementById('hero-subtitle');
+      const heroSubtitle = document.getElementById('hero-subtitle');
       if (heroSubtitle) heroSubtitle.textContent = t.heroSubtitle;
 
-      const heroIntro = elementById('hero-intro');
+      const heroIntro = document.getElementById('hero-intro');
       if (heroIntro) heroIntro.textContent = t.heroIntro;
 
-      const heroBookText = elementById('hero-book-text');
+      const heroBookText = document.getElementById('hero-book-text');
       if (heroBookText) heroBookText.textContent = t.heroBook;
 
-      const tripsTitle = elementById('trips-title');
+      const tripsTitle = document.getElementById('trips-title');
       if (tripsTitle) tripsTitle.textContent = t.tripsTitle;
 
-      const tripsHeading = elementById('trips-heading');
+      const tripsHeading = document.getElementById('trips-heading');
       if (tripsHeading) {
         tripsHeading.innerHTML = `${t.tripsHeading[0]}<span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">${t.tripsHeading[1]}</span>`;
       }
@@ -374,17 +445,17 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       const gallerySubtitle = document.getElementById('gallery-subtitle');
       if (gallerySubtitle) gallerySubtitle.textContent = t.gallerySubtitle;
 
-      const modalCloseText = elementById('trip-modal-close');
-      if (modalCloseText) modalCloseText.textContent = t.closeLabel;
+      if (closeButton) closeButton.textContent = t.closeLabel;
 
       updateCards(lang);
+      updateFaq(lang);
     }
 
-    const currentLang = localStorage.getItem('lang') || 'en';
+    const currentLang = localStorage.getItem('lang') || 'it';
     applyLanguage(currentLang);
 
     document.addEventListener('lang-change', (event) => {
-      const lang = event.detail || 'en';
+      const lang = event.detail || 'it';
       applyLanguage(lang);
     });
 
@@ -404,8 +475,8 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
         const features = button.dataset.features ? button.dataset.features.split('|') : [];
         const pricing = button.dataset.pricing || '';
-        const currentLangValue = localStorage.getItem('lang') || 'en';
-        const startLabel = translations[currentLangValue]?.startLabel || 'Start';
+        const lang = localStorage.getItem('lang') || 'it';
+        const startLabel = translations[lang]?.startLabel || 'Partenza';
 
         modalTitle.textContent = button.dataset.title || '';
         modalStart.textContent = `${startLabel}: ${button.dataset.startTime || ''}`;
