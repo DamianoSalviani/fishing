@@ -199,7 +199,16 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
   <section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
     <div class="absolute inset-0 z-0">
-      <video src="/video-hero.mp4" autoplay muted loop playsinline preload="auto" class="h-full w-full object-cover opacity-40"></video>
+      <video
+        id="hero-video"
+        src="/video-hero.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        class="h-full w-full object-cover opacity-40"
+      ></video>
       <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80"></div>
     </div>
 
@@ -328,32 +337,35 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       </div>
 
       {galleryMedia.length > 0 ? (
-        <div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div id="gallery-carousel-track" class="flex transition-transform duration-500 ease-out">
+        <div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm">
+          <div
+            id="gallery-carousel-track"
+            class="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
             {galleryMedia.map((media, index) => (
               <button
                 type="button"
-                class="gallery-slide group relative flex-shrink-0 cursor-pointer text-left"
+                class="gallery-slide group relative shrink-0 snap-center overflow-hidden rounded-xl border border-slate-200 bg-slate-100 text-left shadow-sm transition hover:shadow-md"
                 data-index={index}
                 data-src={media.src}
                 data-type={media.type}
                 data-alt={media.alt}
                 aria-label={`Open ${media.type}: ${media.alt}`}
+                style="width: min(58vw, 300px);"
               >
                 {media.type === 'video' ? (
                   <video
                     src={media.src}
-                    class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     muted
                     loop
-                    autoplay
                     playsinline
                     preload="metadata"
                   />
                 ) : (
-                  <img src={media.src} alt={media.alt} class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+                  <img src={media.src} alt={media.alt} class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
                 )}
-                <p class="border-t border-slate-100 px-4 py-3 text-sm text-slate-500">{media.alt}</p>
+                <p class="border-t border-slate-100 bg-white/90 px-3 py-2 text-xs font-medium text-slate-600 backdrop-blur-sm">{media.alt}</p>
               </button>
             ))}
           </div>
@@ -423,16 +435,22 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       });
     });
 
-    const heroVideo = document.querySelector('video[autoplay]');
-    if (heroVideo) {
+    const heroVideo = document.getElementById('hero-video');
+    const tryPlayHeroVideo = () => {
+      if (!heroVideo) return;
       heroVideo.muted = true;
       heroVideo.playsInline = true;
-      const playHeroVideo = () => {
-        heroVideo.play().catch(() => {});
-      };
-      heroVideo.addEventListener('loadeddata', playHeroVideo, { once: true });
-      heroVideo.addEventListener('canplay', playHeroVideo, { once: true });
-      playHeroVideo();
+      heroVideo.play().catch(() => {
+        window.setTimeout(() => heroVideo.play().catch(() => {}), 250);
+      });
+    };
+
+    if (heroVideo) {
+      heroVideo.load();
+      heroVideo.addEventListener('canplay', tryPlayHeroVideo, { once: true });
+      heroVideo.addEventListener('loadeddata', tryPlayHeroVideo, { once: true });
+      window.addEventListener('load', tryPlayHeroVideo, { once: true });
+      setTimeout(tryPlayHeroVideo, 150);
     }
 
     modal?.addEventListener('click', (event) => {
