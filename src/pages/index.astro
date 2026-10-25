@@ -78,7 +78,7 @@ const trips = [
     image: 'swordfish.webp',
     description: 'A dedicated night expedition for Swordfish with squid baiting, specialized gear and total darkness.',
     features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
-    pricing: '€1.500/group'
+    pricing: '€1.000/group'
   },
   {
     id: 6,
@@ -199,7 +199,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
   <section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
     <div class="absolute inset-0 z-0">
-      <video src="/video-hero.mp4" autoplay muted loop playsinline class="h-full w-full object-cover opacity-40"></video>
+      <video src="/video-hero.mp4" autoplay muted loop playsinline preload="auto" class="h-full w-full object-cover opacity-40"></video>
       <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80"></div>
     </div>
 
@@ -422,6 +422,18 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
         modal.classList.add('flex');
       });
     });
+
+    const heroVideo = document.querySelector('video[autoplay]');
+    if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.playsInline = true;
+      const playHeroVideo = () => {
+        heroVideo.play().catch(() => {});
+      };
+      heroVideo.addEventListener('loadeddata', playHeroVideo, { once: true });
+      heroVideo.addEventListener('canplay', playHeroVideo, { once: true });
+      playHeroVideo();
+    }
 
     modal?.addEventListener('click', (event) => {
       if (event.target === modal) closeModal();
