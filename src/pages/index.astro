@@ -5,8 +5,10 @@ import path from 'node:path';
 
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
+const brandExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 
 let galleryMedia = [];
+let brandLogos = [];
 
 try {
   const galleryDir = new URL('../../public/gallery/', import.meta.url);
@@ -32,6 +34,28 @@ try {
     .sort((a, b) => a.name.localeCompare(b.name));
 } catch (error) {
   console.error('Unable to load media from public/gallery:', error);
+}
+
+try {
+  const brandsDir = new URL('../../public/brands/', import.meta.url);
+  const entries = await readdir(brandsDir, { withFileTypes: true });
+
+  brandLogos = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => {
+      const extension = path.extname(entry.name).toLowerCase();
+      if (!brandExtensions.has(extension)) return null;
+
+      return {
+        name: entry.name,
+        src: `/brands/${entry.name}`,
+        alt: path.parse(entry.name).name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+} catch (error) {
+  console.error('Unable to load brand logos from public/brands:', error);
 }
 
 const trips = [
@@ -104,7 +128,7 @@ const faqEntries = [
   {
     question: 'Roma è un posto adatto alla pesca?',
     answer:
-      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'incontro di correnti marine, nutrienti e specie migratorie lo rendono un luogo ideale per un\'ampia varietà di catture.'
+      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'inco[...'
   },
   {
     question: 'Quali pesci posso pescare a Roma?',
@@ -124,7 +148,7 @@ const faqEntries = [
   {
     question: 'Cosa succede in caso di maltempo?',
     answer:
-      'La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l\'uscita, la prenotazione verrà spostata alla prima data utile. È possibile cancellare la prenotazione fino a 48 ore prima.'
+      'La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l\'uscita, la prenotazione verrà spostata alla prima data utile. È possibile cancellare la prenotazione fino [...]'
   },
   {
     question: 'Posso portare un accompagnatore che non pesca?',
@@ -225,11 +249,11 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       </p>
 
       <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari. In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane; snack, pranzo e bevande; carburante; esche accuratamente selezionate. A bordo troverai tutto il necessario per pescare.
+        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca delle specie più ambite e delle zone di pesca più produttive.
       </p>
 
       <a
-        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%20and%20availability%3F"
+        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%20and%20availability?"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
@@ -325,13 +349,42 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
     </div>
   </div>
 
+  <section id="brands" class="border-y border-slate-200 bg-white py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-500/20">
+          I nostri Brand
+        </span>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
+          Partner e <span class="text-slate-700">marchi</span> di fiducia
+        </h2>
+      </div>
+
+      {brandLogos.length > 0 ? (
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-6 shadow-sm sm:px-6">
+          <div class="brand-marquee-track flex w-max min-w-full items-center gap-6 sm:gap-8">
+            {[...brandLogos, ...brandLogos].map((brand, index) => (
+              <div class="brand-item flex items-center justify-center rounded-xl border border-slate-200 bg-white p-3 shadow-sm" key={`${brand.name}-${index}`}>
+                <img src={brand.src} alt={brand.alt} class="h-16 w-auto max-w-[160px] object-contain sm:h-20" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p class="mt-6 text-center text-slate-500">
+          Nessun logo trovato in <span class="font-semibold">public/brands</span>. Aggiungi qui i file dei brand per farli scorrere automaticamente.
+        </p>
+      )}
+    </div>
+  </section>
+
   <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           Gallery
         </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
           Moments at Sea
         </h2>
       </div>
@@ -395,6 +448,28 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       </div>
     </div>
   </section>
+
+  <style>
+    @keyframes brand-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .brand-marquee-track {
+      animation: brand-scroll 26s linear infinite;
+      will-change: transform;
+    }
+
+    .brand-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .brand-item {
+      flex: 0 0 auto;
+      width: clamp(140px, 18vw, 220px);
+      min-height: 96px;
+    }
+  </style>
 
   <script>
     const modal = document.getElementById('trip-modal');
