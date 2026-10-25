@@ -15,7 +15,10 @@ const menuItems = [
 	<div class="mx-auto flex w-full max-w-6xl items-center px-4 py-3 sm:px-6 lg:px-8">
 		<a href="/" class="flex items-center gap-3">
 			<img src="/logo.png" alt="Big Catch Logo" class="h-10 w-10 sm:h-12 sm:w-12" />
-			<span class="text-base font-black tracking-tight sm:text-lg" style="font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0891b2,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Big Catch</span>
+			<span class="flex flex-col leading-none tracking-[-0.06em] sm:leading-[0.9]" style="font-family:'Montserrat',sans-serif;">
+				<span class="text-[1.1rem] font-black uppercase sm:text-[1.7rem] lg:text-[2.2rem]" style="background:linear-gradient(135deg,#0aa7d8 0%,#12b7d7 18%,#0c8ec0 55%,#065f9a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Big Catch</span>
+				<span class="text-[0.58rem] font-black uppercase tracking-[0.28em] text-sky-700 sm:text-[0.7rem] lg:text-[0.82rem]">Fishing Charter</span>
+			</span>
 		</a>
 
 		<nav class="hidden items-center gap-6 md:flex md:flex-grow md:justify-center lg:gap-8" aria-label="Navigazione principale">
@@ -103,20 +106,18 @@ const menuItems = [
 			button.classList.toggle('shadow-cyan-400/30', selected);
 			button.classList.toggle('text-cyan-700', !selected);
 			button.classList.toggle('hover:text-cyan-900', !selected);
-			button.classList.toggle('hover:text-white', selected);
 		});
 	};
 
-	const initialLang = localStorage.getItem('lang') || 'en';
-	setLangButtonState(initialLang);
-
 	langButtons.forEach((button) => {
 		button.addEventListener('click', () => {
-			const nextLang = button.dataset.lang;
-			if (!nextLang) return;
-			localStorage.setItem('lang', nextLang);
-			setLangButtonState(nextLang);
-			document.dispatchEvent(new CustomEvent('lang-change', { detail: nextLang }));
+			const lang = button.dataset.lang;
+			setLangButtonState(lang);
+			document.dispatchEvent(new CustomEvent('lang-change', { detail: lang }));
+			localStorage.setItem('lang', lang);
 		});
 	});
+
+	const savedLang = localStorage.getItem('lang') || 'en';
+	setLangButtonState(savedLang);
 </script>
