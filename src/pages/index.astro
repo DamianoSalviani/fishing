@@ -104,7 +104,7 @@ const faqEntries = [
   {
     question: 'Roma è un posto adatto alla pesca?',
     answer:
-      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'incontro tra le correnti d\'acqua dolce e quelle salate del Tirreno creano un ecosistema ricco di vita. Qui le rotte migratorie dei predatori, come il Tonno Rosso e l\'Aguglia Imperiale, rendono Roma una base strategica per il Big Game, la traina d\'altura e la pesca costiera.'
+      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia. La particolare conformazione dei fondali e l\'incontro di correnti marine, nutrienti e specie migratorie lo rendono un luogo ideale per un\'ampia varietà di catture.'
   },
   {
     question: 'Quali pesci posso pescare a Roma?',
@@ -124,7 +124,7 @@ const faqEntries = [
   {
     question: 'Cosa succede in caso di maltempo?',
     answer:
-      'La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l\'uscita, la prenotazione verrà spostata alla prima data utile. È possibile cancellare la prenotazione fino a 3 giorni prima.'
+      'La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l\'uscita, la prenotazione verrà spostata alla prima data utile. È possibile cancellare la prenotazione fino a 48 ore prima.'
   },
   {
     question: 'Posso portare un accompagnatore che non pesca?',
@@ -213,11 +213,11 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       </p>
 
       <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing. We focus on safety, local knowledge and memorable sea days.
+        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari. In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane; snack, pranzo e bevande; carburante; esche accuratamente selezionate. A bordo troverai tutto il necessario per pescare.
       </p>
 
       <a
-        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages?"
+        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%20and%20availability%3F"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
@@ -240,7 +240,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tripsWithSchemes.map((trip) => (
-          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/80">
+          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/50">
             <button
               type="button"
               class="trip-card-trigger block w-full cursor-pointer text-left"
@@ -319,7 +319,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           Gallery
         </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; color:transparent;">
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
           Moments at Sea
         </h2>
       </div>
@@ -364,7 +364,9 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="faq" class="bg-slate-50 py-16 sm:py-20">
     <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-orange-500/20">FAQ</span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-orange-500/30">
+          FAQ
+        </span>
         <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
       </div>
 
