@@ -28,7 +28,6 @@ const menuItems = [
 			}
 		</nav>
 
-		<!-- Language Switcher + Menu Button (Right side) -->
 		<div class="ml-auto flex items-center gap-3">
 			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="tablist">
 				<button 
@@ -83,7 +82,6 @@ const menuItems = [
 <script>
 	const mobileMenuCheckbox = document.getElementById('mobile-menu');
 	const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
 	if (mobileMenuCheckbox && mobileNavLinks.length > 0) {
 		mobileNavLinks.forEach((link) => {
 			link.addEventListener('click', () => {
@@ -93,7 +91,6 @@ const menuItems = [
 	}
 
 	const langButtons = document.querySelectorAll('.lang-btn');
-
 	const setLangButtonState = (lang) => {
 		langButtons.forEach((button) => {
 			const selected = button.dataset.lang === lang;
@@ -110,8 +107,8 @@ const menuItems = [
 		});
 	};
 
-	const currentLang = localStorage.getItem('lang') || 'en';
-	setLangButtonState(currentLang);
+	const initialLang = localStorage.getItem('lang') || 'en';
+	setLangButtonState(initialLang);
 
 	langButtons.forEach((button) => {
 		button.addEventListener('click', () => {

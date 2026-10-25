@@ -18,18 +18,13 @@ try {
       const extension = path.extname(entry.name).toLowerCase();
       const isImage = imageExtensions.has(extension);
       const isVideo = videoExtensions.has(extension);
-
       if (!isImage && !isVideo) return null;
 
       return {
         name: entry.name,
         src: `/gallery/${entry.name}`,
         type: isVideo ? 'video' : 'image',
-        alt: path
-          .parse(entry.name)
-          .name
-          .replace(/[-_]+/g, ' ')
-          .replace(/\b\w/g, (char) => char.toUpperCase())
+        alt: path.parse(entry.name).name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
       };
     })
     .filter(Boolean)
@@ -95,7 +90,7 @@ const trips = [
   },
   {
     id: 7,
-    title: 'Traina alla Spigola',
+    title: 'Seabass Trolling',
     startTime: '08:00am',
     image: 'spigola.jpg',
     description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.',
@@ -115,44 +110,6 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 ---
 
 <Layout title="Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters | Pesca Tonno, Traina, Drifting">
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "LocalBusiness",
-          "@id": "https://www.bigcatchfishingcharters.com/#business",
-          "name": "Big Catch Fishing Charters",
-          "description": "Charter pesca Roma e Fiumicino. Uscite di pesca al tonno rosso, pesce spada, drifting, traina offshore e inshore, bolentino nel Mar Tirreno.",
-          "url": "https://www.bigcatchfishingcharters.com",
-          "telephone": "+39-3793554548",
-          "email": "bigcatchfishingcharters@gmail.com",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Viale Traiano 88",
-            "addressLocality": "Fiumicino",
-            "addressRegion": "RM",
-            "postalCode": "00054",
-            "addressCountry": "IT"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 41.7666,
-            "longitude": 12.2333
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "opens": "06:00",
-            "closes": "22:00"
-          },
-          "sameAs": [],
-          "image": "/og-image.jpg"
-        }
-      ]
-    })} />
-  </Fragment>
-
   <section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
     <div class="absolute inset-0 z-0">
       <video src="/video-hero.mp4" autoplay muted loop playsinline class="h-full w-full object-cover opacity-40"></video>
@@ -160,25 +117,18 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
     </div>
 
     <div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
-        Rome Fishing Charters
-      </h1>
-
-      <p class="mt-3 text-sm text-slate-300 sm:text-base">
-        More than 10 years fishing the coast's of Rome
-      </p>
-
-      <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing.
-      </p>
+      <h1 id="hero-title" class="text-4xl font-bold leading-tight tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">Rome Fishing Charters</h1>
+      <p id="hero-subtitle" class="mt-3 text-sm text-slate-300 sm:text-base">More than 10 years fishing the coast's of Rome</p>
+      <p id="hero-intro" class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing.</p>
 
       <a
+        id="hero-book-link"
         href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%3F"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
       >
-        Book Now
+        <span id="hero-book-text">Book Now</span>
       </a>
     </div>
   </section>
@@ -186,12 +136,8 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">
-          BOOK YOUR TRIP
-        </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>
-        </h2>
+        <span id="trips-title" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">BOOK YOUR TRIP</span>
+        <h2 id="trips-heading" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span></h2>
       </div>
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -220,9 +166,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
                 <div class="trip-card-pricing mt-2 flex flex-wrap gap-1">
                   {trip.pricing.split('|').map((p) => (
-                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">
-                      {p}
-                    </span>
+                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">{p}</span>
                   ))}
                 </div>
 
@@ -272,37 +216,18 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">
-          Gallery
-        </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-          Moments at Sea
-        </h2>
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-400/30">Gallery</span>
+        <h2 id="gallery-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Moments at Sea</h2>
+        <p id="gallery-subtitle" class="mx-auto mt-3 max-w-xl text-base text-slate-500">Every trip is a story. Browse the moments captured on board.</p>
       </div>
 
       {galleryMedia.length > 0 ? (
         <div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div id="gallery-carousel-track" class="flex transition-transform duration-500 ease-out">
             {galleryMedia.map((media, index) => (
-              <button
-                type="button"
-                class="gallery-slide group relative flex-shrink-0 cursor-pointer text-left"
-                data-index={index}
-                data-src={media.src}
-                data-type={media.type}
-                data-alt={media.alt}
-                aria-label={`Open ${media.type}: ${media.alt}`}
-              >
+              <button type="button" class="gallery-slide group relative flex-shrink-0 cursor-pointer text-left" data-index={index} data-src={media.src} data-type={media.type} data-alt={media.alt} aria-label={`Open ${media.type}: ${media.alt}`}>
                 {media.type === 'video' ? (
-                  <video
-                    src={media.src}
-                    class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    muted
-                    loop
-                    autoplay
-                    playsinline
-                    preload="metadata"
-                  />
+                  <video src={media.src} class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" muted loop autoplay playsinline preload="metadata" />
                 ) : (
                   <img src={media.src} alt={media.alt} class="aspect-[16/9] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
                 )}
@@ -318,6 +243,66 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   </section>
 
   <script>
+    const translations = {
+      en: {
+        heroTitle: 'Rome Fishing Charters',
+        heroSubtitle: 'More than 10 years fishing the coast\'s of Rome',
+        heroIntro: 'Embark on an unforgettable fishing adventure in Rome. Our charters are designed to deliver the best mixed fishing experience, from Bluefin Tuna and Swordfish to inshore seabass and bottom fishing.',
+        heroBook: 'Book Now',
+        tripsTitle: 'BOOK YOUR TRIP',
+        tripsHeading: ['Choose Your ', 'Adventure'],
+        galleryTitle: 'Moments at Sea',
+        gallerySubtitle: 'Every trip is a story. Browse the moments captured on board.',
+        startLabel: 'Start',
+        closeLabel: 'Close',
+        openTripLabel: 'Open details for '
+      },
+      it: {
+        heroTitle: 'Charter di Pesca a Roma',
+        heroSubtitle: 'Più di 10 anni di pesca sulle coste di Roma',
+        heroIntro: 'Preparati a vivere un\'avventura di pesca indimenticabile a Roma. Le nostre uscite combinano pesca d\'altura, traina costiera, bolentino e esperienze da sogno nel Tirreno.',
+        heroBook: 'Prenota ora',
+        tripsTitle: 'PRENOTA LA TUA USCITA',
+        tripsHeading: ['Scegli la tua ', 'Avventura'],
+        galleryTitle: 'Momenti in mare',
+        gallerySubtitle: 'Ogni uscita è una storia. Sfoglia i momenti catturati a bordo.',
+        startLabel: 'Partenza',
+        closeLabel: 'Chiudi',
+        openTripLabel: 'Apri dettagli per '
+      }
+    };
+
+    const tripTranslations = {
+      1: {
+        en: { title: 'Big Game Drifting Tuna', pricing: '8h – €750/group|6h – 600€/group|4h – €450/group', description: 'Big Game drifting for Bluefin Tuna, built for anglers who want the most iconic fight in the Mediterranean.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Big Game Drifting Tonno Rosso', pricing: '8h — €750/gruppo|6h - 600€/gruppo|4h — €450/gruppo', description: 'Drifting al tonno per un combattimento iconico e spettacolare nel Mar Tirreno.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      2: {
+        en: { title: 'Trolling Offshore', pricing: '8h — €900/group', description: 'Offshore trolling for Bluefin Tuna, Swordfish, Albacore and big pelagics with a technical long-range approach.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: "Traina d'Altura", pricing: '8h — €900/gruppo', description: 'Traina d\'altura per tonno rosso, pesce spada, alalunga e grandi pelagici.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      3: {
+        en: { title: 'Inshore Trolling', pricing: '8h – €750/group|6h – 600€/group|4h – €450/group', description: 'Inshore trolling with a precise, technical approach to target seabass, mackerel and coastal predators.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Traina Costiera', pricing: '8h — €750/gruppo|6h - 600€/gruppo|4h — €450/gruppo', description: 'Traina costiera ad alta precisione per spigole, sgombri e predatori costieri.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      4: {
+        en: { title: 'Bottom Fishing', pricing: '8h – €750/group|6h – 600€/group|4h – €450/group', description: 'Bottom fishing and bolentino focused on reading the seabed, structure and the best feeding zones.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Bolentino', pricing: '8h — €750/gruppo|6h - 600€/gruppo|4h — €450/gruppo', description: 'Bolentino e pesca di fondo per leggere il fondale e individuare le zone di pesca migliori.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      5: {
+        en: { title: 'Swordfish Night Fishing', pricing: '€1.000/group', description: 'A dedicated night expedition for Swordfish with squid baiting, specialized gear and total darkness.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Pesca al Pesce Spada Notturna', pricing: '€1.000/gruppo', description: 'Spedizione notturna dedicata al pesce spada con esca di calamaro e attrezzatura specializzata.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      6: {
+        en: { title: 'Octopus and Squid Fishing', pricing: '8h – €750/group|6h – 600€/group|4h – €450/group', description: 'A technical, patient session aimed at octopus and squid using classic and modern fishing methods.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Pesca a Polpi e Calamari', pricing: '8h — €750/gruppo|6h - 600€/gruppo|4h — €450/gruppo', description: 'Sessione tecnica e paziente dedicata a polpi e calamari con metodi classici e moderni.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      },
+      7: {
+        en: { title: 'Seabass Trolling', pricing: '8h – €750/group|6h – 600€/group|4h – €450/group', description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.', features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'] },
+        it: { title: 'Traina alla Spigola', pricing: '8h — €750/gruppo|6h - 600€/gruppo|4h — €450/gruppo', description: 'Uscita costiera dedicata alla spigola con esche, attrezzatura e lettura precisa del fondale.', features: ['Cibo e bevande', 'Canne, mulinelli e attrezzatura', 'Max 4 persone'] }
+      }
+    };
+
     const modal = document.getElementById('trip-modal');
     const modalTitle = document.getElementById('trip-modal-title');
     const modalStart = document.getElementById('trip-modal-start');
@@ -325,6 +310,83 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
     const modalFeatures = document.getElementById('trip-modal-features');
     const modalDescription = document.getElementById('trip-modal-description');
     const closeButton = document.getElementById('trip-modal-close');
+
+    function updateCards(lang) {
+      document.querySelectorAll('.trip-card-trigger').forEach((card) => {
+        const tripId = Number(card.dataset.tripId);
+        const trip = tripTranslations[tripId]?.[lang];
+        if (!trip) return;
+
+        card.dataset.title = trip.title;
+        card.dataset.description = trip.description;
+        card.dataset.features = trip.features.join('|');
+        card.dataset.pricing = trip.pricing;
+        card.setAttribute('aria-label', `${translations[lang].openTripLabel}${trip.title}`);
+
+        const titleEl = card.querySelector('.trip-card-title');
+        if (titleEl) titleEl.textContent = trip.title;
+
+        const pricingEl = card.querySelector('.trip-card-pricing');
+        if (pricingEl) {
+          pricingEl.innerHTML = trip.pricing
+            .split('|')
+            .map((p) => `<span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">${p}</span>`)
+            .join('');
+        }
+
+        const featuresEl = card.querySelectorAll('.trip-feature-text');
+        featuresEl.forEach((item, index) => {
+          item.textContent = trip.features[index] ?? trip.features[0] ?? '';
+        });
+
+        const startLabelEl = card.querySelector('.trip-start-label');
+        if (startLabelEl) startLabelEl.textContent = translations[lang].startLabel;
+      });
+    }
+
+    function applyLanguage(lang = 'en') {
+      const t = translations[lang] || translations.en;
+      const elementById = (id) => document.getElementById(id);
+
+      const heroTitle = elementById('hero-title');
+      if (heroTitle) heroTitle.textContent = t.heroTitle;
+
+      const heroSubtitle = elementById('hero-subtitle');
+      if (heroSubtitle) heroSubtitle.textContent = t.heroSubtitle;
+
+      const heroIntro = elementById('hero-intro');
+      if (heroIntro) heroIntro.textContent = t.heroIntro;
+
+      const heroBookText = elementById('hero-book-text');
+      if (heroBookText) heroBookText.textContent = t.heroBook;
+
+      const tripsTitle = elementById('trips-title');
+      if (tripsTitle) tripsTitle.textContent = t.tripsTitle;
+
+      const tripsHeading = elementById('trips-heading');
+      if (tripsHeading) {
+        tripsHeading.innerHTML = `${t.tripsHeading[0]}<span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">${t.tripsHeading[1]}</span>`;
+      }
+
+      const galleryTitle = document.getElementById('gallery-title');
+      if (galleryTitle) galleryTitle.textContent = t.galleryTitle;
+
+      const gallerySubtitle = document.getElementById('gallery-subtitle');
+      if (gallerySubtitle) gallerySubtitle.textContent = t.gallerySubtitle;
+
+      const modalCloseText = elementById('trip-modal-close');
+      if (modalCloseText) modalCloseText.textContent = t.closeLabel;
+
+      updateCards(lang);
+    }
+
+    const currentLang = localStorage.getItem('lang') || 'en';
+    applyLanguage(currentLang);
+
+    document.addEventListener('lang-change', (event) => {
+      const lang = event.detail || 'en';
+      applyLanguage(lang);
+    });
 
     function closeModal() {
       if (!modal) return;
@@ -342,14 +404,14 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
         const features = button.dataset.features ? button.dataset.features.split('|') : [];
         const pricing = button.dataset.pricing || '';
+        const currentLangValue = localStorage.getItem('lang') || 'en';
+        const startLabel = translations[currentLangValue]?.startLabel || 'Start';
 
         modalTitle.textContent = button.dataset.title || '';
-        modalStart.textContent = `Start: ${button.dataset.startTime || ''}`;
+        modalStart.textContent = `${startLabel}: ${button.dataset.startTime || ''}`;
         modalPricing.textContent = pricing;
         modalDescription.textContent = button.dataset.description || '';
-        modalFeatures.innerHTML = features
-          .map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${feature}</span>`)
-          .join('');
+        modalFeatures.innerHTML = features.map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${feature}</span>`).join('');
 
         modal.classList.remove('hidden');
         modal.classList.add('flex');
