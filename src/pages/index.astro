@@ -118,7 +118,7 @@ const trips = [
     title: 'Seabass Trolling',
     startTime: '08:00am',
     image: 'spigola.jpg',
-    description: 'Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti, astuti e combattivi che ci siano. Che siate pescatori esperti a caccia di un trofeo o principianti desiderosi di imparare le tecniche di traina più raffinate, il nostro capitano professionista e il suo equipaggio vi garantiranno una giornata indimenticabile sull\'acqua',
+    description: 'Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti, astuti e combattivi con cui sfidare il mare.',
     features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
     pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
   },
@@ -127,7 +127,7 @@ const trips = [
     title: 'Traina con il Vivo',
     startTime: '08:00am',
     image: 'leccia.jpg',
-    description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.',
+    description: 'La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare. Ci dedicheremo prima alla ricerca e alla cattura dell\'esca fresca (calamari, seppie o cefali), per poi calare le lenze a caccia di dentici, Lecce e Serra. Pronto a piegare la canna? Prenota ora la tua uscita e vivi l\'emozione della caccia ai grandi predatori!',
     features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person'],
     pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
   }
@@ -258,11 +258,11 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
       </p>
 
       <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla rice[...]
+        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più ambiti.
       </p>
 
       <a
-        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20pack[...]
+        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20packages%20and%20availability?"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
@@ -275,7 +275,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/[...]
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           BOOK YOUR TRIP
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
@@ -285,7 +285,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tripsWithSchemes.map((trip) => (
-          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-1[...]
+          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/60">
             <button
               type="button"
               class="trip-card-trigger block w-full cursor-pointer text-left"
@@ -361,7 +361,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="brands" class="border-y border-slate-200 bg-white py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-[...]
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">
           I nostri Brand
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
@@ -390,7 +390,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
   <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/[...]
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           Gallery
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
