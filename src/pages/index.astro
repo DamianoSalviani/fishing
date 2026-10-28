@@ -58,147 +58,308 @@ try {
   console.error('Unable to load brand logos from public/brands:', error);
 }
 
-const trips = [
-  {
-    id: 1,
-    title: 'Big Game Drifting Tuna',
-    startTime: '08:00am',
-    image: 'tuna.jpg',
-    description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 2,
-    title: 'Trolling Offshore',
-    startTime: '08:00am',
-    image: 'trolling.png',
-    description: "Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le Specie Target: Bluefin tuna, albacore tuna, dolphinfish, amberjack, barracuda, little tunny and mackerel.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h — €900/group'
-  },
-  {
-    id: 3,
-    title: 'Trolling Inshore',
-    startTime: '08:00am',
-    image: 'inshore.jpg',
-    description: "Un'uscita dinamica e ricca di emozioni appena al largo della costa, perfetta sia per i principianti che vogliono avvicinarsi alla pesca sportiva, sia per i pescatori esperti.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 4,
-    title: 'Bottom Fishing',
-    startTime: '08:00am',
-    image: 'bottom.webp',
-    description: "Goditi una giornata di autentico relax a bordo del nostro charter. La pesca a fondo è la tecnica perfetta per chi vuole sentire la 'tirata' sulla canna e godersi la bellezza del mare.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 5,
-    title: 'Swordfish Night Fishing',
-    startTime: '08:00pm',
-    image: 'swordfish.webp',
-    description: "Vivi il sogno di catturare pesce spada in mezzo al mare di notte. Cominceremo cercando l'esca: calamari giganti!",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '€1.000/group'
-  },
-  {
-    id: 6,
-    title: 'Octopus and Squid Fishing',
-    startTime: '08:00am',
-    image: 'octopus.jpg',
-    description: "Vivi l'emozione della pesca al polpo. Questa uscita di pesca è altamente consigliata per famiglie con bambini o principianti che non hanno mai pescato prima.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 7,
-    title: 'Seabass Trolling',
-    startTime: '08:00am',
-    image: 'spigola.jpg',
-    description: "Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 8,
-    title: 'Traina con il Vivo',
-    startTime: '08:00am',
-    image: 'leccia.jpg',
-    description: "La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.",
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  },
-  {
-    id: 9,
-    title: 'Pesca e cena al tramonto',
-    startTime: '02:00pm',
-    image: 'tramonto.jpg',
-    description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.',
-    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
-    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
-  }
+const featuresText = {
+  en: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+  it: ['Cibo e bevande', 'Canna, mulinello e attrezzatura', 'Max 4 persone', 'Adatto ai bambini', 'Lezioni per principianti']
+};
+
+const tripsBase = [
+  { id: 1, image: 'tuna.jpg', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 2, image: 'trolling.png', time: '08:00', pricing: ['8h|900'] },
+  { id: 3, image: 'inshore.jpg', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 4, image: 'bottom.webp', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 5, image: 'swordfish.webp', time: '20:00', pricing: ['1.000'] },
+  { id: 6, image: 'octopus.jpg', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 7, image: 'spigola.jpg', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 8, image: 'leccia.jpg', time: '08:00', pricing: ['8h|750', '6h|600', '4h|450'] },
+  { id: 9, image: 'tramonto.jpg', time: '14:00', pricing: ['8h|750', '6h|600', '4h|450'] }
 ];
 
-const faqEntries = [
-  {
-    question: 'Roma è un posto adatto alla pesca?',
-    answer:
-      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia.'
+const tripTexts = {
+  1: {
+    en: {
+      title: 'Big Game Drifting Tuna',
+      description: 'Our big game tuna charter is a battle of strength, endurance and pure adrenaline. We offer an elite experience both for expert anglers and for those who want to approach the great predator of the Mediterranean, with professional equipment and a strategy built on the real conditions of the day.'
+    },
+    it: {
+      title: 'Big Game Drifting Tuna',
+      description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno."
+    }
   },
-  {
-    question: 'Quali pesci posso pescare a Roma?',
-    answer:
-      'Tonno Rosso, Tonno Alletterato, Aguglia Imperiale, Tonno Alalunga, Pesce Spada, Lampuga, Leccia Amia, Pesce Serra, Polpi, Seppie, Orata e pesce di fondo.'
+  2: {
+    en: {
+      title: 'Trolling Offshore',
+      description: 'Leave the coast behind and venture into the deep blue. We move away from the shore to hunt the fastest and most prestigious predators of the sea. Target species: Bluefin tuna, albacore tuna, dolphinfish, amberjack, barracuda, little tunny and mackerel.'
+    },
+    it: {
+      title: 'Traina d\'altura',
+      description: 'Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le specie target: tonno rosso, alalunga, lampuga, ricciola, barracuda, tonnetto e sgombro.'
+    }
   },
-  {
-    question: 'Posso portare la mia attrezzatura?',
-    answer:
-      'Mettiamo a disposizione attrezzatura premium dei migliori brand mondiali (Giapponesi, Americani, Italiani). Se però hai una tua canna "fortunata", sei libero di portarla.'
+  3: {
+    en: {
+      title: 'Trolling Inshore',
+      description: 'A dynamic and exciting trip just off the coast, perfect both for beginners who want to get into sport fishing and for expert anglers.'
+    },
+    it: {
+      title: 'Traina costiera',
+      description: "Un'uscita dinamica e ricca di emozioni appena al largo della costa, perfetta sia per i principianti che vogliono avvicinarsi alla pesca sportiva, sia per i pescatori esperti."
+    }
   },
-  {
-    question: 'Cosa succede se non ho mai pescato prima?',
-    answer:
-      'Le nostre uscite sono aperte a tutti. Ti assisteremo passo dopo passo, insegnandoti le basi del combattimento e della gestione della preda.'
+  4: {
+    en: {
+      title: 'Bottom Fishing',
+      description: "Enjoy a day of genuine relaxation aboard our charter. Bottom fishing is the perfect technique for those who want to feel the 'pull' on the rod and enjoy the beauty of the sea."
+    },
+    it: {
+      title: 'Pesca a fondo',
+      description: "Goditi una giornata di autentico relax a bordo del nostro charter. La pesca a fondo è la tecnica perfetta per chi vuole sentire la 'tirata' sulla canna e godersi la bellezza del mare."
+    }
   },
-  {
-    question: 'Cosa succede in caso di maltempo?',
-    answer:
-      "La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l'uscita, la prenotazione verrà spostata alla prima data utile."
+  5: {
+    en: {
+      title: 'Swordfish Night Fishing',
+      description: 'Live the dream of catching swordfish in the middle of the sea at night. We will start by looking for the bait: giant squid!'
+    },
+    it: {
+      title: 'Pesca notturna al pesce spada',
+      description: "Vivi il sogno di catturare pesce spada in mezzo al mare di notte. Cominceremo cercando l'esca: calamari giganti!"
+    }
   },
-  {
-    question: 'Posso portare un accompagnatore che non pesca?',
-    answer:
-      'Certamente! La barca è spaziosa e perfetta anche per chi vuole solo godersi una giornata di sole e mare.'
+  6: {
+    en: {
+      title: 'Octopus and Squid Fishing',
+      description: 'Experience the thrill of octopus fishing. This trip is highly recommended for families with children or beginners who have never fished before.'
+    },
+    it: {
+      title: 'Pesca a polpi e calamari',
+      description: "Vivi l'emozione della pesca al polpo. Questa uscita di pesca è altamente consigliata per famiglie con bambini o principianti che non hanno mai pescato prima."
+    }
   },
-  {
-    question: 'Cosa succede se prendiamo un pesce? Posso portarlo a casa?',
-    answer:
-      'Seguiamo rigorosamente le normative vigenti. Per il Tonno Rosso pratichiamo spesso il Catch & Release, mentre per altre specie è possibile tenere il pescato.'
+  7: {
+    en: {
+      title: 'Seabass Trolling',
+      description: 'Ready to go after the king of coastal waters? Join us for an exclusive trolling charter dedicated to the Seabass, one of the most sought-after fighting fish.'
+    },
+    it: {
+      title: 'Traina alla spigola',
+      description: 'Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti.'
+    }
   },
-  {
-    question: 'La cattura è garantita?',
-    answer:
-      "Il mare non è un acquario, ma la nostra esperienza e la strumentazione di bordo massimizzano le probabilità di successo. L'emozione della caccia è parte integrante dell'avventura."
+  8: {
+    en: {
+      title: 'Live Bait Trolling',
+      description: "Live bait trolling is one of the most exciting and rewarding techniques for targeting the great predators of our sea."
+    },
+    it: {
+      title: 'Traina con il Vivo',
+      description: 'La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.'
+    }
   },
-  {
-    question: 'I bambini sono accettati?',
-    answer:
-      'Certo che sì, sono il futuro della pesca!'
-  },
-  {
-    question: "L'orario di partenza è flessibile?",
-    answer:
-      "Sì, cerchiamo sempre di andare incontro alle tue esigenze. L’orario di uscita standard viene concordato in fase di prenotazione in base alla tipologia di battuta di pesca o tour scelto, ma possiamo adattarlo alle tue preferenze (salvo disponibilità e condizioni meteo/marine). Se hai richieste particolari su orari di partenza o rientro, faccelo sapere al momento della prenotazione e faremo il possibile per accontentarti!"
-  },
-  {
-    question: 'I charter sono privati?',
-    answer:
-      "Sì, al 100%. Tutte le nostre uscite sono ad uso esclusivo per te e il tuo gruppo (famiglia, amici o colleghi). A bordo ci sarete solo voi e lo skipper: questo ti garantisce massima privacy, totale personalizzazione dell'esperienza e la nostra completa attenzione per tutta la durata dell'uscita."
+  9: {
+    en: {
+      title: 'Sunset Fishing and Dinner',
+      description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.'
+    },
+    it: {
+      title: 'Pesca e cena al tramonto',
+      description: "Una sessione di pesca alla spigola lungo la costa, basata su artificiali, esche vive, lettura del fondale e presentazione precisa."
+    }
   }
-];
+};
+
+const formatTime = (time, lang) => {
+  if (lang === 'it') return time;
+  const [h, m] = time.split(':').map(Number);
+  return `${h % 12 === 0 ? 12 : h % 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+};
+
+const formatPricing = (entries, lang) =>
+  entries.map((entry) => {
+    const [a, b] = entry.split('|');
+    const unit = lang === 'it' ? 'gruppo' : 'group';
+    return b ? `${a} – €${b}/${unit}` : `€${a}/${unit}`;
+  });
+
+const trips = tripsBase.map((base) => {
+  const i18n = {};
+  for (const lang of ['en', 'it']) {
+    i18n[lang] = {
+      ...tripTexts[base.id][lang],
+      startTime: formatTime(base.time, lang),
+      features: featuresText[lang],
+      pricing: formatPricing(base.pricing, lang)
+    };
+  }
+  return { id: base.id, image: base.image, i18n, ...i18n.en };
+});
+
+const faqI18n = {
+  en: [
+    {
+      question: 'Is Rome a good place for fishing?',
+      answer: 'The Roman coast, and in particular the stretch of sea in front of the Tiber mouth, is one of the "hot spots" of sport fishing in Italy.'
+    },
+    {
+      question: 'What fish can I catch in Rome?',
+      answer: 'Bluefin tuna, little tunny, garfish, albacore tuna, swordfish, dolphinfish, leerfish, bluefish, octopus, cuttlefish, sea bream and bottom fish.'
+    },
+    {
+      question: 'Can I bring my own equipment?',
+      answer: 'We provide premium equipment from the best brands in the world (Japanese, American, Italian). However, if you have your own "lucky" rod, you are free to bring it.'
+    },
+    {
+      question: "What if I've never fished before?",
+      answer: 'Our trips are open to everyone. We will assist you step by step, teaching you the basics of fighting and handling the catch.'
+    },
+    {
+      question: 'What happens in case of bad weather?',
+      answer: 'Safety is our priority. If the weather and sea conditions do not allow the trip, the booking will be moved to the first available date.'
+    },
+    {
+      question: 'Can I bring a companion who does not fish?',
+      answer: 'Of course! The boat is spacious and perfect also for those who just want to enjoy a day of sun and sea.'
+    },
+    {
+      question: 'What happens if we catch a fish? Can I take it home?',
+      answer: 'We strictly follow current regulations. For Bluefin tuna we often practice Catch & Release, while for other species it is possible to keep the catch.'
+    },
+    {
+      question: 'Is the catch guaranteed?',
+      answer: 'The sea is not an aquarium, but our experience and onboard instrumentation maximize the chances of success. The thrill of the hunt is an integral part of the adventure.'
+    },
+    {
+      question: 'Are children welcome?',
+      answer: 'Of course, they are the future of fishing!'
+    },
+    {
+      question: 'Is the departure time flexible?',
+      answer: 'Yes, we always try to meet your needs. The standard departure time is agreed upon at booking based on the type of fishing trip or tour chosen, but we can adapt it to your preferences (subject to availability and weather/sea conditions). If you have particular requests about departure or return times, let us know when booking and we will do our best to accommodate you!'
+    },
+    {
+      question: 'Are the charters private?',
+      answer: 'Yes, 100%. All our trips are for the exclusive use of you and your group (family, friends or colleagues). On board there will be only you and the skipper: this guarantees maximum privacy, total personalization of the experience and our full attention for the entire duration of the trip.'
+    }
+  ],
+  it: [
+    {
+      question: 'Roma è un posto adatto alla pesca?',
+      answer: 'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia.'
+    },
+    {
+      question: 'Quali pesci posso pescare a Roma?',
+      answer: 'Tonno Rosso, Tonno Alletterato, Aguglia Imperiale, Tonno Alalunga, Pesce Spada, Lampuga, Leccia Amia, Pesce Serra, Polpi, Seppie, Orata e pesce di fondo.'
+    },
+    {
+      question: 'Posso portare la mia attrezzatura?',
+      answer: 'Mettiamo a disposizione attrezzatura premium dei migliori brand mondiali (Giapponesi, Americani, Italiani). Se però hai una tua canna "fortunata", sei libero di portarla.'
+    },
+    {
+      question: 'Cosa succede se non ho mai pescato prima?',
+      answer: 'Le nostre uscite sono aperte a tutti. Ti assisteremo passo dopo passo, insegnandoti le basi del combattimento e della gestione della preda.'
+    },
+    {
+      question: 'Cosa succede in caso di maltempo?',
+      answer: "La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l'uscita, la prenotazione verrà spostata alla prima data utile."
+    },
+    {
+      question: 'Posso portare un accompagnatore che non pesca?',
+      answer: 'Certamente! La barca è spaziosa e perfetta anche per chi vuole solo godersi una giornata di sole e mare.'
+    },
+    {
+      question: 'Cosa succede se prendiamo un pesce? Posso portarlo a casa?',
+      answer: 'Seguiamo rigorosamente le normative vigenti. Per il Tonno Rosso pratichiamo spesso il Catch & Release, mentre per altre specie è possibile tenere il pescato.'
+    },
+    {
+      question: 'La cattura è garantita?',
+      answer: "Il mare non è un acquario, ma la nostra esperienza e la strumentazione di bordo massimizzano le probabilità di successo. L'emozione della caccia è parte integrante dell'avventura."
+    },
+    {
+      question: 'I bambini sono accettati?',
+      answer: 'Certo che sì, sono il futuro della pesca!'
+    },
+    {
+      question: "L'orario di partenza è flessibile?",
+      answer: "Sì, cerchiamo sempre di andare incontro alle tue esigenze. L’orario di uscita standard viene concordato in fase di prenotazione in base alla tipologia di battuta di pesca o tour scelto, ma possiamo adattarlo alle tue preferenze (salvo disponibilità e condizioni meteo/marine). Se hai richieste particolari su orari di partenza o rientro, faccelo sapere al momento della prenotazione e faremo il possibile per accontentarti!"
+    },
+    {
+      question: 'I charter sono privati?',
+      answer: "Sì, al 100%. Tutte le nostre uscite sono ad uso esclusivo per te e il tuo gruppo (famiglia, amici o colleghi). A bordo ci sarete solo voi e lo skipper: questo ti garantisce massima privacy, totale personalizzazione dell'esperienza e la nostra completa attenzione per tutta la durata dell'uscita."
+    }
+  ]
+};
+
+const faqEntries = faqI18n.en;
+
+const ui = {
+  en: {
+    heroTitle: 'BIG CATCH FISHING CHARTER IN ROME',
+    heroSubtitle: 'More than 10 years fishing the coast of Rome',
+    heroBody: "Embark on an unforgettable fishing adventure in Rome. Our charter was created to offer you not just a simple boat trip, but a real expedition into the heart of the Tyrrhenian Sea, in search of the most combative predators of the Mediterranean: Bluefin Tuna, Garfish and Swordfish among others. Every excursion is designed to maximize your chances of success and give you a memorable fight.\nWe use state-of-the-art technology to guarantee an unparalleled fishing experience.\nAll our excursions include: premium equipment selected from the best Japanese, American, Australian and Italian brands;\nSnacks, lunch and drinks;\nFuel;\nCarefully selected baits;\nOn board you will find everything you need to fish.",
+    bookNow: 'Book Now',
+    tripsBadge: 'BOOK YOUR TRIP',
+    tripsTitle: 'Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>',
+    start: 'Start',
+    openDetails: 'Open details for',
+    vesselTitle: 'Vessel',
+    vessel1: "The heart of our trips at sea is a 30-foot boat, a vessel that perfectly combines stability, wide room to move and safety. Designed to face different sea conditions, it is the ideal boat for those looking for a solid and high-performing fishing boat. Powered by a 200 HP Suzuki (year 2020), a guarantee of speed and reliability to quickly reach the fishing grounds. For maximum safety we have a Mercury auxiliary engine. We navigate with pinpoint precision thanks to the Garmin system, essential for spotting marks and structures on the seabed. The autopilot system allows us to manage routes and trolling phases with maximum focus on the fishing action.",
+    vessel2: 'The boat is specifically equipped for sport fishing: large live wells to keep baits in perfect condition, a 300-litre fuel tank, rod holders and outriggers to cover wide areas while offshore trolling.',
+    vessel3: 'We leave nothing to chance. Our philosophy is simple: to go after the great predators you need the best components in the world.',
+    close: 'Close',
+    closeAria: 'Close trip details',
+    brandsBadge: 'Our Brands',
+    brandsTitle: 'Trusted <span class="text-slate-700">partners</span> and brands',
+    brandsEmpty: 'No logos found in <span class="font-semibold">public/brands</span>. Add the brand files there to make them scroll automatically.',
+    galleryBadge: 'Gallery',
+    galleryTitle: 'Fishing Moments',
+    galleryEmpty: 'No files found in public/gallery.',
+    openMedia: 'Open',
+    video: 'video',
+    image: 'image',
+    faqBadge: 'FAQ',
+    faqTitle: 'Frequently asked questions',
+    navHome: 'Home', navTrips: 'Trips', navVessel: 'Vessel', navFaq: 'FAQ', navGallery: 'Gallery', navContact: 'Contact',
+    footerLinks: 'Useful links', footerContact: 'Contact', footerEmail: 'Email', footerPhone: 'Phone', footerAddress: 'Address',
+    footerRights: 'All rights reserved.', footerPrivacy: 'Privacy Policy & Cookie Policy',
+    cookieText: 'This site uses technical cookies to improve your browsing experience.',
+    cookieMore: 'Learn more', cookieAccept: 'Accept', cookieReject: 'Reject'
+  },
+  it: {
+    heroTitle: 'BIG CATCH FISHING CHARTER A ROMA',
+    heroSubtitle: 'Più di 10 anni di pesca lungo la costa di Roma',
+    heroBody: "Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile.\nUtilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari.\nIn tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane;\nSnack, pranzo e bevande;\nCarburante;\nEsche accuratamente selezionate;\nA bordo troverai tutto il necessario per pescare.",
+    bookNow: 'Prenota ora',
+    tripsBadge: 'PRENOTA LA TUA USCITA',
+    tripsTitle: 'Scegli la tua <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Avventura</span>',
+    start: 'Partenza',
+    openDetails: 'Apri i dettagli di',
+    vesselTitle: 'Imbarcazione',
+    vessel1: "Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.",
+    vessel2: "La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.",
+    vessel3: 'Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.',
+    close: 'Chiudi',
+    closeAria: 'Chiudi i dettagli dell\'uscita',
+    brandsBadge: 'I nostri Brand',
+    brandsTitle: 'Partner e <span class="text-slate-700">marchi</span> di fiducia',
+    brandsEmpty: 'Nessun logo trovato in <span class="font-semibold">public/brands</span>. Aggiungi qui i file dei brand per farli scorrere automaticamente.',
+    galleryBadge: 'Galleria',
+    galleryTitle: 'Momenti di pesca',
+    galleryEmpty: 'Nessun file trovato in public/gallery.',
+    openMedia: 'Apri',
+    video: 'video',
+    image: 'immagine',
+    faqBadge: 'FAQ',
+    faqTitle: 'Domande frequenti',
+    navHome: 'Home', navTrips: 'Uscite', navVessel: 'Imbarcazione', navFaq: 'FAQ', navGallery: 'Galleria', navContact: 'Contatti',
+    footerLinks: 'Link utili', footerContact: 'Contatti', footerEmail: 'Email', footerPhone: 'Telefono', footerAddress: 'Indirizzo',
+    footerRights: 'Tutti i diritti riservati.', footerPrivacy: 'Privacy Policy & Cookie Policy',
+    cookieText: 'Questo sito utilizza cookie tecnici per migliorare la tua esperienza di navigazione.',
+    cookieMore: 'Scopri di più', cookieAccept: 'Accetta', cookieReject: 'Rifiuta'
+  }
+};
+
+const t = ui.en;
+const i18nPayload = JSON.stringify({ ui, trips: Object.fromEntries(trips.map((trip) => [trip.id, trip.i18n])), faq: faqI18n }).replace(/</g, '\\u003c');
 
 const cardSchemes = [
   {
@@ -269,22 +430,14 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
         class="text-[2.4rem] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-[4.1rem] lg:text-[5.5rem]"
         style="font-family:'Montserrat',sans-serif; text-shadow: 0 10px 28px rgba(15, 23, 42, 0.75);"
       >
-        BIG CATCH FISHING CHARTER IN ROME
+        <span data-i18n="heroTitle">{t.heroTitle}</span>
       </h1>
 
       <p class="mt-3 text-lg font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-xl" style="font-family:'Montserrat',sans-serif; text-shadow: 0 6px 18px rgba(15, 23, 42, 0.5);">
-        More than 10 years fishing the coast's of Rome
+        <span data-i18n="heroSubtitle">{t.heroSubtitle}</span>
       </p>
 
-      <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. 
-Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari. 
-In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane;
-Snack, pranzo e bevande;
-Carburante;
-Esche accuratamente selezionate;
-A bordo troverai tutto il necessario per pescare. 
-      </p>
+      <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg" data-i18n="heroBody">{t.heroBody}</p>
 
       <a
         href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20services%3F"
@@ -292,7 +445,7 @@ A bordo troverai tutto il necessario per pescare. 
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
       >
-        Book Now
+        <span data-i18n="bookNow">{t.bookNow}</span>
       </a>
     </div>
   </section>
@@ -301,30 +454,23 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
-          BOOK YOUR TRIP
+          <span data-i18n="tripsBadge">{t.tripsBadge}</span>
         </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>
-        </h2>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif" data-i18n-html="tripsTitle" set:html={t.tripsTitle}></h2>
       </div>
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tripsWithSchemes.map((trip) => (
-          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/60">
+          <article data-trip-id={trip.id} class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/60">
             <button
               type="button"
               class="trip-card-trigger block w-full cursor-pointer text-left"
               data-trip-id={trip.id}
-              data-title={trip.title}
-              data-start-time={trip.startTime}
               data-image={trip.image}
-              data-description={trip.description}
-              data-features={trip.features.join('|')}
-              data-pricing={trip.pricing}
-              aria-label={`Open details for ${trip.title}`}
+              aria-label={`${t.openDetails} ${trip.title}`}
             >
               <div class="aspect-[4/3] overflow-hidden bg-slate-100">
-                <img src={trip.image} alt={trip.title} class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src={trip.image} alt={trip.title} class="trip-card-img h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
               </div>
 
               <div class="h-2 w-full" style={trip.s.bar}></div>
@@ -333,7 +479,7 @@ A bordo troverai tutto il necessario per pescare. 
                 <h3 class="trip-card-title text-xl font-black" style={trip.s.titleGrad}>{trip.title}</h3>
 
                 <div class="trip-card-pricing mt-2 flex flex-wrap gap-1">
-                  {trip.pricing.split('|').map((p) => (
+                  {trip.pricing.map((p) => (
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">
                       {p}
                     </span>
@@ -341,7 +487,7 @@ A bordo troverai tutto il necessario per pescare. 
                 </div>
 
                 <p class="mt-3 text-sm text-slate-500">
-                  <span class="trip-start-label">Start</span>
+                  <span class="trip-start-label" data-i18n="start">{t.start}</span>
                   <span class="trip-start-time">{trip.startTime}</span>
                 </p>
 
@@ -361,11 +507,11 @@ A bordo troverai tutto il necessario per pescare. 
   </section>
 
   <section id="vessel" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">Vessel</h2>
+    <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl" data-i18n="vesselTitle">{t.vesselTitle}</h2>
     <div class="mt-6 space-y-4 text-base leading-relaxed text-slate-700">
-      <p>Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.</p>
-      <p>La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.</p>
-      <p>Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.</p>
+      <p data-i18n="vessel1">{t.vessel1}</p>
+      <p data-i18n="vessel2">{t.vessel2}</p>
+      <p data-i18n="vessel3">{t.vessel3}</p>
     </div>
   </section>
 
@@ -374,9 +520,11 @@ A bordo troverai tutto il necessario per pescare. 
       type="button"
       id="trip-modal-close"
       class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
-      aria-label="Close trip details"
+      aria-label={t.closeAria}
+      data-i18n-aria="closeAria"
+      data-i18n="close"
     >
-      Close
+      {t.close}
     </button>
 
     <div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
@@ -396,11 +544,9 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">
-          I nostri Brand
+          <span data-i18n="brandsBadge">{t.brandsBadge}</span>
         </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Partner e <span class="text-slate-700">marchi</span> di fiducia
-        </h2>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif" data-i18n-html="brandsTitle" set:html={t.brandsTitle}></h2>
       </div>
 
       {brandLogos.length > 0 ? (
@@ -414,9 +560,7 @@ A bordo troverai tutto il necessario per pescare. 
           </div>
         </div>
       ) : (
-        <p class="mt-6 text-center text-slate-500">
-          Nessun logo trovato in <span class="font-semibold">public/brands</span>. Aggiungi qui i file dei brand per farli scorrere automaticamente.
-        </p>
+        <p class="mt-6 text-center text-slate-500" data-i18n-html="brandsEmpty" set:html={t.brandsEmpty}></p>
       )}
     </div>
   </section>
@@ -425,10 +569,10 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
-          Gallery
+          <span data-i18n="galleryBadge">{t.galleryBadge}</span>
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
-          Fishing Moments
+          <span data-i18n="galleryTitle">{t.galleryTitle}</span>
         </h2>
       </div>
 
@@ -446,7 +590,8 @@ A bordo troverai tutto il necessario per pescare. 
                 data-src={media.src}
                 data-type={media.type}
                 data-alt={media.alt}
-                aria-label={`Open ${media.type}: ${media.alt}`}
+                data-media-type={media.type}
+                aria-label={`${t.openMedia} ${media.type === 'video' ? t.video : t.image}: ${media.alt}`}
                 style="width: min(58vw, 300px);"
               >
                 {media.type === 'video' ? (
@@ -467,7 +612,7 @@ A bordo troverai tutto il necessario per pescare. 
           </div>
         </div>
       ) : (
-        <p class="mt-6 text-center text-slate-500">No files found in public/gallery.</p>
+        <p class="mt-6 text-center text-slate-500" data-i18n="galleryEmpty">{t.galleryEmpty}</p>
       )}
     </div>
   </section>
@@ -476,14 +621,14 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-amber-500/30">
-          FAQ
+          <span data-i18n="faqBadge">{t.faqBadge}</span>
         </span>
-        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
+        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" data-i18n="faqTitle">{t.faqTitle}</h2>
       </div>
 
       <div id="faq-list" class="space-y-4">
-        {faqEntries.map((item) => (
-          <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        {faqEntries.map((item, faqIndex) => (
+          <div data-faq-index={faqIndex} class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <h3 class="faq-question text-lg font-bold text-slate-900">{item.question}</h3>
             <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">{item.answer}</p>
           </div>
@@ -514,6 +659,8 @@ A bordo troverai tutto il necessario per pescare. 
     }
   </style>
 
+  <script type="application/json" id="i18n-data" set:html={i18nPayload} />
+
   <script>
     const modal = document.getElementById('trip-modal');
     const modalTitle = document.getElementById('trip-modal-title');
@@ -523,8 +670,117 @@ A bordo troverai tutto il necessario per pescare. 
     const modalDescription = document.getElementById('trip-modal-description');
     const closeButton = document.getElementById('trip-modal-close');
 
+    const data = JSON.parse(document.getElementById('i18n-data')?.textContent || '{}');
+    const supportedLangs = ['en', 'it'];
+    const storedLang = localStorage.getItem('lang');
+    let currentLang = supportedLangs.includes(storedLang) ? storedLang : 'en';
+    let openTripId = null;
+
+    const setText = (selector, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.textContent = value;
+    };
+
+    function renderModal() {
+      if (!modal || !modalTitle || !modalStart || !modalPricing || !modalFeatures || !modalDescription || openTripId === null) return;
+      const trip = data.trips?.[openTripId]?.[currentLang];
+      if (!trip) return;
+      const ui = data.ui[currentLang];
+
+      modalTitle.textContent = trip.title;
+      modalStart.textContent = `${ui.start}: ${trip.startTime}`;
+      modalPricing.textContent = trip.pricing.join(' | ');
+      modalDescription.textContent = trip.description;
+      modalFeatures.replaceChildren(
+        ...trip.features.map((feature) => {
+          const chip = document.createElement('span');
+          chip.className = 'rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200';
+          chip.textContent = feature;
+          return chip;
+        })
+      );
+    }
+
+    function applyLanguage(lang) {
+      if (!supportedLangs.includes(lang) || !data.ui) return;
+      currentLang = lang;
+      const ui = data.ui[lang];
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (key && ui[key] !== undefined) el.textContent = ui[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-html');
+        if (key && ui[key] !== undefined) el.innerHTML = ui[key];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-aria');
+        if (key && ui[key] !== undefined) el.setAttribute('aria-label', ui[key]);
+      });
+
+      document.querySelectorAll('article[data-trip-id]').forEach((card) => {
+        const trip = data.trips?.[card.getAttribute('data-trip-id')]?.[lang];
+        if (!trip) return;
+        const title = card.querySelector('.trip-card-title');
+        if (title) title.textContent = trip.title;
+        const img = card.querySelector('.trip-card-img');
+        if (img) img.setAttribute('alt', trip.title);
+        const trigger = card.querySelector('.trip-card-trigger');
+        if (trigger) trigger.setAttribute('aria-label', `${ui.openDetails} ${trip.title}`);
+        const startTime = card.querySelector('.trip-start-time');
+        if (startTime) startTime.textContent = trip.startTime;
+        card.querySelectorAll('.trip-card-pricing > span').forEach((el, index) => {
+          if (trip.pricing[index] !== undefined) el.textContent = trip.pricing[index];
+        });
+        card.querySelectorAll('.trip-feature-text').forEach((el, index) => {
+          if (trip.features[index] !== undefined) el.textContent = trip.features[index];
+        });
+      });
+
+      document.querySelectorAll('.gallery-slide').forEach((slide) => {
+        const type = slide.getAttribute('data-media-type') === 'video' ? ui.video : ui.image;
+        slide.setAttribute('aria-label', `${ui.openMedia} ${type}: ${slide.getAttribute('data-alt') || ''}`);
+      });
+
+      document.querySelectorAll('.faq-item').forEach((item) => {
+        const entry = data.faq?.[lang]?.[Number(item.getAttribute('data-faq-index'))];
+        if (!entry) return;
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        if (question) question.textContent = entry.question;
+        if (answer) answer.textContent = entry.answer;
+      });
+
+      const navLabels = { home: ui.navHome, trips: ui.navTrips, vessel: ui.navVessel, faq: ui.navFaq, gallery: ui.navGallery, contact: ui.navContact };
+      document.querySelectorAll('[data-nav-key]').forEach((el) => {
+        const label = navLabels[el.getAttribute('data-nav-key')];
+        if (label) el.textContent = label.trim();
+      });
+      document.querySelectorAll('[data-footer-link-key]').forEach((el) => {
+        const label = navLabels[el.getAttribute('data-footer-link-key')];
+        if (label) el.textContent = label;
+      });
+
+      setText('#footer-links-title', ui.footerLinks);
+      setText('#footer-contact-title', ui.footerContact);
+      setText('#footer-email-label', ui.footerEmail);
+      setText('#footer-phone-label', ui.footerPhone);
+      setText('#footer-address-label', ui.footerAddress);
+      setText('#footer-copyright', `© ${new Date().getFullYear()} Big Catch Fishing Charters. ${ui.footerRights}`);
+      setText('#footer-privacy-link', ui.footerPrivacy);
+      setText('#cookie-text', ui.cookieText);
+      setText('#cookie-more', ui.cookieMore);
+      setText('#cookie-accept', ui.cookieAccept);
+      setText('#cookie-reject', ui.cookieReject);
+
+      renderModal();
+    }
+
     function closeModal() {
       if (!modal) return;
+      openTripId = null;
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     }
@@ -535,23 +791,23 @@ A bordo troverai tutto il necessario per pescare. 
 
     document.querySelectorAll('.trip-card-trigger').forEach((button) => {
       button.addEventListener('click', () => {
-        if (!modal || !modalTitle || !modalStart || !modalPricing || !modalFeatures || !modalDescription) return;
-
-        const features = button.dataset.features ? button.dataset.features.split('|') : [];
-        const pricing = button.dataset.pricing || '';
-
-        modalTitle.textContent = button.dataset.title || '';
-        modalStart.textContent = `Start: ${button.dataset.startTime || ''}`;
-        modalPricing.textContent = pricing;
-        modalDescription.textContent = button.dataset.description || '';
-        modalFeatures.innerHTML = features
-          .map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${feature}</span>`)
-          .join('');
-
+        if (!modal) return;
+        openTripId = button.dataset.tripId || null;
+        renderModal();
         modal.classList.remove('hidden');
         modal.classList.add('flex');
       });
     });
+
+    document.addEventListener('lang-change', (event) => {
+      applyLanguage(event.detail);
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'lang' && event.newValue) applyLanguage(event.newValue);
+    });
+
+    applyLanguage(currentLang);
 
     const heroVideo = document.getElementById('hero-video');
     const tryPlayHeroVideo = () => {
