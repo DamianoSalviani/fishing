@@ -200,6 +200,240 @@ const faqEntries = [
   }
 ];
 
+const tripEn = {
+  1: {
+    title: 'Big Game Drifting Tuna',
+    description: "Our Big Game tuna fishing charter is a battle of strength, endurance and pure adrenaline. We offer an elite experience both for experienced anglers and for those who want to approach the great predator of the Mediterranean, with professional equipment and a strategy built on the real conditions of the day."
+  },
+  2: {
+    title: 'Trolling Offshore',
+    description: "Leave the coast behind and venture into the deep blue. We head away from the shore to hunt the fastest and most prestigious predators of the sea. Target species: Bluefin tuna, albacore tuna, dolphinfish, amberjack, barracuda, little tunny and mackerel."
+  },
+  3: {
+    title: 'Trolling Inshore',
+    description: "A dynamic, thrilling outing just off the coast, perfect both for beginners who want to get into sport fishing and for experienced anglers."
+  },
+  4: {
+    title: 'Bottom Fishing',
+    description: "Enjoy a day of genuine relaxation aboard our charter. Bottom fishing is the perfect technique for those who want to feel the 'tug' on the rod and enjoy the beauty of the sea."
+  },
+  5: {
+    title: 'Swordfish Night Fishing',
+    description: "Live the dream of catching swordfish in the middle of the sea at night. We will start by looking for bait: giant squid!"
+  },
+  6: {
+    title: 'Octopus and Squid Fishing',
+    description: "Experience the thrill of octopus fishing. This fishing trip is highly recommended for families with children or beginners who have never fished before."
+  },
+  7: {
+    title: 'Seabass Trolling',
+    description: "Ready to target the king of coastal waters? Join us for an exclusive trolling charter dedicated to Seabass, one of the most sought-after game fish."
+  },
+  8: {
+    title: 'Live Bait Trolling',
+    description: "Live bait trolling is one of the most exciting and rewarding techniques to target the great predators of our sea."
+  },
+  9: {
+    title: 'Sunset Fishing and Dinner',
+    description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.'
+  }
+};
+
+const tripItText = {
+  2: {
+    description: "Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le Specie Target: Tonno rosso, tonno alalunga, lampuga, ricciola, barracuda, alletterato e sgombro."
+  },
+  9: {
+    description: "Una sessione di pesca costiera alla spigola basata su artificiali, esche, lettura del fondale e presentazione precisa."
+  }
+};
+
+const featuresIt = {
+  'Food & Drinks': 'Cibo e bevande',
+  'Rod, Reel and Tackle': 'Canna, mulinello e attrezzatura',
+  'Max 4 person': 'Max 4 persone',
+  'Child friendly': 'Adatto ai bambini',
+  'Tuition for beginners': 'Istruzioni per principianti'
+};
+
+const timeIt = (time) => {
+  const match = /^(\d{1,2}):(\d{2})\s*(am|pm)$/i.exec(time);
+  if (!match) return time;
+  const hours = (Number(match[1]) % 12) + (match[3].toLowerCase() === 'pm' ? 12 : 0);
+  return `${String(hours).padStart(2, '0')}:${match[2]}`;
+};
+
+const localizedTrips = trips.map((trip) => ({
+  id: trip.id,
+  en: {
+    title: tripEn[trip.id].title,
+    description: tripEn[trip.id].description,
+    startTime: trip.startTime,
+    features: trip.features,
+    pricing: trip.pricing
+  },
+  it: {
+    title: tripItText[trip.id]?.title ?? trip.title,
+    description: tripItText[trip.id]?.description ?? trip.description,
+    startTime: timeIt(trip.startTime),
+    features: trip.features.map((feature) => featuresIt[feature] ?? feature),
+    pricing: trip.pricing.replaceAll('/group', '/gruppo')
+  }
+}));
+
+const faqEn = [
+  {
+    question: 'Is Rome a good place for fishing?',
+    answer: 'The Roman coast, and in particular the stretch of sea in front of the Tiber mouth, is one of the "hot spots" of sport fishing in Italy.'
+  },
+  {
+    question: 'Which fish can I catch in Rome?',
+    answer: 'Bluefin Tuna, Little Tunny, Spearfish, Albacore Tuna, Swordfish, Dolphinfish, Leerfish, Bluefish, Octopus, Cuttlefish, Sea Bream and bottom fish.'
+  },
+  {
+    question: 'Can I bring my own tackle?',
+    answer: 'We provide premium tackle from the best brands in the world (Japanese, American, Italian). However, if you have your own "lucky" rod, you are free to bring it.'
+  },
+  {
+    question: "What if I've never fished before?",
+    answer: 'Our trips are open to everyone. We will assist you step by step, teaching you the basics of fighting and handling the catch.'
+  },
+  {
+    question: 'What happens in case of bad weather?',
+    answer: 'Safety is our priority. If the weather and sea conditions do not allow the trip, the booking will be moved to the first available date.'
+  },
+  {
+    question: 'Can I bring a companion who does not fish?',
+    answer: 'Of course! The boat is spacious and also perfect for those who just want to enjoy a day of sun and sea.'
+  },
+  {
+    question: 'What happens if we catch a fish? Can I take it home?',
+    answer: 'We strictly follow current regulations. For Bluefin Tuna we often practice Catch & Release, while for other species it is possible to keep the catch.'
+  },
+  {
+    question: 'Is a catch guaranteed?',
+    answer: 'The sea is not an aquarium, but our experience and on-board instruments maximise the chances of success. The thrill of the hunt is an integral part of the adventure.'
+  },
+  {
+    question: 'Are children welcome?',
+    answer: 'Of course, they are the future of fishing!'
+  },
+  {
+    question: 'Is the departure time flexible?',
+    answer: 'Yes, we always try to meet your needs. The standard departure time is agreed at booking based on the type of fishing trip or tour chosen, but we can adapt it to your preferences (subject to availability and weather/sea conditions). If you have special requests about departure or return times, let us know when booking and we will do our best to accommodate you!'
+  },
+  {
+    question: 'Are the charters private?',
+    answer: 'Yes, 100%. All our trips are for the exclusive use of you and your group (family, friends or colleagues). Only you and the skipper will be on board: this guarantees maximum privacy, total personalisation of the experience and our full attention for the entire duration of the trip.'
+  }
+];
+
+const ui = {
+  en: {
+    heroTitle: 'BIG CATCH FISHING CHARTER IN ROME',
+    heroSub: "More than 10 years fishing the coast's of Rome",
+    heroText: "Set off on an unforgettable fishing adventure in Rome. Our charter was created to offer you not just a simple boat trip, but a real expedition into the heart of the Tyrrhenian Sea, in search of the most combative predators of the Mediterranean: Bluefin Tuna, Spearfish, Swordfish among others. Every excursion is designed to maximise your chances of success and give you a memorable fight.\nWe use cutting-edge technology to guarantee an unrivalled fishing experience.\nAll our excursions include: premium equipment selected from the best Japanese, American, Australian and Italian brands;\nSnacks, lunch and drinks;\nFuel;\nCarefully selected bait;\nOn board you will find everything you need to fish.",
+    bookNow: 'Book Now',
+    tripsBadge: 'BOOK YOUR TRIP',
+    tripsTitleA: 'Choose Your',
+    tripsTitleB: 'Adventure',
+    start: 'Start',
+    openDetails: 'Open details for',
+    close: 'Close',
+    closeAria: 'Close trip details',
+    vesselTitle: 'Vessel',
+    vessel1: "The heart of our outings at sea is a 30-foot boat that perfectly combines stability, ample room to move and safety. Designed to handle different sea conditions, it is the ideal vessel for those looking for a solid, high-performing fishing boat. Powered by a 200 HP Suzuki (2020), a guarantee of speed and reliability to quickly reach the fishing grounds. For maximum safety we have a Mercury auxiliary engine. We navigate with pinpoint precision thanks to the Garmin system, essential for finding marks and structures on the bottom. The autopilot system lets us manage routes and trolling phases with maximum focus on the fishing action.",
+    vessel2: 'The boat is specifically equipped for sport fishing: large livewells to keep the bait in perfect condition, a tank with 300 litres of fuel, rod holders and outriggers to cover wide areas during offshore trolling.',
+    vessel3: 'We leave nothing to chance. Our philosophy is simple: to target the great predators you need the best components in the world.',
+    brandsBadge: 'Our Brands',
+    brandsTitleA: 'Trusted ',
+    brandsTitleB: 'partners and brands',
+    brandsTitleC: '',
+    brandsEmptyA: 'No logo found in ',
+    brandsEmptyB: '. Add the brand files here to make them scroll automatically.',
+    galleryBadge: 'Gallery',
+    galleryTitle: 'Fishing Moments',
+    galleryEmptyA: 'No files found in ',
+    galleryEmptyB: '.',
+    openImage: 'Open image',
+    openVideo: 'Open video',
+    faqTitle: 'Frequently asked questions',
+    navHome: 'Home',
+    navTrips: 'Trips',
+    navVessel: 'Vessel',
+    navFaq: 'FAQ',
+    navGallery: 'Gallery',
+    navContact: 'Contact',
+    footerLinks: 'Useful links',
+    footerContact: 'Contacts',
+    footerEmail: 'Email',
+    footerPhone: 'Phone',
+    footerAddress: 'Address',
+    footerRights: 'All rights reserved.',
+    cookieText: 'This site uses technical cookies to improve your browsing experience.',
+    cookieMore: 'Learn more',
+    cookieAccept: 'Accept',
+    cookieReject: 'Reject',
+    pageTitle: 'Fishing Charter Rome and Fiumicino | Big Catch Fishing Charters | Tuna Fishing, Trolling, Drifting'
+  },
+  it: {
+    heroTitle: 'BIG CATCH FISHING CHARTER A ROMA',
+    heroSub: 'Oltre 10 anni di pesca sulle coste di Roma',
+    heroText: "Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile.\nUtilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari.\nIn tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane;\nSnack, pranzo e bevande;\nCarburante;\nEsche accuratamente selezionate;\nA bordo troverai tutto il necessario per pescare.",
+    bookNow: 'Prenota ora',
+    tripsBadge: 'PRENOTA LA TUA USCITA',
+    tripsTitleA: 'Scegli la tua',
+    tripsTitleB: 'Avventura',
+    start: 'Inizio',
+    openDetails: 'Apri i dettagli di',
+    close: 'Chiudi',
+    closeAria: 'Chiudi i dettagli dell\'uscita',
+    vesselTitle: 'Imbarcazione',
+    vessel1: "Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.",
+    vessel2: "La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.",
+    vessel3: 'Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.',
+    brandsBadge: 'I nostri Brand',
+    brandsTitleA: 'Partner e ',
+    brandsTitleB: 'marchi',
+    brandsTitleC: ' di fiducia',
+    brandsEmptyA: 'Nessun logo trovato in ',
+    brandsEmptyB: '. Aggiungi qui i file dei brand per farli scorrere automaticamente.',
+    galleryBadge: 'Gallery',
+    galleryTitle: 'Momenti di pesca',
+    galleryEmptyA: 'Nessun file trovato in ',
+    galleryEmptyB: '.',
+    openImage: 'Apri immagine',
+    openVideo: 'Apri video',
+    faqTitle: 'Domande frequenti',
+    navHome: 'Home',
+    navTrips: 'Uscite',
+    navVessel: 'Imbarcazione',
+    navFaq: 'FAQ',
+    navGallery: 'Gallery',
+    navContact: 'Contatti',
+    footerLinks: 'Link utili',
+    footerContact: 'Contatti',
+    footerEmail: 'Email',
+    footerPhone: 'Telefono',
+    footerAddress: 'Indirizzo',
+    footerRights: 'Tutti i diritti riservati.',
+    cookieText: 'Questo sito utilizza cookie tecnici per migliorare la tua esperienza di navigazione.',
+    cookieMore: 'Scopri di più',
+    cookieAccept: 'Accetta',
+    cookieReject: 'Rifiuta',
+    pageTitle: 'Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters | Pesca Tonno, Traina, Drifting'
+  }
+};
+
+const localizedFaq = faqEntries.map((item, i) => ({
+  en: faqEn[i],
+  it: item
+}));
+
+const i18nData = { ui, trips: localizedTrips, faq: localizedFaq };
+const defaultLang = 'en';
+const t = ui[defaultLang];
+
 const cardSchemes = [
   {
     bar: 'background:linear-gradient(to right,#22d3ee,#0ea5e9,#3b82f6)',
@@ -207,7 +441,7 @@ const cardSchemes = [
   },
 ];
 
-const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % cardSchemes.length] }));
+const tripsWithSchemes = localizedTrips.map((trip, i) => ({ ...trip, ...trip[defaultLang], image: trips[i].image, s: cardSchemes[i % cardSchemes.length] }));
 ---
 
 <Layout title="Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters | Pesca Tonno, Traina, Drifting">
@@ -269,21 +503,15 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
         class="text-[2.4rem] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-[4.1rem] lg:text-[5.5rem]"
         style="font-family:'Montserrat',sans-serif; text-shadow: 0 10px 28px rgba(15, 23, 42, 0.75);"
       >
-        BIG CATCH FISHING CHARTER IN ROME
+        <span data-i18n="heroTitle">{t.heroTitle}</span>
       </h1>
 
       <p class="mt-3 text-lg font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-xl" style="font-family:'Montserrat',sans-serif; text-shadow: 0 6px 18px rgba(15, 23, 42, 0.5);">
-        More than 10 years fishing the coast's of Rome
+        <span data-i18n="heroSub">{t.heroSub}</span>
       </p>
 
       <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. 
-Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari. 
-In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane;
-Snack, pranzo e bevande;
-Carburante;
-Esche accuratamente selezionate;
-A bordo troverai tutto il necessario per pescare. 
+        <span data-i18n="heroText">{t.heroText}</span>
       </p>
 
       <a
@@ -292,7 +520,7 @@ A bordo troverai tutto il necessario per pescare. 
         rel="noopener noreferrer"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
       >
-        Book Now
+        <span data-i18n="bookNow">{t.bookNow}</span>
       </a>
     </div>
   </section>
@@ -301,10 +529,10 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
-          BOOK YOUR TRIP
+          <span data-i18n="tripsBadge">{t.tripsBadge}</span>
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>
+          <span data-i18n="tripsTitleA">{t.tripsTitleA}</span> <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent" data-i18n="tripsTitleB">{t.tripsTitleB}</span>
         </h2>
       </div>
 
@@ -315,16 +543,11 @@ A bordo troverai tutto il necessario per pescare. 
               type="button"
               class="trip-card-trigger block w-full cursor-pointer text-left"
               data-trip-id={trip.id}
-              data-title={trip.title}
-              data-start-time={trip.startTime}
               data-image={trip.image}
-              data-description={trip.description}
-              data-features={trip.features.join('|')}
-              data-pricing={trip.pricing}
-              aria-label={`Open details for ${trip.title}`}
+              aria-label={`${t.openDetails} ${trip.title}`}
             >
               <div class="aspect-[4/3] overflow-hidden bg-slate-100">
-                <img src={trip.image} alt={trip.title} class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src={trip.image} alt={trip.title} class="trip-card-image h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
               </div>
 
               <div class="h-2 w-full" style={trip.s.bar}></div>
@@ -341,7 +564,7 @@ A bordo troverai tutto il necessario per pescare. 
                 </div>
 
                 <p class="mt-3 text-sm text-slate-500">
-                  <span class="trip-start-label">Start</span>
+                  <span class="trip-start-label">{t.start}</span>
                   <span class="trip-start-time">{trip.startTime}</span>
                 </p>
 
@@ -361,11 +584,11 @@ A bordo troverai tutto il necessario per pescare. 
   </section>
 
   <section id="vessel" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">Vessel</h2>
+    <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl" data-i18n="vesselTitle">{t.vesselTitle}</h2>
     <div class="mt-6 space-y-4 text-base leading-relaxed text-slate-700">
-      <p>Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.</p>
-      <p>La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.</p>
-      <p>Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.</p>
+      <p data-i18n="vessel1">{t.vessel1}</p>
+      <p data-i18n="vessel2">{t.vessel2}</p>
+      <p data-i18n="vessel3">{t.vessel3}</p>
     </div>
   </section>
 
@@ -374,9 +597,9 @@ A bordo troverai tutto il necessario per pescare. 
       type="button"
       id="trip-modal-close"
       class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
-      aria-label="Close trip details"
+      aria-label={t.closeAria}
     >
-      Close
+      {t.close}
     </button>
 
     <div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
@@ -396,10 +619,10 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">
-          I nostri Brand
+          <span data-i18n="brandsBadge">{t.brandsBadge}</span>
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Partner e <span class="text-slate-700">marchi</span> di fiducia
+          <span data-i18n="brandsTitleA">{t.brandsTitleA}</span><span class="text-slate-700" data-i18n="brandsTitleB">{t.brandsTitleB}</span><span data-i18n="brandsTitleC">{t.brandsTitleC}</span>
         </h2>
       </div>
 
@@ -415,7 +638,7 @@ A bordo troverai tutto il necessario per pescare. 
         </div>
       ) : (
         <p class="mt-6 text-center text-slate-500">
-          Nessun logo trovato in <span class="font-semibold">public/brands</span>. Aggiungi qui i file dei brand per farli scorrere automaticamente.
+          <span data-i18n="brandsEmptyA">{t.brandsEmptyA}</span><span class="font-semibold">public/brands</span><span data-i18n="brandsEmptyB">{t.brandsEmptyB}</span>
         </p>
       )}
     </div>
@@ -425,10 +648,10 @@ A bordo troverai tutto il necessario per pescare. 
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
-          Gallery
+          <span data-i18n="galleryBadge">{t.galleryBadge}</span>
         </span>
-        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
-          Fishing Moments
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;" data-i18n="galleryTitle">
+          {t.galleryTitle}
         </h2>
       </div>
 
@@ -446,7 +669,8 @@ A bordo troverai tutto il necessario per pescare. 
                 data-src={media.src}
                 data-type={media.type}
                 data-alt={media.alt}
-                aria-label={`Open ${media.type}: ${media.alt}`}
+                data-type-label={media.type}
+                aria-label={`${media.type === 'video' ? t.openVideo : t.openImage}: ${media.alt}`}
                 style="width: min(58vw, 300px);"
               >
                 {media.type === 'video' ? (
@@ -467,7 +691,7 @@ A bordo troverai tutto il necessario per pescare. 
           </div>
         </div>
       ) : (
-        <p class="mt-6 text-center text-slate-500">No files found in public/gallery.</p>
+        <p class="mt-6 text-center text-slate-500"><span data-i18n="galleryEmptyA">{t.galleryEmptyA}</span><span>public/gallery</span><span data-i18n="galleryEmptyB">{t.galleryEmptyB}</span></p>
       )}
     </div>
   </section>
@@ -478,11 +702,11 @@ A bordo troverai tutto il necessario per pescare. 
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-amber-500/30">
           FAQ
         </span>
-        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
+        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" data-i18n="faqTitle">{t.faqTitle}</h2>
       </div>
 
       <div id="faq-list" class="space-y-4">
-        {faqEntries.map((item) => (
+        {localizedFaq.map((entry) => entry[defaultLang]).map((item) => (
           <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <h3 class="faq-question text-lg font-bold text-slate-900">{item.question}</h3>
             <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">{item.answer}</p>
@@ -514,7 +738,23 @@ A bordo troverai tutto il necessario per pescare. 
     }
   </style>
 
+  <script type="application/json" id="i18n-data" set:html={JSON.stringify(i18nData)} />
+
   <script>
+    const i18nData = JSON.parse(document.getElementById('i18n-data')?.textContent || '{}');
+    const supportedLangs = ['en', 'it'];
+    const defaultLang = 'en';
+    const readStoredLang = () => {
+      try {
+        const stored = localStorage.getItem('lang');
+        return stored && supportedLangs.includes(stored) ? stored : defaultLang;
+      } catch (error) {
+        return defaultLang;
+      }
+    };
+    let currentLang = readStoredLang();
+    let openTripId = null;
+
     const modal = document.getElementById('trip-modal');
     const modalTitle = document.getElementById('trip-modal-title');
     const modalStart = document.getElementById('trip-modal-start');
@@ -523,8 +763,30 @@ A bordo troverai tutto il necessario per pescare. 
     const modalDescription = document.getElementById('trip-modal-description');
     const closeButton = document.getElementById('trip-modal-close');
 
+    const escapeHtml = (value) =>
+      String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+
+    const getTrip = (id) => (i18nData.trips || []).find((trip) => String(trip.id) === String(id));
+
+    function renderModal() {
+      if (!modalTitle || !modalStart || !modalPricing || !modalFeatures || !modalDescription) return;
+      const trip = getTrip(openTripId);
+      if (!trip) return;
+      const text = trip[currentLang];
+      const ui = i18nData.ui[currentLang];
+
+      modalTitle.textContent = text.title;
+      modalStart.textContent = `${ui.start}: ${text.startTime}`;
+      modalPricing.textContent = text.pricing;
+      modalDescription.textContent = text.description;
+      modalFeatures.innerHTML = text.features
+        .map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${escapeHtml(feature)}</span>`)
+        .join('');
+    }
+
     function closeModal() {
       if (!modal) return;
+      openTripId = null;
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     }
@@ -535,23 +797,102 @@ A bordo troverai tutto il necessario per pescare. 
 
     document.querySelectorAll('.trip-card-trigger').forEach((button) => {
       button.addEventListener('click', () => {
-        if (!modal || !modalTitle || !modalStart || !modalPricing || !modalFeatures || !modalDescription) return;
-
-        const features = button.dataset.features ? button.dataset.features.split('|') : [];
-        const pricing = button.dataset.pricing || '';
-
-        modalTitle.textContent = button.dataset.title || '';
-        modalStart.textContent = `Start: ${button.dataset.startTime || ''}`;
-        modalPricing.textContent = pricing;
-        modalDescription.textContent = button.dataset.description || '';
-        modalFeatures.innerHTML = features
-          .map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${feature}</span>`)
-          .join('');
+        if (!modal) return;
+        openTripId = button.dataset.tripId;
+        renderModal();
 
         modal.classList.remove('hidden');
         modal.classList.add('flex');
       });
     });
+
+    const setText = (selector, value) => {
+      document.querySelectorAll(selector).forEach((el) => {
+        el.textContent = value;
+      });
+    };
+
+    function applyLanguage(lang) {
+      if (!supportedLangs.includes(lang) || !i18nData.ui) return;
+      currentLang = lang;
+      const ui = i18nData.ui[lang];
+
+      document.documentElement.lang = lang;
+      document.title = ui.pageTitle;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = ui[el.dataset.i18n];
+        if (value !== undefined) el.textContent = value;
+      });
+
+      i18nData.trips.forEach((trip) => {
+        const text = trip[lang];
+        const trigger = document.querySelector(`.trip-card-trigger[data-trip-id="${trip.id}"]`);
+        if (!trigger) return;
+        trigger.setAttribute('aria-label', `${ui.openDetails} ${text.title}`);
+        const image = trigger.querySelector('.trip-card-image');
+        if (image) image.setAttribute('alt', text.title);
+        const title = trigger.querySelector('.trip-card-title');
+        if (title) title.textContent = text.title;
+        const pricing = trigger.querySelector('.trip-card-pricing');
+        if (pricing) {
+          pricing.querySelectorAll('span').forEach((el, i) => {
+            el.textContent = text.pricing.split('|')[i] ?? '';
+          });
+        }
+        const startLabel = trigger.querySelector('.trip-start-label');
+        if (startLabel) startLabel.textContent = ui.start;
+        const startTime = trigger.querySelector('.trip-start-time');
+        if (startTime) startTime.textContent = text.startTime;
+        trigger.querySelectorAll('.trip-feature-text').forEach((el, i) => {
+          el.textContent = text.features[i] ?? '';
+        });
+      });
+
+      document.querySelectorAll('.gallery-slide').forEach((slide) => {
+        const label = slide.dataset.type === 'video' ? ui.openVideo : ui.openImage;
+        slide.setAttribute('aria-label', `${label}: ${slide.dataset.alt || ''}`);
+      });
+
+      document.querySelectorAll('#faq-list .faq-item').forEach((item, i) => {
+        const entry = i18nData.faq[i]?.[lang];
+        if (!entry) return;
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        if (question) question.textContent = entry.question;
+        if (answer) answer.textContent = entry.answer;
+      });
+
+      if (closeButton) {
+        closeButton.textContent = ui.close;
+        closeButton.setAttribute('aria-label', ui.closeAria);
+      }
+      renderModal();
+
+      const navLabels = { home: ui.navHome, trips: ui.navTrips, vessel: ui.navVessel, faq: ui.navFaq, gallery: ui.navGallery, contact: ui.navContact };
+      Object.entries(navLabels).forEach(([key, label]) => {
+        setText(`[data-nav-key="${key}"]`, label);
+        setText(`[data-footer-link-key="${key}"]`, label);
+      });
+
+      setText('#footer-links-title', ui.footerLinks);
+      setText('#footer-contact-title', ui.footerContact);
+      setText('#footer-email-label', ui.footerEmail);
+      setText('#footer-phone-label', ui.footerPhone);
+      setText('#footer-address-label', ui.footerAddress);
+      setText('#footer-copyright', `© ${new Date().getFullYear()} Big Catch Fishing Charters. ${ui.footerRights}`);
+      setText('#cookie-text', ui.cookieText);
+      setText('#cookie-more', ui.cookieMore);
+      setText('#cookie-accept', ui.cookieAccept);
+      setText('#cookie-reject', ui.cookieReject);
+    }
+
+    document.addEventListener('lang-change', (event) => {
+      const nextLang = event instanceof CustomEvent ? event.detail : null;
+      applyLanguage(nextLang);
+    });
+
+    applyLanguage(currentLang);
 
     const heroVideo = document.getElementById('hero-video');
     const tryPlayHeroVideo = () => {
