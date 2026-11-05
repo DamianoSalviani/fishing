@@ -266,17 +266,18 @@ const tripsWithSchemes = trips.map((trip, i) => ({ ...trip, s: cardSchemes[i % c
 
     <div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
       <h1
+        data-i18n="hero.title"
         class="text-[2.4rem] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-[4.1rem] lg:text-[5.5rem]"
         style="font-family:'Montserrat',sans-serif; text-shadow: 0 10px 28px rgba(15, 23, 42, 0.75);"
       >
         BIG CATCH FISHING CHARTER IN ROME
       </h1>
 
-      <p class="mt-3 text-lg font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-xl" style="font-family:'Montserrat',sans-serif; text-shadow: 0 6px 18px rgba(15, 23, 42, 0.5);">
+      <p data-i18n="hero.tagline" class="mt-3 text-lg font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-xl" style="font-family:'Montserrat',sans-serif; text-shadow: 0 6px 18px rgba(15, 23, 42, 0.5);">
         More than 10 years fishing the coast's of Rome
       </p>
 
-      <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+      <p data-i18n="hero.description" class="mt-6 max-w-3xl whitespace-pre-line text-base leading-relaxed text-slate-300 sm:text-lg">
         Parti per un'indimenticabile avventura di pesca a Roma. Il nostro charter nasce per offrirti non una semplice uscita in barca, ma una vera e propria spedizione nel cuore del Tirreno, alla ricerca dei predatori più combattivi del Mediterraneo: Tonno Rosso, Aguglia Imperiale, Pesce Spada tra gli altri. Ogni nostra escursione è progettata per massimizzare le tue probabilità di successo e regalarti un combattimento memorabile. 
 Utilizziamo tecnologie all'avanguardia per garantire un'esperienza di pesca senza pari. 
 In tutte le nostre escursioni sono inclusi: attrezzatura premium selezionata tra le migliori marche giapponesi, americane, australiane ed italiane;
@@ -290,6 +291,7 @@ A bordo troverai tutto il necessario per pescare. 
         href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20services%3F"
         target="_blank"
         rel="noopener noreferrer"
+        data-i18n="hero.book"
         class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
       >
         Book Now
@@ -300,11 +302,11 @@ A bordo troverai tutto il necessario per pescare. 
   <section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-12 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
+        <span data-i18n="trips.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           BOOK YOUR TRIP
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Choose Your <span class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>
+          <span data-i18n="trips.heading">Choose Your</span> <span data-i18n="trips.adventure" class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">Adventure</span>
         </h2>
       </div>
 
@@ -321,6 +323,7 @@ A bordo troverai tutto il necessario per pescare. 
               data-description={trip.description}
               data-features={trip.features.join('|')}
               data-pricing={trip.pricing}
+              data-i18n-aria={`trip.${trip.id}.aria`}
               aria-label={`Open details for ${trip.title}`}
             >
               <div class="aspect-[4/3] overflow-hidden bg-slate-100">
@@ -341,14 +344,14 @@ A bordo troverai tutto il necessario per pescare. 
                 </div>
 
                 <p class="mt-3 text-sm text-slate-500">
-                  <span class="trip-start-label">Start</span>
+                  <span class="trip-start-label" data-i18n="trips.start">Start</span>
                   <span class="trip-start-time">{trip.startTime}</span>
                 </p>
 
                 <ul class="mt-4 space-y-2">
-                  {trip.features.map((feature) => (
+                  {trip.features.map((feature, featureIndex) => (
                     <li class="flex items-center gap-2 text-sm text-slate-600">
-                      <span class="trip-feature-text">{feature}</span>
+                      <span class="trip-feature-text" data-i18n={`trips.features.${featureIndex}`}>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -361,11 +364,11 @@ A bordo troverai tutto il necessario per pescare. 
   </section>
 
   <section id="vessel" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">Vessel</h2>
+    <h2 data-i18n="vessel.title" class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">Vessel</h2>
     <div class="mt-6 space-y-4 text-base leading-relaxed text-slate-700">
-      <p>Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.</p>
-      <p>La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.</p>
-      <p>Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.</p>
+      <p data-i18n="vessel.paragraph.0">Il cuore delle nostre uscite in mare è un 30 piedi, un’imbarcazione che coniuga perfettamente stabilità, ampi spazi di movimento e sicurezza. Progettata per affrontare diverse condizioni marine, è il mezzo ideale per chi cerca una barca da pesca solida e performante. Spinta da un Suzuki 200 CV (anno 2020), garanzia di velocità e affidabilità per raggiungere rapidamente le zone di pesca. Per la massima sicurezza disponiamo di un motore ausiliario Mercury. Navighiamo con precisione millimetrica grazie al sistema Garmin, fondamentale per individuare marcature e strutture sul fondo. Il sistema di autopilota ci permette di gestire le rotte e le fasi di traina con la massima concentrazione sull'azione di pesca.</p>
+      <p data-i18n="vessel.paragraph.1">La barca è allestita specificamente per l'attività sportiva: ampie vasche del vivo per mantenere le esche in perfette condizioni, serbatoio con 300 litri di carburante, portacanne e divergenti per coprire ampi raggi d'azione durante la traina d'altura.</p>
+      <p data-i18n="vessel.paragraph.2">Non lasciamo nulla al caso. La nostra filosofia è semplice: per insidiare i grandi predatori servono i componenti migliori al mondo.</p>
     </div>
   </section>
 
@@ -373,6 +376,7 @@ A bordo troverai tutto il necessario per pescare. 
     <button
       type="button"
       id="trip-modal-close"
+      data-i18n="modal.close"
       class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
       aria-label="Close trip details"
     >
@@ -383,7 +387,7 @@ A bordo troverai tutto il necessario per pescare. 
       <div class="min-h-0 flex-1 overflow-y-auto">
         <div class="space-y-3 p-4 sm:space-y-4 sm:p-6">
           <h3 id="trip-modal-title" class="text-xl font-semibold text-slate-900 sm:text-2xl"></h3>
-          <p id="trip-modal-start" class="text-sm text-slate-500"></p>
+          <p id="trip-modal-start" class="text-sm text-slate-500"><span data-i18n="trips.start">Start</span>: <span id="trip-modal-start-time"></span></p>
           <div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
           <div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
           <p id="trip-modal-description" class="text-sm leading-relaxed text-slate-700"></p>
@@ -395,11 +399,11 @@ A bordo troverai tutto il necessario per pescare. 
   <section id="brands" class="border-y border-slate-200 bg-white py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">
+        <span data-i18n="brands.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">
           I nostri Brand
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
-          Partner e <span class="text-slate-700">marchi</span> di fiducia
+          <span data-i18n="brands.heading">Partner e</span> <span data-i18n="brands.marks" class="text-slate-700">marchi di fiducia</span>
         </h2>
       </div>
 
@@ -415,7 +419,7 @@ A bordo troverai tutto il necessario per pescare. 
         </div>
       ) : (
         <p class="mt-6 text-center text-slate-500">
-          Nessun logo trovato in <span class="font-semibold">public/brands</span>. Aggiungi qui i file dei brand per farli scorrere automaticamente.
+          <span data-i18n="brands.empty">Nessun logo trovato in</span> <span class="font-semibold">public/brands</span>. <span data-i18n="brands.add">Aggiungi qui i file dei brand per farli scorrere automaticamente.</span>
         </p>
       )}
     </div>
@@ -424,11 +428,11 @@ A bordo troverai tutto il necessario per pescare. 
   <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
+        <span data-i18n="gallery.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">
           Gallery
         </span>
         <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
-          Fishing Moments
+          <span data-i18n="gallery.heading">Fishing Moments</span>
         </h2>
       </div>
 
@@ -467,7 +471,7 @@ A bordo troverai tutto il necessario per pescare. 
           </div>
         </div>
       ) : (
-        <p class="mt-6 text-center text-slate-500">No files found in public/gallery.</p>
+        <p data-i18n="gallery.empty" class="mt-6 text-center text-slate-500">No files found in public/gallery.</p>
       )}
     </div>
   </section>
@@ -478,14 +482,14 @@ A bordo troverai tutto il necessario per pescare. 
         <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-amber-500/30">
           FAQ
         </span>
-        <h2 id="faq-title" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
+        <h2 id="faq-title" data-i18n="faq.heading" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Domande frequenti</h2>
       </div>
 
       <div id="faq-list" class="space-y-4">
-        {faqEntries.map((item) => (
+        {faqEntries.map((item, index) => (
           <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 class="faq-question text-lg font-bold text-slate-900">{item.question}</h3>
-            <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600">{item.answer}</p>
+            <h3 class="faq-question text-lg font-bold text-slate-900" data-i18n={`faq.${index}.question`}>{item.question}</h3>
+            <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600" data-i18n={`faq.${index}.answer`}>{item.answer}</p>
           </div>
         ))}
       </div>
@@ -517,7 +521,7 @@ A bordo troverai tutto il necessario per pescare. 
   <script>
     const modal = document.getElementById('trip-modal');
     const modalTitle = document.getElementById('trip-modal-title');
-    const modalStart = document.getElementById('trip-modal-start');
+    const modalStartTime = document.getElementById('trip-modal-start-time');
     const modalPricing = document.getElementById('trip-modal-pricing');
     const modalFeatures = document.getElementById('trip-modal-features');
     const modalDescription = document.getElementById('trip-modal-description');
@@ -535,13 +539,13 @@ A bordo troverai tutto il necessario per pescare. 
 
     document.querySelectorAll('.trip-card-trigger').forEach((button) => {
       button.addEventListener('click', () => {
-        if (!modal || !modalTitle || !modalStart || !modalPricing || !modalFeatures || !modalDescription) return;
+        if (!modal || !modalTitle || !modalStartTime || !modalPricing || !modalFeatures || !modalDescription) return;
 
         const features = button.dataset.features ? button.dataset.features.split('|') : [];
         const pricing = button.dataset.pricing || '';
 
         modalTitle.textContent = button.dataset.title || '';
-        modalStart.textContent = `Start: ${button.dataset.startTime || ''}`;
+        modalStartTime.textContent = button.dataset.startTime || '';
         modalPricing.textContent = pricing;
         modalDescription.textContent = button.dataset.description || '';
         modalFeatures.innerHTML = features

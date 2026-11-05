@@ -5,19 +5,19 @@ const year = new Date().getFullYear();
 <footer class="border-t-4 border-cyan-500 bg-gradient-to-br from-slate-900 to-sky-950">
 	<div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-2 lg:px-8">
 		<div>
-			<h3 id="footer-links-title" class="text-sm font-black uppercase tracking-widest text-cyan-300">Link utili</h3>
+			<h3 id="footer-links-title" data-i18n="footer.links" class="text-sm font-black uppercase tracking-widest text-cyan-300">Link utili</h3>
 			<ul class="mt-3 space-y-2 text-sm text-slate-300">
-				<li><a href="/#" data-footer-link-key="home" class="transition hover:text-cyan-400">Home</a></li>
-				<li><a href="/#trips" data-footer-link-key="trips" class="transition hover:text-cyan-400">Uscite</a></li>
-				<li><a href="/#vessel" data-footer-link-key="vessel" class="transition hover:text-cyan-400">Imbarcazione</a></li>
-				<li><a href="/#faq" data-footer-link-key="faq" class="transition hover:text-cyan-400">FAQ</a></li>
-				<li><a href="/#gallery" data-footer-link-key="gallery" class="transition hover:text-cyan-400">Gallery</a></li>
-				<li><a href="/#contact" data-footer-link-key="contact" class="transition hover:text-cyan-400">Contatti</a></li>
+				<li><a href="/#" data-footer-link-key="home" data-i18n="home" class="transition hover:text-cyan-400">Home</a></li>
+				<li><a href="/#trips" data-footer-link-key="trips" data-i18n="footer.trips" class="transition hover:text-cyan-400">Uscite</a></li>
+				<li><a href="/#vessel" data-footer-link-key="vessel" data-i18n="footer.vessel" class="transition hover:text-cyan-400">Imbarcazione</a></li>
+				<li><a href="/#faq" data-footer-link-key="faq" data-i18n="faq" class="transition hover:text-cyan-400">FAQ</a></li>
+				<li><a href="/#gallery" data-footer-link-key="gallery" data-i18n="gallery" class="transition hover:text-cyan-400">Gallery</a></li>
+				<li><a href="/#contact" data-footer-link-key="contact" data-i18n="contact" class="transition hover:text-cyan-400">Contatti</a></li>
 			</ul>
 		</div>
 
 		<div id="contact">
-			<h3 id="footer-contact-title" class="text-sm font-black uppercase tracking-widest text-cyan-300">Contatti</h3>
+			<h3 id="footer-contact-title" data-i18n="footer.contact" class="text-sm font-black uppercase tracking-widest text-cyan-300">Contatti</h3>
 			<ul class="mt-3 space-y-2 text-sm text-slate-300">
 				<li>
 					<span id="footer-email-label">Email</span>:
@@ -29,10 +29,10 @@ const year = new Date().getFullYear();
 					</a>
 				</li>
 				<li>
-					<span id="footer-phone-label">Telefono</span>:
+					<span id="footer-phone-label" data-i18n="footer.phone">Telefono</span>:
 					<a href="tel:+390123456789" class="font-medium text-cyan-400 underline decoration-cyan-500/70 underline-offset-4 transition hover:text-cyan-300 rounded-sm">+39 393793554548</a>
 				</li>
-				<li><span id="footer-address-label">Indirizzo</span>: <span id="footer-address-value">Viale Traiano 88</span></li>
+				<li><span id="footer-address-label" data-i18n="footer.address">Indirizzo</span>: <span id="footer-address-value">Viale Traiano 88</span></li>
 			</ul>
 			<div class="mt-4">
 				<a 
@@ -48,7 +48,7 @@ const year = new Date().getFullYear();
 		</div>
 	</div>
 	<div class="border-t border-slate-700 py-4 text-center text-xs text-slate-500">
-		<p id="footer-copyright">© {year} Big Catch Fishing Charters. Tutti i diritti riservati.</p>
+		<p id="footer-copyright">© {year} Big Catch Fishing Charters. <span data-i18n="footer.copyright">Tutti i diritti riservati.</span></p>
 		<a href="/privacy" class="mt-1 inline-block text-cyan-400 underline underline-offset-2 transition hover:text-cyan-300" id="footer-privacy-link">Privacy Policy & Cookie Policy</a>
 	</div>
 </footer>

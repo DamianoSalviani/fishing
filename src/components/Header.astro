@@ -10,7 +10,7 @@ const menuItems = [
 ---
 
 <header class="sticky top-0 z-50 w-full border-b-2 border-cyan-500/30 bg-white/95 shadow-sm backdrop-blur">
-	<input id="mobile-menu" type="checkbox" class="peer sr-only md:hidden" aria-label="Apri menu" />
+	<input id="mobile-menu" type="checkbox" class="peer sr-only md:hidden" aria-label="Apri menu" data-i18n-aria="menu.open" />
 
 	<div class="mx-auto flex w-full max-w-6xl items-center px-4 py-3 sm:px-6 lg:px-8">
 		<a href="/" class="flex items-center gap-3">
@@ -24,7 +24,7 @@ const menuItems = [
 		<nav class="hidden items-center gap-6 md:flex md:flex-grow md:justify-center lg:gap-8" aria-label="Navigazione principale">
 			{
 				menuItems.map((item) => (
-					<a href={item.href} data-nav-key={item.key} class="text-sm font-semibold text-slate-600 transition-all hover:text-cyan-600 hover:underline hover:underline-offset-4 hover:decoration-cyan-400">
+					<a href={item.href} data-nav-key={item.key} data-i18n={item.key} class="text-sm font-semibold text-slate-600 transition-all hover:text-cyan-600 hover:underline hover:underline-offset-4 hover:decoration-cyan-400">
 						{item.label}
 					</a>
 				))
@@ -32,12 +32,12 @@ const menuItems = [
 		</nav>
 
 		<div class="ml-auto flex items-center gap-3">
-			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="tablist">
+			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="group" aria-label="Language" data-i18n-aria="language.select">
 				<button 
 					type="button" 
 					data-lang="en" 
-					role="tab"
-					aria-selected="true"
+					aria-pressed="true"
+					aria-label="English"
 					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:text-white"
 				>
 					EN
@@ -45,8 +45,8 @@ const menuItems = [
 				<button 
 					type="button" 
 					data-lang="it" 
-					role="tab"
-					aria-selected="false"
+					aria-pressed="false"
+					aria-label="Italiano"
 					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out text-cyan-700 hover:text-cyan-900" 
 				>
 					IT
@@ -72,7 +72,7 @@ const menuItems = [
 			{
 				menuItems.map((item) => (
 					<li>
-						<a href={item.href} data-nav-key={item.key} class="mobile-nav-link block rounded-md px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-700">
+						<a href={item.href} data-nav-key={item.key} data-i18n={item.key} class="mobile-nav-link block rounded-md px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-700">
 							{item.label}
 						</a>
 					</li>
@@ -83,6 +83,8 @@ const menuItems = [
 </header>
 
 <script>
+	import { applyLanguage } from '../utils/i18n';
+
 	const mobileMenuCheckbox = document.getElementById('mobile-menu');
 	const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 	if (mobileMenuCheckbox && mobileNavLinks.length > 0) {
@@ -97,7 +99,7 @@ const menuItems = [
 	const setLangButtonState = (lang) => {
 		langButtons.forEach((button) => {
 			const selected = button.dataset.lang === lang;
-			button.setAttribute('aria-selected', String(selected));
+			button.setAttribute('aria-pressed', String(selected));
 			button.classList.toggle('bg-gradient-to-r', selected);
 			button.classList.toggle('from-cyan-500', selected);
 			button.classList.toggle('to-sky-600', selected);
@@ -110,7 +112,8 @@ const menuItems = [
 		});
 	};
 
-	const initialLang = localStorage.getItem('lang') || 'en';
+	const savedLang = localStorage.getItem('lang');
+	const initialLang = applyLanguage(savedLang === 'it' ? 'it' : 'en');
 	setLangButtonState(initialLang);
 
 	langButtons.forEach((button) => {
@@ -118,7 +121,7 @@ const menuItems = [
 			const nextLang = button.dataset.lang;
 			if (!nextLang) return;
 			localStorage.setItem('lang', nextLang);
-			setLangButtonState(nextLang);
+			setLangButtonState(applyLanguage(nextLang));
 			document.dispatchEvent(new CustomEvent('lang-change', { detail: nextLang }));
 		});
 	});

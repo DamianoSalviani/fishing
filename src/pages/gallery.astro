@@ -42,8 +42,8 @@ try {
 <Layout title="Gallery - Big Catch Fishing Charters">
 	<section class="py-14 sm:py-20">
 		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-			<h1 class="text-3xl font-bold text-slate-100 sm:text-4xl">Gallery</h1>
-			<p class="mt-3 text-slate-400">Foto e video delle nostre uscite.</p>
+			<h1 data-i18n="gallery.page.heading" class="text-3xl font-bold text-slate-100 sm:text-4xl">Gallery</h1>
+			<p data-i18n="gallery.page.description" class="mt-3 text-slate-400">Foto e video delle nostre uscite.</p>
 
 			{
 				galleryMedia.length > 0 ? (
@@ -79,7 +79,7 @@ try {
 						))}
 					</div>
 				) : (
-					<p class="mt-6 text-slate-400">Nessun file trovato in public/gallery.</p>
+					<p data-i18n="gallery.empty" class="mt-6 text-slate-400">Nessun file trovato in public/gallery.</p>
 				)
 			}
 		</div>
@@ -89,15 +89,17 @@ try {
 		<button
 			type="button"
 			id="gallery-lightbox-close"
+			data-i18n-aria="gallery.close"
 			class="absolute right-4 top-4 rounded-md border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800"
 			aria-label="Close lightbox"
 		>
-			Close
+			<span data-i18n="gallery.close">Close</span>
 		</button>
 
 		<button
 			type="button"
 			id="gallery-lightbox-prev"
+			data-i18n-aria="gallery.previous"
 			class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
 			aria-label="Previous"
 		>
@@ -114,6 +116,7 @@ try {
 		<button
 			type="button"
 			id="gallery-lightbox-next"
+			data-i18n-aria="gallery.next"
 			class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/70 p-3 text-slate-200 transition hover:bg-slate-800"
 			aria-label="Next"
 		>
