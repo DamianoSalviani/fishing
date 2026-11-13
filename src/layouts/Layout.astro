@@ -17,8 +17,8 @@ const {
 	title,
 	description = 'Charter pesca Roma e Fiumicino. Uscite di pesca al tonno, pesce spada, drifting, traina e bolentino nel Mar Tirreno. Prenota la tua esperienza di pesca sportiva a Roma.',
 	keywords = 'charter pesca roma, charter pesca fiumicino, pesca tonno roma, pesca sportiva roma, big game fishing roma, fishing charter rome, traina roma, bolentino roma, drifting tonno roma, pesce spada roma, escursioni pesca roma, uscite pesca fiumicino, pesca altura roma, charter fishing rome italy',
-	canonicalURL = Astro.url.href,
-	ogImage = '/og-image.jpg'
+	canonicalURL = new URL(Astro.url.pathname, siteUrl).href,
+    ogImage = new URL('/og-image.jpg', siteUrl).href
 } = Astro.props;
 ---
 
