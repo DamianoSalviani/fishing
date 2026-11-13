@@ -295,9 +295,9 @@ const tripTranslations: Record<number, Record<Language, { title: string; descrip
 		it: { title: 'TRAINA ALLA SPIGOLA', description: 'Pronto a insidiare il re del sottocosta? Unisciti a noi per un charter esclusivo dedicato alla traina alla Spigola, uno dei predatori più ambiti, astuti e combattivi. Tra correnti, foci e secche costiere, useremo esche artificiali o naturali per ingannare questo magnifico pesce. Che tu sia un esperto a caccia di un trofeo o un principiante desideroso di apprendere le tecniche più raffinate, il nostro capitano e l\'equipaggio ti regaleranno un\'uscita tecnica e una giornata indimenticabile in mare.' },
 	},
 	8: {
-		en: { title: 'LIVE BAIT TROLLING', description: 'Live-bait trolling is one of the most exciting and effective techniques for targeting the large predators in our waters.' },
-		it: { title: 'TRAINA CON IL VIVO', description: 'La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.' },
-	},
+	en: { title: 'LIVE BAIT TROLLING', description: 'Experience the pure thrill of live bait trolling, the most selective and adrenaline-pumping technique to target big coastal predators. We will start the trip by catching our live bait together, before deploying the rigs at different depths along shoals, headlands, and drop-offs. Our targets are spectacular fighters like Leerfish, Bluefish, European Sea Bass, and Little Tunny. Guided by our expert crew, you will face sudden strikes and explosive runs on an unforgettable technical fishing trip.' },
+	it: { title: 'TRAINA CON IL VIVO', description: "Vivi l’emozione pura della traina con il vivo! Inizieremo l’uscita pescando insieme le nostre esche vive, per poi calarle a diverse profondità lungo secche, punte e cadute di fondale. L'obiettivo sono combattenti spettacolari come Leccia Amia, Pesce Serra, Spigola e Tonnetti. Guidati dal nostro equipaggio esperto, affronterai attacchi improvvisi e fughe esplosive, vivendo una giornata di pesca tecnica indimenticabile." },
+},
 	9: {
 		en: { title: 'FISHING AND SUNSET DINNER', description: 'A coastal seabass session built around lures, bait, seabed readings and precise presentation.' },
 		it: { title: 'PESCA E CENA AL TRAMONTO', description: 'Una sessione costiera dedicata alla spigola, tra artificiali, esche, lettura dei fondali e presentazioni precise.' },
