@@ -267,40 +267,40 @@ const translations: Record<Language, Record<string, string>> = {
 
 const tripTranslations: Record<number, Record<Language, { title: string; description: string }>> = {
 	1: {
-		en: { title: 'Big Game Drifting Tuna', description: 'Our big-game tuna charter is a test of strength, endurance and pure adrenaline. We offer an elite experience for seasoned anglers and newcomers alike, with professional equipment and a strategy tailored to the conditions on the day.' },
-		it: { title: 'Big Game Drifting Tuna', description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno." },
+		en: { title: 'BIG GAME DRIFTING BLUEFIN TUNA', description: 'Our big-game tuna charter is a test of strength, endurance and pure adrenaline. We offer an elite experience for seasoned anglers and newcomers alike, with professional equipment and a strategy tailored to the conditions on the day.' },
+		it: { title: 'BIG GAME DRIFTING TONNO ROSSO', description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno." },
 	},
 	2: {
-		en: { title: 'Offshore Trolling', description: 'Leave the coast behind and head into the deep blue in search of the sea’s fastest and most prized predators. Target species include bluefin tuna, albacore, dolphinfish, amberjack, barracuda, little tunny and mackerel.' },
-		it: { title: 'Traina d’altura', description: 'Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le specie target: tonno rosso, alalunga, lampuga, ricciola, barracuda, tonnetto e sgombro.' },
+		en: { title: 'TROLLING OFFSHORE', description: 'Leave the coast behind and head into the deep blue in search of the sea’s fastest and most prized predators. Target species include bluefin tuna, albacore, dolphinfish, amberjack, barracuda, little tunny and mackerel.' },
+		it: { title: "TRAINA D'ALTURA", description: 'Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le specie target: tonno rosso, alalunga, lampuga, ricciola, barracuda, tonnetto e sgombro.' },
 	},
 	3: {
-		en: { title: 'Inshore Trolling', description: 'A dynamic, exciting trip just off the coast, ideal for beginners looking to try sport fishing as well as experienced anglers.' },
-		it: { title: 'Traina costiera', description: "Un'uscita dinamica e ricca di emozioni appena al largo della costa, perfetta sia per i principianti che vogliono avvicinarsi alla pesca sportiva, sia per i pescatori esperti." },
+		en: { title: 'TROLLING INSHORE', description: 'A dynamic, exciting trip just off the coast, ideal for beginners looking to try sport fishing as well as experienced anglers.' },
+		it: { title: 'TRAINA COSTIERA', description: "Un'uscita dinamica e ricca di emozioni appena al largo della costa, perfetta sia per i principianti che vogliono avvicinarsi alla pesca sportiva, sia per i pescatori esperti." },
 	},
 	4: {
-		en: { title: 'Bottom Fishing', description: 'Enjoy a relaxing day aboard our charter. Bottom fishing is perfect for anyone who wants to feel a bite on the rod and take in the beauty of the sea.' },
-		it: { title: 'Bolentino', description: "Goditi una giornata di autentico relax a bordo del nostro charter. La pesca a fondo è la tecnica perfetta per chi vuole sentire la 'tirata' sulla canna e godersi la bellezza del mare." },
+		en: { title: 'BOTTOM FISHING', description: 'Enjoy a relaxing day aboard our charter. Bottom fishing is perfect for anyone who wants to feel a bite on the rod and take in the beauty of the sea.' },
+		it: { title: 'BOLENTINO', description: "Goditi una giornata di autentico relax a bordo del nostro charter. La pesca a fondo è la tecnica perfetta per chi vuole sentire la 'tirata' sulla canna e godersi la bellezza del mare." },
 	},
 	5: {
-		en: { title: 'Swordfish Night Fishing', description: 'Live the dream of catching swordfish offshore at night. We will begin by searching for bait: giant squid!' },
-		it: { title: 'Pesca notturna al pesce spada', description: "Vivi il sogno di catturare pesce spada in mezzo al mare di notte. Cominceremo cercando l'esca: calamari giganti!" },
+		en: { title: 'SWORDFISH NIGHT FISHING', description: 'Live the dream of catching swordfish offshore at night. We will begin by searching for bait: giant squid!' },
+		it: { title: 'PESCA NOTTURNA AL PESCE SPADA', description: "Vivi il sogno di catturare pesce spada in mezzo al mare di notte. Cominceremo cercando l'esca: calamari giganti!" },
 	},
 	6: {
-		en: { title: 'Octopus and Squid Fishing', description: 'Experience the excitement of octopus fishing. This trip is highly recommended for families with children and for beginners who have never fished before.' },
-		it: { title: 'Pesca al polpo e ai calamari', description: "Vivi l'emozione della pesca al polpo. Questa uscita di pesca è altamente consigliata per famiglie con bambini o principianti che non hanno mai pescato prima." },
+		en: { title: 'OCTOPUS AND SQUID FISHING', description: 'Experience the excitement of octopus fishing. This trip is highly recommended for families with children and for beginners who have never fished before.' },
+		it: { title: 'PESCA AL POLPO E SEPPIA', description: "Vivi l'emozione della pesca al polpo. Questa uscita di pesca è altamente consigliata per famiglie con bambini o principianti che non hanno mai pescato prima." },
 	},
 	7: {
-		en: { title: 'Seabass Trolling', description: 'Ready to target the king of coastal waters? Join us for an exclusive trolling trip dedicated to seabass, one of the most sought-after fighting fish.' },
-		it: { title: 'Traina alla spigola', description: 'Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti.' },
+		en: { title: 'SEABASS TROLLING', description: 'Ready to target the king of coastal waters? Join us for an exclusive trolling trip dedicated to seabass, one of the most sought-after fighting fish.' },
+		it: { title: 'TRAINA ALLA SPIGOLA', description: 'Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti.' },
 	},
 	8: {
-		en: { title: 'Live Bait Trolling', description: 'Live-bait trolling is one of the most exciting and effective techniques for targeting the large predators in our waters.' },
-		it: { title: 'Traina con il vivo', description: 'La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.' },
+		en: { title: 'LIVE BAIT TROLLING', description: 'Live-bait trolling is one of the most exciting and effective techniques for targeting the large predators in our waters.' },
+		it: { title: 'TRAINA CON IL VIVO', description: 'La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.' },
 	},
 	9: {
-		en: { title: 'Fishing and Sunset Dinner', description: 'A coastal seabass session built around lures, bait, seabed readings and precise presentation.' },
-		it: { title: 'Pesca e cena al tramonto', description: 'Una sessione costiera dedicata alla spigola, tra artificiali, esche, lettura dei fondali e presentazioni precise.' },
+		en: { title: 'FISHING AND SUNSET DINNER', description: 'A coastal seabass session built around lures, bait, seabed readings and precise presentation.' },
+		it: { title: 'PESCA E CENA AL TRAMONTO', description: 'Una sessione costiera dedicata alla spigola, tra artificiali, esche, lettura dei fondali e presentazioni precise.' },
 	},
 };
 
