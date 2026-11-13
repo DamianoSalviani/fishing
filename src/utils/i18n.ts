@@ -274,8 +274,8 @@ We will fish either at anchor or drifting, chumming with sardines and oily fish 
 		it: { title: 'BIG GAME DRIFTING TONNO ROSSO', description: `Preparati a vivere il combattimento più iconico dei nostri mari. 
 Che tu sia un esperto o alla tua prima esperienza di Big Game, il nostro team ti assisterà nella gestione del combattimento in stand-up, garantendo la massima sicurezza per te e il massimo rispetto per la preda secondo le normative vigenti. 
 Offriamo un'esperienza d'élite sia per i pescatori più esperti che per gli amanti del brivido. Forniamo canne e mulinelli heavy-duty di altissima gamma (Alutecnos, Seeker, Fin Nor, Nomad Tackle, Maruto, Aftco), già armati e pronti per il combattimento della vita. Che tu sia un professionista o alla tua prima esperienza, ti guideremo passo dopo passo.
-Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo preferito dei tonni). Attireremo i tonni sotto la nostra barca, dove all'interno di una pioggia di sarde, ci saranno innescate esche vive e morte. Inizia il combattimento!
-` },
+Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo preferito dei tonni). Attireremo i tonni sotto la nostra barca, dove all'interno di una pioggia di sarde, ci saranno innescate esche vive e morte. Inizia il combattimento!`
+ },
 	2: {
 		en: { title: 'TROLLING OFFSHORE', description: 'Leave the coast behind and head into the deep blue in search of the sea’s fastest and most prized predators. Target species include bluefin tuna, albacore, dolphinfish, amberjack, barracuda, little tunny and mackerel.' },
 		it: { title: "TRAINA D'ALTURA", description: 'Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le specie target: tonno rosso, alalunga, lampuga, ricciola, barracuda, tonnetto e sgombro.' },
