@@ -299,9 +299,9 @@ const tripTranslations: Record<number, Record<Language, { title: string; descrip
 	it: { title: 'TRAINA CON IL VIVO', description: "Vivi l’emozione pura della traina con il vivo! Inizieremo l’uscita pescando insieme le nostre esche vive, per poi calarle a diverse profondità lungo secche, punte e cadute di fondale. L'obiettivo sono combattenti spettacolari come Leccia Amia, Pesce Serra, Spigola e Tonnetti. Guidati dal nostro equipaggio esperto, affronterai attacchi improvvisi e fughe esplosive, vivendo una giornata di pesca tecnica indimenticabile." },
 },
 	9: {
-		en: { title: 'FISHING AND SUNSET DINNER', description: 'A coastal seabass session built around lures, bait, seabed readings and precise presentation.' },
-		it: { title: 'PESCA E CENA AL TRAMONTO', description: 'Una sessione costiera dedicata alla spigola, tra artificiali, esche, lettura dei fondali e presentazioni precise.' },
-	},
+	en: { title: 'FISHING AND SUNSET DINNER', description: "Experience something truly unique, blending the sea, relaxation, and authentic flavors. Set sail with us in the afternoon and enjoy a few hours of fishing. You'll have the chance to try your hand at fishing while the golden light of the sunset makes every moment even more special. After the activity, indulge in a delicious dinner on board, featuring traditional Italian cuisine accompanied by excellent wine. Perfect for couples, friends, or anyone who wants to enjoy the sea in an authentic way." },
+	it: { title: 'PESCA E CENA AL TRAMONTO', description: "Vivi un'esperienza davvero unica, che unisce mare, relax e sapori autentici. Salpa con noi nel pomeriggio e goditi qualche ora di pesca: avrai l'opportunità di metterti alla prova mentre la luce dorata del tramonto rende ogni istante ancora più speciale. Al termine dell'attività, lasciati conquistare da una deliziosa cena a bordo a base di cucina tradizionale italiana, accompagnata da un ottimo vino. Perfetta per coppie, amici o per chiunque desideri vivere il mare in modo autentico." },
+},
 };
 
 export function applyLanguage(language: string): Language {
