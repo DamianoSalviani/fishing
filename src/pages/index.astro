@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+const siteUrl = Astro.site ?? new URL('https://www.bigcatchfishingcharters.com/');
+
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
 const brandExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
