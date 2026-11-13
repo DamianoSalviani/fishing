@@ -3,6 +3,8 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 
+const siteUrl = Astro.site ?? new URL('https://www.bigcatchfishingcharters.com/');
+
 interface Props {
 	title: string;
 	description?: string;
