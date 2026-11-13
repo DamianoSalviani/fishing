@@ -267,8 +267,15 @@ const translations: Record<Language, Record<string, string>> = {
 
 const tripTranslations: Record<number, Record<Language, { title: string; description: string }>> = {
 	1: {
-		en: { title: 'BIG GAME DRIFTING BLUEFIN TUNA', description: 'Our big-game tuna charter is a test of strength, endurance and pure adrenaline. We offer an elite experience for seasoned anglers and newcomers alike, with professional equipment and a strategy tailored to the conditions on the day.' },
-		it: { title: 'BIG GAME DRIFTING TONNO ROSSO', description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno." },
+		en: { title: 'BIG GAME DRIFTING BLUEFIN TUNA', description: 'Get ready to experience the most iconic battle of our seas.
+Whether you are a seasoned pro or a first-timer at Big Game fishing, our crew will assist you throughout the stand-up fight, ensuring maximum safety for you and the utmost respect for the catch in full compliance with current regulations.
+We provide an elite experience for serious anglers and thrill-seekers alike. We supply top-tier heavy-duty rods and reels (Alutecnos, Seeker, Fin Nor, Nomad Tackle, Maruto, Aftco), rigged and ready for the fight of a lifetime. Whether you are an expert or a beginner, we will guide you every step of the way.
+We will fish either at anchor or drifting, chumming with sardines and oily fish (a tuna’s favorite meal). We’ll draw the tuna right beneath our boat, where both live and dead baits will be rigged amidst a shower of sardines. Let the battle begin!' },
+		it: { title: 'BIG GAME DRIFTING TONNO ROSSO', description: "Preparati a vivere il combattimento più iconico dei nostri mari. 
+Che tu sia un esperto o alla tua prima esperienza di Big Game, il nostro team ti assisterà nella gestione del combattimento in stand-up, garantendo la massima sicurezza per te e il massimo rispetto per la preda secondo le normative vigenti. 
+Offriamo un'esperienza d'élite sia per i pescatori più esperti che per gli amanti del brivido. Forniamo canne e mulinelli heavy-duty di altissima gamma (Alutecnos, Seeker, Fin Nor, Nomad Tackle, Maruto, Aftco), già armati e pronti per il combattimento della vita. Che tu sia un professionista o alla tua prima esperienza, ti guideremo passo dopo passo.
+Saremo all'ancora o in corrente, pasturando sardine e pesce azzurro (il cibo preferito dei tonni). Attireremo i tonni sotto la nostra barca, dove all'interno di una pioggia di sarde, ci saranno innescate esche vive e morte. Inizia il combattimento!
+" },
 	},
 	2: {
 		en: { title: 'TROLLING OFFSHORE', description: 'Leave the coast behind and head into the deep blue in search of the sea’s fastest and most prized predators. Target species include bluefin tuna, albacore, dolphinfish, amberjack, barracuda, little tunny and mackerel.' },
