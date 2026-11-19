@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getTranslation, tripTranslations } from '../utils/i18n';
+import { getImageAlt } from '../utils/imageAlt';
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -460,7 +461,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({
           <div class="brand-marquee-track flex w-max min-w-full items-center gap-6 sm:gap-8">
             {[...brandLogos, ...brandLogos].map((brand, index) => (
               <div class="brand-item flex items-center justify-center rounded-xl border border-slate-200 bg-white p-3 shadow-sm" key={`${brand.name}-${index}`}>
-                <img src={brand.src} alt={brand.alt} class="h-16 w-auto max-w-[160px] object-contain sm:h-20" loading="lazy" />
+                <img src={brand.src} alt={getImageAlt('brands', brand.name, lang, brand.alt)} class="h-16 w-auto max-w-[160px] object-contain sm:h-20" loading="lazy" />
               </div>
             ))}
           </div>
@@ -509,7 +510,7 @@ const tripsWithSchemes = trips.map((trip, i) => ({
                     preload="metadata"
                   />
                 ) : (
-                  <img src={media.src} alt={media.alt} class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+                  <img src={media.src} alt={getImageAlt('gallery', media.name, lang, media.alt)} class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
                 )}
                 <p class="border-t border-slate-100 bg-white/90 px-3 py-2 text-xs font-medium text-slate-600 backdrop-blur-sm">{media.alt}</p>
               </button>

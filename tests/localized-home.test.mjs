@@ -47,3 +47,15 @@ test('sitemap contains both canonical home pages', () => {
 		assert.ok(sitemap.includes(`<loc>${domain}${path}</loc>`));
 	}
 });
+
+test('gallery image alt text is localized without changing the visible caption', () => {
+	for (const { file, lang } of pages) {
+		const html = readFileSync(file, 'utf8');
+		const alt = lang === 'it'
+			? 'Spigola tenuta in mano davanti al mare'
+			: 'Sea bass held up in front of the sea';
+		assert.ok(html.includes(`src="/gallery/spigola.jpg" alt="${alt}"`));
+		assert.ok(html.includes('>Spigola</p>'));
+		assert.ok(html.includes('alt="Logo Shimano"'));
+	}
+});

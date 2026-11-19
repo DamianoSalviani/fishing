@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getImageAlt } from '../utils/imageAlt';
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -69,7 +70,8 @@ try {
 								) : (
 									<img
 										src={media.src}
-										alt={media.alt}
+										alt={getImageAlt('gallery', media.name, 'en', media.alt)}
+										data-gallery-image={media.name}
 										loading="lazy"
 										class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 									/>
@@ -158,7 +160,7 @@ try {
 				} else {
 					const img = document.createElement('img');
 					img.src = src;
-					img.alt = alt;
+					img.alt = item.querySelector('img')?.alt || alt;
 					img.className = 'max-h-[80vh] w-full object-contain';
 					lightboxContent.appendChild(img);
 				}
@@ -178,6 +180,12 @@ try {
 				lightboxContent.innerHTML = '';
 				document.body.style.overflow = '';
 			};
+
+			document.addEventListener('lang-change', () => {
+				const image = lightboxContent.querySelector('img');
+				const source = galleryItems[currentIndex].querySelector('img');
+				if (image && source) image.alt = source.alt;
+			});
 
 			const prevMedia = () => {
 				currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;

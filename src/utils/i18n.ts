@@ -1,3 +1,5 @@
+import { getImageAlt } from './imageAlt';
+
 export type Language = 'en' | 'it';
 
 const translations: Record<Language, Record<string, string>> = {
@@ -341,6 +343,11 @@ export function applyLanguage(language: string): Language {
 	document.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach((element) => {
 		const key = element.dataset.i18nAria;
 		if (key && dictionary[key] !== undefined) element.setAttribute('aria-label', dictionary[key]);
+	});
+
+	document.querySelectorAll<HTMLImageElement>('[data-gallery-image]').forEach((image) => {
+		const name = image.dataset.galleryImage;
+		if (name) image.alt = getImageAlt('gallery', name, lang, image.alt);
 	});
 
 	const bookingLink = document.querySelector<HTMLAnchorElement>('[data-i18n="hero.book"]');
