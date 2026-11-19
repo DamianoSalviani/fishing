@@ -1,4 +1,4 @@
-type Language = 'en' | 'it';
+export type Language = 'en' | 'it';
 
 const translations: Record<Language, Record<string, string>> = {
 	en: {
@@ -277,7 +277,7 @@ const translations: Record<Language, Record<string, string>> = {
 	},
 };
 
-const tripTranslations: Record<number, Record<Language, { title: string; description: string }>> = {
+export const tripTranslations: Record<number, Record<Language, { title: string; description: string }>> = {
 	1: {
 		en: { title: 'BIG GAME DRIFTING BLUEFIN TUNA', description: 'Get ready to experience the most iconic battle of our seas.\nWhether you are a seasoned pro or a first-timer at Big Game fishing, our crew will assist you throughout the stand-up fight, ensuring maximum safety for you and the utmost respect for the catch in full compliance with current regulations.\nWe provide an elite experience for serious anglers and thrill-seekers alike. We supply top-tier heavy-duty rods and reels (Alutecnos, Seeker, Fin Nor, Nomad Tackle, Maruto, Aftco), rigged and ready for the fight of a lifetime. Whether you are an expert or a beginner, we will guide you every step of the way.\nWe will fish either at anchor or drifting, chumming with sardines and oily fish (a tuna’s favorite meal). We’ll draw the tuna right beneath our boat, where both live and dead baits will be rigged amidst a shower of sardines. Let the battle begin!' },
 		it: { title: 'BIG GAME DRIFTING TONNO ROSSO', description: "Preparati a vivere il combattimento più iconico dei nostri mari.\nChe tu sia un esperto o alla tua prima esperienza di Big Game, il nostro team ti assisterà durante tutto il combattimento in stand-up, garantendo la massima sicurezza per te e il massimo rispetto per la preda, in conformità con le normative vigenti.\nOffriamo un’esperienza d’élite sia ai pescatori più esperti sia agli amanti del brivido. Forniamo canne e mulinelli heavy-duty di altissima gamma (Alutecnos, Seeker, Fin Nor, Nomad Tackle, Maruto, Aftco), già armati e pronti per il combattimento della vita. Che tu sia un professionista o alla tua prima esperienza, ti guideremo passo dopo passo.\nPescheremo all’ancora o alla deriva, pasturando con sardine e pesce azzurro, il cibo preferito dei tonni. Attireremo i tonni sotto la barca e caleremo esche vive e morte in mezzo a una pioggia di sardine. Che il combattimento abbia inizio!" },
@@ -315,6 +315,12 @@ const tripTranslations: Record<number, Record<Language, { title: string; descrip
 	it: { title: 'PESCA E CENA AL TRAMONTO', description: "Vivi un'esperienza davvero unica, che unisce mare, relax e sapori autentici. Salpa con noi nel pomeriggio e goditi qualche ora di pesca: avrai l'opportunità di metterti alla prova mentre la luce dorata del tramonto rende ogni istante ancora più speciale. Al termine dell'attività, lasciati conquistare da una deliziosa cena a bordo a base di cucina tradizionale italiana, accompagnata da un ottimo vino. Perfetta per coppie, amici o per chiunque desideri vivere il mare in modo autentico." },
 },
 };
+
+export function getTranslation(lang: Language, key: string): string {
+	const value = translations[lang][key];
+	if (value === undefined) throw new Error(`Missing ${lang} translation: ${key}`);
+	return value;
+}
 
 export function applyLanguage(language: string): Language {
 	const lang: Language = language === 'it' ? 'it' : 'en';

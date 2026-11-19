@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bigcatchfishingcharters.com/sitemap-index.xml
+Sitemap: https://www.bigcatchfishingcharter.com/sitemap-index.xml

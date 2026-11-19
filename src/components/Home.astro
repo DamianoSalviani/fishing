@@ -1,0 +1,628 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getTranslation, tripTranslations } from '../utils/i18n';
+import { readdir } from 'node:fs/promises';
+import path from 'node:path';
+
+const siteUrl = Astro.site ?? new URL('https://www.bigcatchfishingcharter.com/');
+const lang = Astro.url.pathname === '/it' || Astro.url.pathname === '/it/' ? 'it' : 'en';
+const t = (key: string) => getTranslation(lang, key);
+
+const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+const videoExtensions = new Set(['.mp4', '.webm', '.ogg', '.mov']);
+const brandExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+
+let galleryMedia = [];
+let brandLogos = [];
+
+try {
+  const galleryDir = new URL('../../public/gallery/', import.meta.url);
+  const entries = await readdir(galleryDir, { withFileTypes: true });
+
+  galleryMedia = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => {
+      const extension = path.extname(entry.name).toLowerCase();
+      const isImage = imageExtensions.has(extension);
+      const isVideo = videoExtensions.has(extension);
+
+      if (!isImage && !isVideo) return null;
+
+      return {
+        name: entry.name,
+        src: `/gallery/${entry.name}`,
+        type: isVideo ? 'video' : 'image',
+        alt: path.parse(entry.name).name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+} catch (error) {
+  console.error('Unable to load media from public/gallery:', error);
+}
+
+try {
+  const brandsDir = new URL('../../public/brands/', import.meta.url);
+  const entries = await readdir(brandsDir, { withFileTypes: true });
+
+  brandLogos = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => {
+      const extension = path.extname(entry.name).toLowerCase();
+      if (!brandExtensions.has(extension)) return null;
+
+      return {
+        name: entry.name,
+        src: `/brands/${entry.name}`,
+        alt: path.parse(entry.name).name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+} catch (error) {
+  console.error('Unable to load brand logos from public/brands:', error);
+}
+
+const trips = [
+  {
+    id: 1,
+    title: 'BIG GAME DRIFTING TONNO ROSSO',
+    startTime: '08:00am',
+    image: 'tuna.jpg',
+    description: "Il nostro Charter per la pesca al big game del tonno è una battaglia di forza, resistenza e pura adrenalina. Offriamo un'esperienza d'élite sia per pescatori esperti che per chi desidera approcciarsi al grande predatore del Mediterraneo, con equipaggiamento professionale e strategia costruita sulle condizioni reali del giorno.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 2,
+    title: "TRAINA D'ALTURA",
+    startTime: '08:00am',
+    image: 'trolling.png',
+    description: "Lasciati alle spalle la costa e avventurati nel blu profondo. Ci allontaniamo dalla riva per cacciare i predatori più veloci e prestigiosi del mare. Le Specie Target: Bluefin tuna, albacore tuna, dolphinfish, amberjack, barracuda, little tunny and mackerel.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h — €900/group'
+  },
+  {
+    id: 3,
+    title: 'TRAINA COSTIERA',
+    startTime: '08:00am',
+    image: 'inshore.jpg',
+    description: "Un'uscita dinamica e ricca di emozioni appena al largo della costa, perfetta sia per i principianti che vogliono avvicinarsi alla pesca sportiva, sia per i pescatori esperti.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 4,
+    title: 'BOLENTINO',
+    startTime: '08:00am',
+    image: 'bottom.webp',
+    description: "Goditi una giornata di autentico relax a bordo del nostro charter. La pesca a fondo è la tecnica perfetta per chi vuole sentire la 'tirata' sulla canna e godersi la bellezza del mare.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 5,
+    title: 'NOTTURNA AL PESCE SPADA',
+    startTime: '08:00pm',
+    image: 'swordfish.webp',
+    description: "Vivi il sogno di catturare pesce spada in mezzo al mare di notte. Cominceremo cercando l'esca: calamari giganti!",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '€1.000/group'
+  },
+  {
+    id: 6,
+    title: 'PESCA AL POLPO E SEPPIE',
+    startTime: '08:00am',
+    image: 'octopus.jpg',
+    description: "Vivi l'emozione della pesca al polpo. Questa uscita di pesca è altamente consigliata per famiglie con bambini o principianti che non hanno mai pescato prima.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 7,
+    title: 'TRAINA ALLA SPIGOLA',
+    startTime: '08:00am',
+    image: 'spigola.jpg',
+    description: "Pronti a puntare al re delle acque costiere? Unitevi a noi per un charter esclusivo in traina dedicato alla Spigola, uno dei pesci da combattimento più ambiti.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 8,
+    title: 'TRAINA CON IL VIVO',
+    startTime: '08:00am',
+    image: 'leccia.jpg',
+    description: "La traina con il vivo è una delle tecniche più avvincenti e redditizie per insidiare i grandi predatori del nostro mare.",
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  },
+  {
+    id: 9,
+    title: 'PESCA E CENA AL TRAMONTO',
+    startTime: '02:00pm',
+    image: 'tramonto.jpg',
+    description: 'A coastal seabass session built around lures, bait, readings of the seabed and precise presentation.',
+    features: ['Food & Drinks', 'Rod, Reel and Tackle', 'Max 4 person', 'Child friendly', 'Tuition for beginners'],
+    pricing: '8h – €750/group|6h – 600€/group|4h – €450/group'
+  }
+];
+
+const faqEntries = [
+  {
+    question: 'Roma è un posto adatto alla pesca?',
+    answer:
+      'Il litorale romano, e in particolare il tratto di mare antistante la foce del Tevere, è uno dei "punti caldi" della pesca sportiva in Italia.'
+  },
+  {
+    question: 'Quali pesci posso pescare a Roma?',
+    answer:
+      'Tonno Rosso, Tonno Alletterato, Aguglia Imperiale, Tonno Alalunga, Pesce Spada, Lampuga, Leccia Amia, Pesce Serra, Polpi, Seppie, Orata e pesce di fondo.'
+  },
+  {
+    question: 'Posso portare la mia attrezzatura?',
+    answer:
+      'Mettiamo a disposizione attrezzatura premium dei migliori brand mondiali (Giapponesi, Americani, Italiani). Se però hai una tua canna "fortunata", sei libero di portarla.'
+  },
+  {
+    question: 'Cosa succede se non ho mai pescato prima?',
+    answer:
+      'Le nostre uscite sono aperte a tutti. Ti assisteremo passo dopo passo, insegnandoti le basi del combattimento e della gestione della preda.'
+  },
+  {
+    question: 'Cosa succede in caso di maltempo?',
+    answer:
+      "La sicurezza è la nostra priorità. Se le condizioni meteo-marine non consentono l'uscita, la prenotazione verrà spostata alla prima data utile."
+  },
+  {
+    question: 'Posso portare un accompagnatore che non pesca?',
+    answer:
+      'Certamente! La barca è spaziosa e perfetta anche per chi vuole solo godersi una giornata di sole e mare.'
+  },
+  {
+    question: 'Cosa succede se prendiamo un pesce? Posso portarlo a casa?',
+    answer:
+      'Seguiamo rigorosamente le normative vigenti. Per il Tonno Rosso pratichiamo spesso il Catch & Release, mentre per altre specie è possibile tenere il pescato.'
+  },
+  {
+    question: 'La cattura è garantita?',
+    answer:
+      "Il mare non è un acquario, ma la nostra esperienza e la strumentazione di bordo massimizzano le probabilità di successo. L'emozione della caccia è parte integrante dell'avventura."
+  },
+  {
+    question: 'I bambini sono accettati?',
+    answer:
+      'Certo che sì, sono il futuro della pesca!'
+  },
+  {
+    question: "L'orario di partenza è flessibile?",
+    answer:
+      "Sì, cerchiamo sempre di andare incontro alle tue esigenze. L’orario di uscita standard viene concordato in fase di prenotazione in base alla tipologia di battuta di pesca o tour scelto, ma possiamo adattarlo alle tue preferenze (salvo disponibilità e condizioni meteo/marine). Se hai richieste particolari su orari di partenza o rientro, faccelo sapere al momento della prenotazione e faremo il possibile per accontentarti!"
+  },
+  {
+    question: 'I charter sono privati?',
+    answer:
+      "Sì, al 100%. Tutte le nostre uscite sono ad uso esclusivo per te e il tuo gruppo (famiglia, amici o colleghi). A bordo ci sarete solo voi e lo skipper: questo ti garantisce massima privacy, totale personalizzazione dell'esperienza e la nostra completa attenzione per tutta la durata dell'uscita."
+  }
+];
+
+const cardSchemes = [
+  {
+    bar: 'background:linear-gradient(to right,#22d3ee,#0ea5e9,#3b82f6)',
+    titleGrad: "font-family:'Montserrat',sans-serif;color:#0f172a",
+  },
+];
+
+const tripsWithSchemes = trips.map((trip, i) => ({
+  ...trip,
+  ...tripTranslations[trip.id][lang],
+  features: trip.features.map((_, index) => t(`trips.features.${index}`)),
+  pricing: lang === 'it' ? trip.pricing.replaceAll('/group', '/gruppo') : trip.pricing,
+  s: cardSchemes[i % cardSchemes.length]
+}));
+---
+
+<Layout title={t('page.title.home')} lang={lang} localizedHome={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": new URL('/#business', siteUrl).href,
+          "name": "Big Catch Fishing Charters",
+          "description": t('hero.description').split('\n')[0],
+          "url": siteUrl.href,
+          "telephone": "+39 3793554548",
+          "email": "bigcatchfishingcharters@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale Traiano 88",
+            "addressLocality": "Fiumicino",
+            "addressRegion": "RM",
+            "postalCode": "00054",
+            "addressCountry": "IT"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.7666,
+            "longitude": 12.2333
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "06:00",
+            "closes": "22:00"
+          },
+          "sameAs": [],
+          "image": "/og-image.jpg"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <section class="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 sm:min-h-[700px]">
+    <div class="absolute inset-0 z-0">
+      <video
+        id="hero-video"
+        src="/video-hero.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        class="h-full w-full object-cover opacity-40"
+      ></video>
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <h1
+        data-i18n="hero.title"
+        class="text-[2.4rem] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-[4.1rem] lg:text-[5.5rem]"
+        style="font-family:'Montserrat',sans-serif; text-shadow: 0 10px 28px rgba(15, 23, 42, 0.75);"
+      >{t('hero.title')}</h1>
+
+      <p data-i18n="hero.tagline" class="mt-3 text-lg font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-xl" style="font-family:'Montserrat',sans-serif; text-shadow: 0 6px 18px rgba(15, 23, 42, 0.5);">{t('hero.tagline')}</p>
+
+      <p data-i18n="hero.description" class="mt-6 max-w-3xl whitespace-pre-line text-base leading-relaxed text-slate-300 sm:text-lg">{t('hero.description')}</p>
+
+      <a
+        href="https://wa.me/393793554548?text=Hi!%20I'm%20interested%20in%20booking%20a%20fishing%20trip%20with%20your%20charter.%20Could%20you%20please%20send%20me%20more%20info%20about%20your%20services%3F"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-i18n="hero.book"
+        class="mt-8 mb-8 inline-flex items-center gap-2 rounded-lg bg-green-600 px-8 py-3.5 text-base font-semibold uppercase text-white shadow-lg shadow-green-600/30 transition-all hover:bg-green-500"
+      >{t('hero.book')}</a>
+    </div>
+  </section>
+
+  <section id="trips" class="bg-gradient-to-b from-white to-sky-50/60 py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <span data-i18n="trips.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">{t('trips.badge')}</span>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
+          <span data-i18n="trips.heading">{t('trips.heading')}</span> <span data-i18n="trips.adventure" class="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">{t('trips.adventure')}</span>
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {tripsWithSchemes.map((trip) => (
+          <article class="group overflow-hidden rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-100/60">
+            <button
+              type="button"
+              class="trip-card-trigger block w-full cursor-pointer text-left"
+              data-trip-id={trip.id}
+              data-title={trip.title}
+              data-start-time={trip.startTime}
+              data-image={trip.image}
+              data-description={trip.description}
+              data-features={trip.features.join('|')}
+              data-pricing={trip.pricing}
+              data-i18n-aria={`trip.${trip.id}.aria`}
+              aria-label={`${lang === 'it' ? 'Apri i dettagli di' : 'Open details for'} ${trip.title}`}
+            >
+              <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+                <img src={`/${trip.image}`} alt={trip.title} class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+              </div>
+
+              <div class="h-2 w-full" style={trip.s.bar}></div>
+
+              <div class="p-6">
+                <h3 class="trip-card-title text-xl font-black" style={trip.s.titleGrad}>{trip.title}</h3>
+
+                <div class="trip-card-pricing mt-2 flex flex-wrap gap-1">
+                  {trip.pricing.split('|').map((p) => (
+                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">
+                      {p}
+                    </span>
+                  ))}
+                </div>
+
+                <p class="mt-3 text-sm text-slate-500">
+                  <span class="trip-start-label" data-i18n="trips.start">{t('trips.start')}</span>
+                  <span class="trip-start-time">{trip.startTime}</span>
+                </p>
+
+                <ul class="mt-4 space-y-2">
+                  {trip.features.map((feature, featureIndex) => (
+                    <li class="flex items-center gap-2 text-sm text-slate-600">
+                      <span class="trip-feature-text" data-i18n={`trips.features.${featureIndex}`}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </button>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="vessel" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 data-i18n="vessel.title" class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">{t('vessel.title')}</h2>
+    <div class="mt-6 space-y-4 text-base leading-relaxed text-slate-700">
+      <p data-i18n="vessel.paragraph.0">{t('vessel.paragraph.0')}</p>
+      <p data-i18n="vessel.paragraph.1">{t('vessel.paragraph.1')}</p>
+      <p data-i18n="vessel.paragraph.2">{t('vessel.paragraph.2')}</p>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-14 sm:py-16">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-cyan-100 bg-white p-6 shadow-sm sm:p-8">
+        <div class="flex items-start gap-4">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+          </span>
+          <div class="min-w-0">
+            <h2 data-i18n="location.title" class="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">{t('location.title')}</h2>
+            <p data-i18n="location.description" class="mt-3 leading-relaxed text-slate-600">{t('location.description')}</p>
+            <ul class="mt-5 space-y-3 text-slate-700">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 13h18l-2-6H5l-2 6Z" /><path d="M5 13v5h14v-5M7 18v2m10-2v2M7 13v-2m10 2v-2" /><circle cx="7.5" cy="16" r="1" /><circle cx="16.5" cy="16" r="1" />
+                </svg>
+                <span data-i18n="location.point.0">{t('location.point.0')}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6M8 10h.01M12 10h.01M16 10h.01" />
+                </svg>
+                <span data-i18n="location.point.1">{t('location.point.1')}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 16V9a2 2 0 0 1 2-2h10l4 4h2a2 2 0 0 1 2 2v3h-3" /><path d="M3 16h3m6 0h3" /><circle cx="9" cy="16" r="2" /><circle cx="17" cy="16" r="2" />
+                </svg>
+                <span data-i18n="location.point.2">{t('location.point.2')}</span>
+              </li>
+            </ul>
+            <a
+              href="https://goo.gl/maps/u4prvC1JBiGoRSVHA?g_st=ac"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-600 px-5 py-3 text-sm font-bold text-white shadow-md shadow-cyan-500/25 transition hover:from-cyan-600 hover:to-sky-700"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" />
+              </svg>
+              <span data-i18n="location.maps">{t('location.maps')}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="trip-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/90 p-3 sm:p-4">
+    <button
+      type="button"
+      id="trip-modal-close"
+      data-i18n="modal.close"
+      class="absolute right-3 top-3 z-10 rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 sm:right-4 sm:top-4"
+      aria-label="Close trip details"
+    >{t('modal.close')}</button>
+
+    <div class="flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      <div class="min-h-0 flex-1 overflow-y-auto">
+        <div class="space-y-3 p-4 sm:space-y-4 sm:p-6">
+          <h3 id="trip-modal-title" class="text-xl font-semibold text-slate-900 sm:text-2xl"></h3>
+          <p id="trip-modal-start" class="text-sm text-slate-500"><span data-i18n="trips.start">{t('trips.start')}</span>: <span id="trip-modal-start-time"></span></p>
+          <div id="trip-modal-pricing" class="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200"></div>
+          <div id="trip-modal-features" class="flex flex-wrap gap-2"></div>
+          <p id="trip-modal-description" class="text-sm leading-relaxed text-slate-700"></p>
+<a
+  href="https://wa.me/393793554548"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-i18n="hero.book"
+  class="inline-flex rounded-lg bg-green-600 px-8 py-3.5 font-semibold uppercase text-white hover:bg-green-500"
+>{t('hero.book')}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="brands" class="border-y border-slate-200 bg-white py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 text-center">
+        <span data-i18n="brands.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-800 to-slate-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-slate-900/20">{t('brands.badge')}</span>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif">
+          <span data-i18n="brands.heading">{t('brands.heading')}</span> <span data-i18n="brands.marks" class="text-slate-700">{t('brands.marks')}</span>
+        </h2>
+      </div>
+
+      {brandLogos.length > 0 ? (
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-6 shadow-sm sm:px-6">
+          <div class="brand-marquee-track flex w-max min-w-full items-center gap-6 sm:gap-8">
+            {[...brandLogos, ...brandLogos].map((brand, index) => (
+              <div class="brand-item flex items-center justify-center rounded-xl border border-slate-200 bg-white p-3 shadow-sm" key={`${brand.name}-${index}`}>
+                <img src={brand.src} alt={brand.alt} class="h-16 w-auto max-w-[160px] object-contain sm:h-20" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p class="mt-6 text-center text-slate-500">
+          <span data-i18n="brands.empty">{t('brands.empty')}</span> <span class="font-semibold">public/brands</span>. <span data-i18n="brands.add">{t('brands.add')}</span>
+        </p>
+      )}
+    </div>
+  </section>
+
+  <section id="gallery" class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 py-16 sm:py-24">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <span data-i18n="gallery.badge" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-cyan-500/30">{t('gallery.badge')}</span>
+        <h2 class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl" style="font-family:'Montserrat',sans-serif; background:linear-gradient(135deg,#0891b2,#0369a1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+          <span data-i18n="gallery.heading">{t('gallery.heading')}</span>
+        </h2>
+      </div>
+
+      {galleryMedia.length > 0 ? (
+        <div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm">
+          <div
+            id="gallery-carousel-track"
+            class="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {galleryMedia.map((media, index) => (
+              <button
+                type="button"
+                class="gallery-slide group relative shrink-0 snap-center overflow-hidden rounded-xl border border-slate-200 bg-slate-100 text-left shadow-sm transition hover:shadow-md"
+                data-index={index}
+                data-src={media.src}
+                data-type={media.type}
+                data-alt={media.alt}
+                aria-label={`Open ${media.type}: ${media.alt}`}
+                style="width: min(58vw, 300px);"
+              >
+                {media.type === 'video' ? (
+                  <video
+                    src={media.src}
+                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                  />
+                ) : (
+                  <img src={media.src} alt={media.alt} class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+                )}
+                <p class="border-t border-slate-100 bg-white/90 px-3 py-2 text-xs font-medium text-slate-600 backdrop-blur-sm">{media.alt}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p data-i18n="gallery.empty" class="mt-6 text-center text-slate-500">{t('gallery.empty')}</p>
+      )}
+    </div>
+  </section>
+
+  <section id="faq" class="bg-slate-50 py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white shadow-md shadow-amber-500/30">
+          FAQ
+        </span>
+        <h2 id="faq-title" data-i18n="faq.heading" class="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">{t('faq.heading')}</h2>
+      </div>
+
+      <div id="faq-list" class="space-y-4">
+        {faqEntries.map((item, index) => (
+          <div class="faq-item rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h3 class="faq-question text-lg font-bold text-slate-900" data-i18n={`faq.${index}.question`}>{t(`faq.${index}.question`)}</h3>
+            <p class="faq-answer mt-2 text-sm leading-relaxed text-slate-600" data-i18n={`faq.${index}.answer`}>{t(`faq.${index}.answer`)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @keyframes brand-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .brand-marquee-track {
+      animation: brand-scroll 26s linear infinite;
+      will-change: transform;
+    }
+
+    .brand-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .brand-item {
+      flex: 0 0 auto;
+      width: clamp(140px, 18vw, 220px);
+      min-height: 96px;
+    }
+  </style>
+
+  <script>
+    const modal = document.getElementById('trip-modal');
+    const modalTitle = document.getElementById('trip-modal-title');
+    const modalStartTime = document.getElementById('trip-modal-start-time');
+    const modalPricing = document.getElementById('trip-modal-pricing');
+    const modalFeatures = document.getElementById('trip-modal-features');
+    const modalDescription = document.getElementById('trip-modal-description');
+    const closeButton = document.getElementById('trip-modal-close');
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+    }
+
+    document.querySelectorAll('.trip-card-trigger').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!modal || !modalTitle || !modalStartTime || !modalPricing || !modalFeatures || !modalDescription) return;
+
+        const features = button.dataset.features ? button.dataset.features.split('|') : [];
+        const pricing = button.dataset.pricing || '';
+
+        modalTitle.textContent = button.dataset.title || '';
+        modalStartTime.textContent = button.dataset.startTime || '';
+        modalPricing.textContent = pricing;
+        modalDescription.textContent = button.dataset.description || '';
+        modalFeatures.innerHTML = features
+          .map((feature) => `<span class="rounded-full bg-sky-50 px-2 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-200">${feature}</span>`)
+          .join('');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      });
+    });
+
+    const heroVideo = document.getElementById('hero-video');
+    const tryPlayHeroVideo = () => {
+      if (!heroVideo) return;
+      heroVideo.muted = true;
+      heroVideo.playsInline = true;
+      heroVideo.play().catch(() => {
+        window.setTimeout(() => heroVideo.play().catch(() => {}), 250);
+      });
+    };
+
+    if (heroVideo) {
+      heroVideo.load();
+      heroVideo.addEventListener('canplay', tryPlayHeroVideo, { once: true });
+      heroVideo.addEventListener('loadeddata', tryPlayHeroVideo, { once: true });
+      window.addEventListener('load', tryPlayHeroVideo, { once: true });
+      setTimeout(tryPlayHeroVideo, 150);
+    }
+
+    modal?.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+  </script>
+</Layout>

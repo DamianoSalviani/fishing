@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.bigcatchfishingcharters.com',
+  site: 'https://www.bigcatchfishingcharter.com',
   integrations: [react(), sitemap()],
 
   vite: {

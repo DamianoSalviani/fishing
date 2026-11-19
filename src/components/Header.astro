@@ -1,19 +1,30 @@
 ---
+import { getTranslation, type Language } from '../utils/i18n';
+
+interface Props {
+	lang: Language;
+	localizedHome: boolean;
+}
+
+const { lang, localizedHome } = Astro.props;
+const t = (key: string) => getTranslation(lang, key);
+const home = lang === 'it' && localizedHome ? '/it/' : '/';
+const LanguageControl = localizedHome ? 'a' : 'button';
 const menuItems = [
-	{ key: 'home', label: 'Home', href: '/#' },
-	{ key: 'trips', label: 'Trips', href: '/#trips' },
-	{ key: 'vessel', label: 'Vessel', href: '/#vessel' },
-	{ key: 'faq', label: 'FAQ', href: '/#faq' },
-	{ key: 'gallery', label: 'Gallery', href: '/#gallery' },
-	{ key: 'contact', label: 'Contact', href: '/#contact' },
+	{ key: 'home', href: `${home}#` },
+	{ key: 'trips', href: `${home}#trips` },
+	{ key: 'vessel', href: `${home}#vessel` },
+	{ key: 'faq', href: `${home}#faq` },
+	{ key: 'gallery', href: `${home}#gallery` },
+	{ key: 'contact', href: `${home}#contact` },
 ];
 ---
 
 <header class="sticky top-0 z-50 w-full border-b-2 border-cyan-500/30 bg-white/95 shadow-sm backdrop-blur">
-	<input id="mobile-menu" type="checkbox" class="peer sr-only md:hidden" aria-label="Apri menu" data-i18n-aria="menu.open" />
+	<input id="mobile-menu" type="checkbox" class="peer sr-only md:hidden" aria-label={t('menu.open')} data-i18n-aria="menu.open" />
 
 	<div class="mx-auto flex w-full max-w-6xl items-center px-4 py-3 sm:px-6 lg:px-8">
-		<a href="/" class="flex items-center gap-3">
+		<a href={home} data-home-link class="flex items-center gap-3">
 			<img src="/logo.png" alt="Big Catch Logo" class="h-10 w-10 sm:h-12 sm:w-12" />
 			<span class="flex flex-col leading-none">
 				<span class="text-sm font-black tracking-[0.18em] text-cyan-700 sm:text-base" style="font-family:'Montserrat',sans-serif; font-weight:900;">BIG CATCH</span>
@@ -25,32 +36,36 @@ const menuItems = [
 			{
 				menuItems.map((item) => (
 					<a href={item.href} data-nav-key={item.key} data-i18n={item.key} class="text-sm font-semibold text-slate-600 transition-all hover:text-cyan-600 hover:underline hover:underline-offset-4 hover:decoration-cyan-400">
-						{item.label}
+						{t(item.key)}
 					</a>
 				))
 			}
 		</nav>
 
 		<div class="ml-auto flex items-center gap-3">
-			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="group" aria-label="Language" data-i18n-aria="language.select">
-				<button 
-					type="button" 
+			<div class="inline-flex items-center rounded-full border-2 border-cyan-200 bg-cyan-50 p-1" id="lang-switcher" role="group" aria-label={t('language.select')} data-i18n-aria="language.select">
+				<LanguageControl
+					type={localizedHome ? undefined : 'button'}
+					href={localizedHome ? '/' : undefined}
 					data-lang="en" 
-					aria-pressed="true"
+					aria-pressed={localizedHome ? undefined : String(lang === 'en')}
+					aria-current={localizedHome && lang === 'en' ? 'page' : undefined}
 					aria-label="English"
-					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:text-white"
+					class:list={['lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out', lang === 'en' ? 'bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:text-white' : 'text-cyan-700 hover:text-cyan-900']}
 				>
 					EN
-				</button>
-				<button 
-					type="button" 
+				</LanguageControl>
+				<LanguageControl
+					type={localizedHome ? undefined : 'button'}
+					href={localizedHome ? '/it/' : undefined}
 					data-lang="it" 
-					aria-pressed="false"
+					aria-pressed={localizedHome ? undefined : String(lang === 'it')}
+					aria-current={localizedHome && lang === 'it' ? 'page' : undefined}
 					aria-label="Italiano"
-					class="lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out text-cyan-700 hover:text-cyan-900" 
+					class:list={['lang-btn rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-out', lang === 'it' ? 'bg-gradient-to-r from-cyan-500 to-sky-600 text-white shadow-md shadow-cyan-400/30 hover:text-white' : 'text-cyan-700 hover:text-cyan-900']}
 				>
 					IT
-				</button>
+				</LanguageControl>
 			</div>
 
 			<label
@@ -73,7 +88,7 @@ const menuItems = [
 				menuItems.map((item) => (
 					<li>
 						<a href={item.href} data-nav-key={item.key} data-i18n={item.key} class="mobile-nav-link block rounded-md px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-700">
-							{item.label}
+							{t(item.key)}
 						</a>
 					</li>
 				))
@@ -99,7 +114,7 @@ const menuItems = [
 	const setLangButtonState = (lang) => {
 		langButtons.forEach((button) => {
 			const selected = button.dataset.lang === lang;
-			button.setAttribute('aria-pressed', String(selected));
+			if (button.tagName === 'BUTTON') button.setAttribute('aria-pressed', String(selected));
 			button.classList.toggle('bg-gradient-to-r', selected);
 			button.classList.toggle('from-cyan-500', selected);
 			button.classList.toggle('to-sky-600', selected);
@@ -112,16 +127,34 @@ const menuItems = [
 		});
 	};
 
+	const isLocalizedHome = location.pathname === '/' || location.pathname === '/it' || location.pathname === '/it/';
 	const savedLang = localStorage.getItem('lang');
-	const initialLang = applyLanguage(savedLang === 'it' ? 'it' : 'en');
+	const initialLang = applyLanguage(isLocalizedHome
+		? (location.pathname === '/' ? 'en' : 'it')
+		: (savedLang === 'it' ? 'it' : 'en'));
+	if (isLocalizedHome) localStorage.setItem('lang', initialLang);
 	setLangButtonState(initialLang);
+
+	const setHomeLinks = (lang) => {
+		const home = lang === 'it' ? '/it/' : '/';
+		document.querySelectorAll('[data-home-link]').forEach((link) => {
+			link.setAttribute('href', home);
+		});
+		document.querySelectorAll('[data-nav-key], [data-footer-link-key]').forEach((link) => {
+			const key = link.dataset.navKey || link.dataset.footerLinkKey;
+			link.setAttribute('href', `${home}#${key === 'home' ? '' : key}`);
+		});
+	};
+	if (!isLocalizedHome) setHomeLinks(initialLang);
 
 	langButtons.forEach((button) => {
 		button.addEventListener('click', () => {
 			const nextLang = button.dataset.lang;
 			if (!nextLang) return;
 			localStorage.setItem('lang', nextLang);
+			if (isLocalizedHome) return;
 			setLangButtonState(applyLanguage(nextLang));
+			setHomeLinks(nextLang);
 			document.dispatchEvent(new CustomEvent('lang-change', { detail: nextLang }));
 		});
 	});

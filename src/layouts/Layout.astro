@@ -2,8 +2,9 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import { getTranslation, type Language } from '../utils/i18n'
 
-const siteUrl = Astro.site ?? new URL('https://www.bigcatchfishingcharters.com/');
+const siteUrl = Astro.site ?? new URL('https://www.bigcatchfishingcharter.com/');
 
 interface Props {
 	title: string;
@@ -11,25 +12,39 @@ interface Props {
 	keywords?: string;
 	canonicalURL?: string;
 	ogImage?: string;
+	lang?: Language;
+	localizedHome?: boolean;
 }
 
 const {
 	title,
-	description = 'Charter pesca Roma e Fiumicino. Uscite di pesca al tonno, pesce spada, drifting, traina e bolentino nel Mar Tirreno. Prenota la tua esperienza di pesca sportiva a Roma.',
+	lang = 'en',
+	localizedHome = false,
+	description = localizedHome && lang === 'en'
+		? "Set off on an unforgettable fishing adventure in Rome. Our charter offers more than a simple boat trip: it is an expedition into the heart of the Tyrrhenian Sea."
+		: 'Charter pesca Roma e Fiumicino. Uscite di pesca al tonno, pesce spada, drifting, traina e bolentino nel Mar Tirreno. Prenota la tua esperienza di pesca sportiva a Roma.',
 	keywords = 'charter pesca roma, charter pesca fiumicino, pesca tonno roma, pesca sportiva roma, big game fishing roma, fishing charter rome, traina roma, bolentino roma, drifting tonno roma, pesce spada roma, escursioni pesca roma, uscite pesca fiumicino, pesca altura roma, charter fishing rome italy',
-	canonicalURL = new URL(Astro.url.pathname, siteUrl).href,
+	canonicalURL = new URL(localizedHome ? (lang === 'it' ? '/it/' : '/') : Astro.url.pathname, siteUrl).href,
     ogImage = new URL('/og-image.jpg', siteUrl).href
 } = Astro.props;
+const t = (key: string) => getTranslation(lang, key);
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="color-scheme" content="light" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="canonical" href={canonicalURL} />
+		{localizedHome && (
+			<>
+				<link rel="alternate" hreflang="en" href={new URL('/', siteUrl).href} />
+				<link rel="alternate" hreflang="it" href={new URL('/it/', siteUrl).href} />
+				<link rel="alternate" hreflang="x-default" href={new URL('/', siteUrl).href} />
+			</>
+		)}
 
 		<!-- SEO Meta -->
 		<meta name="description" content={description} />
@@ -50,8 +65,8 @@ const {
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:locale" content="it_IT" />
-		<meta property="og:locale:alternate" content="en_GB" />
+		<meta property="og:locale" content={lang === 'it' || !localizedHome ? 'it_IT' : 'en_GB'} />
+		<meta property="og:locale:alternate" content={lang === 'it' || !localizedHome ? 'en_GB' : 'it_IT'} />
 		<meta property="og:site_name" content="Big Catch Fishing Charters" />
 
 		<!-- Twitter Card -->
@@ -71,22 +86,22 @@ const {
 		<slot name="head" />
 	</head>
 	<body class="flex min-h-screen flex-col bg-white text-slate-900">
-		<Header />
+		<Header lang={lang} localizedHome={localizedHome} />
 		<main class="flex-1">
 			<slot />
 		</main>
-		<Footer />
+		<Footer lang={lang} />
 
 		<!-- Cookie Banner -->
 		<div id="cookie-banner" class="fixed inset-x-0 bottom-0 z-[9999] hidden border-t border-slate-200 bg-white/95 px-4 py-4 shadow-lg backdrop-blur sm:px-6">
 			<div class="mx-auto flex max-w-6xl flex-col items-center gap-3 sm:flex-row sm:gap-6">
 				<p class="text-sm text-slate-600">
-					<span id="cookie-text" data-i18n="cookie.text">Questo sito utilizza cookie tecnici per migliorare la tua esperienza di navigazione.</span>
-					<a href="/privacy" class="ml-1 font-medium text-cyan-600 underline underline-offset-2 hover:text-cyan-700" id="cookie-more" data-i18n="cookie.more">Scopri di più</a>
+					<span id="cookie-text" data-i18n="cookie.text">{t('cookie.text')}</span>
+					<a href="/privacy" class="ml-1 font-medium text-cyan-600 underline underline-offset-2 hover:text-cyan-700" id="cookie-more" data-i18n="cookie.more">{t('cookie.more')}</a>
 				</p>
 				<div class="flex gap-2">
-					<button id="cookie-accept" class="rounded-lg bg-cyan-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-cyan-700" data-i18n="cookie.accept">Accetta</button>
-					<button id="cookie-reject" class="rounded-lg border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" data-i18n="cookie.reject">Rifiuta</button>
+					<button id="cookie-accept" class="rounded-lg bg-cyan-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-cyan-700" data-i18n="cookie.accept">{t('cookie.accept')}</button>
+					<button id="cookie-reject" class="rounded-lg border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" data-i18n="cookie.reject">{t('cookie.reject')}</button>
 				</div>
 			</div>
 		</div>
