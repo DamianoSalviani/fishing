@@ -59,3 +59,13 @@ test('gallery image alt text is localized without changing the visible caption',
 		assert.ok(html.includes('alt="Logo Shimano"'));
 	}
 });
+
+test('both home pages include the FishingBooker widget with localized surrounding text', () => {
+	for (const { file, lang } of pages) {
+		const html = readFileSync(file, 'utf8');
+		assert.ok(html.includes('id="fbkr-widget-231"'));
+		assert.ok(html.includes('https://fishingbooker.com/widget/get?charterId=42425&widget=your-rating&unique=231&shadow=true&size=large'));
+		assert.ok(html.includes(lang === 'it' ? 'Le nostre recensioni' : 'Our reviews'));
+		assert.ok(html.includes(lang === 'it' ? 'Scopri cosa dicono di noi su FishingBooker.' : 'See what people say about us on FishingBooker.'));
+	}
+});
