@@ -12,6 +12,8 @@ const pages = [
 		hero: 'Set off on an unforgettable fishing adventure in Rome.',
 		faq: 'Is Rome a good place for fishing?',
 		trip: 'BIG GAME DRIFTING BLUEFIN TUNA',
+		restaurantHeading: "From Sea to Table with L'Antico Molo",
+		restaurantDescription: "Your fishing day doesn't end when you return to the harbor: thanks to our partnership with L'Antico Molo, every guest receives a 10% discount at the restaurant and the opportunity to bring their catch of the day (in compliance with current regulations) to have it cooked on the spot.",
 	},
 	{
 		file: 'dist/it/index.html',
@@ -21,17 +23,24 @@ const pages = [
 		hero: "Parti per un'indimenticabile avventura di pesca a Roma.",
 		faq: 'Roma è un posto adatto alla pesca?',
 		trip: 'BIG GAME DRIFTING TONNO ROSSO',
+		restaurantHeading: "Dal mare alla tavola con L'Antico Molo",
+		restaurantDescription: "La giornata di pesca non finisce al rientro in porto: grazie alla collaborazione con L'Antico Molo, ogni cliente riceve il 10% di sconto al ristorante e ha la possibilità di portare il pescato del giorno (rispettando le normative vigenti) per farselo cucinare sul posto.",
 	},
 ];
 
 for (const page of pages) {
 	test(`${page.path} contains localized HTML and language links`, () => {
-		const html = readFileSync(page.file, 'utf8');
+		const html = readFileSync(page.file, 'utf8').replaceAll('&#39;', "'");
 		assert.ok(html.includes(`<html lang="${page.lang}">`));
 		assert.ok(html.includes(`<title>${page.title}</title>`));
 		assert.ok(html.includes(page.hero));
 		assert.ok(html.includes(page.faq));
 		assert.ok(html.includes(page.trip));
+		assert.ok(html.includes(page.restaurantHeading));
+		assert.ok(html.includes(page.restaurantDescription));
+		assert.ok(html.includes('src="/lantico-molo-logo.jpg" alt="'));
+		assert.ok(html.indexOf('class="brand-marquee-track') < html.indexOf('id="restaurant-partnership"'));
+		assert.ok(html.indexOf('id="restaurant-partnership"') < html.indexOf('id="gallery"'));
 		assert.ok(html.includes(`<link rel="canonical" href="${domain}${page.path}">`));
 		assert.ok(html.includes(`<link rel="alternate" hreflang="en" href="${domain}/">`));
 		assert.ok(html.includes(`<link rel="alternate" hreflang="it" href="${domain}/it/">`));
