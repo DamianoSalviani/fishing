@@ -11,6 +11,8 @@ const pages = [
 		title: 'Big Catch Fishing Charter in Rome | Fishing Trips',
 		hero: 'Set off on an unforgettable fishing adventure in Rome.',
 		faq: 'Is Rome a good place for fishing?',
+		catchFaqQuestion: 'Can I have my catch cooked somewhere?',
+		catchFaqAnswer: "Yes, in compliance with current regulations and eligible species, thanks to our partnership with L'Antico Molo, you can bring your catch to the restaurant to have it prepared and cooked for you; furthermore, all our guests are entitled to a 10% discount.",
 		trip: 'BIG GAME DRIFTING BLUEFIN TUNA',
 		restaurantHeading: "From Sea to Table with L'Antico Molo",
 		restaurantDescription: "Your fishing day doesn't end when you return to the harbor: thanks to our partnership with L'Antico Molo, every guest receives a 10% discount at the restaurant and the opportunity to bring their catch of the day (in compliance with current regulations) to have it cooked on the spot.",
@@ -22,6 +24,8 @@ const pages = [
 		title: 'Charter Pesca Roma e Fiumicino | Big Catch Fishing Charters',
 		hero: "Parti per un'indimenticabile avventura di pesca a Roma.",
 		faq: 'Roma è un posto adatto alla pesca?',
+		catchFaqQuestion: 'Posso far cucinare il pescato da qualche parte?',
+		catchFaqAnswer: "Sì, nel rispetto delle normative vigenti e delle specie trattenibili, grazie alla nostra collaborazione con L'Antico Molo puoi portare il tuo pescato al ristorante per fartelo preparare e cucinare; inoltre, tutti i nostri ospiti hanno diritto al 10% di sconto.",
 		trip: 'BIG GAME DRIFTING TONNO ROSSO',
 		restaurantHeading: "Dal mare alla tavola con L'Antico Molo",
 		restaurantDescription: "La giornata di pesca non finisce al rientro in porto: grazie alla collaborazione con L'Antico Molo, ogni cliente riceve il 10% di sconto al ristorante e ha la possibilità di portare il pescato del giorno (rispettando le normative vigenti) per farselo cucinare sul posto.",
@@ -35,6 +39,8 @@ for (const page of pages) {
 		assert.ok(html.includes(`<title>${page.title}</title>`));
 		assert.ok(html.includes(page.hero));
 		assert.ok(html.includes(page.faq));
+		assert.ok(html.includes(page.catchFaqQuestion));
+		assert.ok(html.includes(page.catchFaqAnswer));
 		assert.ok(html.includes(page.trip));
 		assert.ok(html.includes(page.restaurantHeading));
 		assert.ok(html.includes(page.restaurantDescription));
